@@ -23,13 +23,15 @@ public class Sessions {
 	}
 
 	/**
-	 * Gets Session with specified ip
+	 * Returns Session which contains user with given ip and port
 	 * 
 	 * @param ip
-	 *            the ip to get the Session for
+	 *            the user's ip
+	 * @param port
+	 *            the user's port
 	 * @return the Session
 	 */
-	public Session getSessionByIP(String ip) {
+	public Session getSessionByAdress(String ip, int port) {
 		return null;
 	}
 
