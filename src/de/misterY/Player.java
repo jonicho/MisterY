@@ -65,6 +65,10 @@ public class Player {
 	public void setMrY(boolean mrY) {
 		this.mrY = mrY;
 	}
+	
+	public void setMap(Map map) {
+		this.map = map;
+	}
 
 	public String getName() {
 		return name;
@@ -84,6 +88,10 @@ public class Player {
 
 	public int getUndergroundTickets() {
 		return undergroundTickets;
+	}
+	
+	public Map getMap() {
+		return map;
 	}
 	
 	public boolean isMrY() {
