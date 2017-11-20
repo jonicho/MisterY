@@ -18,9 +18,8 @@ public class Player {
 	 * @param mrY
 	 *            Whether the player is mrY.
 	 */
-	public Player(String name, boolean mrY) {
+	public Player(String name) {
 		this.name = name;
-		this.mrY = mrY;
 	}
 
 	/**
@@ -62,6 +61,10 @@ public class Player {
 	public void setCurrentStation(Station currentStation) {
 		this.currentStation = currentStation;
 	}
+	
+	public void setMrY(boolean mrY) {
+		this.mrY = mrY;
+	}
 
 	public String getName() {
 		return name;
@@ -81,6 +84,10 @@ public class Player {
 
 	public int getUndergroundTickets() {
 		return undergroundTickets;
+	}
+	
+	public boolean isMrY() {
+		return mrY;
 	}
 
 }
