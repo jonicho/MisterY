@@ -35,6 +35,10 @@ public class Map {
 	 *         with the given id.
 	 */
 	public Station getStationById(int id) {
+		for (Station station : stations) {
+			if (station.getId() == id)
+				return station;
+		}
 		return null;
 	}
 }
