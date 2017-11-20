@@ -8,12 +8,23 @@ public class Sessions {
 	public Sessions() {
 		sessions = new ArrayList<Session>();
 	}
-
+	
 	public void addSession(Session s) {
 		sessions.add(s);
 	}
 
-	public Session getSessionWithUser(User user) {
+	public void removeSession(Session s) {
+		sessions.remove(s);
+	}
+
+	/**
+	 * Returns the session containing the given user
+	 * 
+	 * @param user
+	 *            The user
+	 * @return The session containing the given user
+	 */
+	public Session getSessionByUser(User user) {
 		for (Session session : sessions) {
 			if (session.doesContain(user)) {
 				return session;
@@ -35,19 +46,11 @@ public class Sessions {
 		return null;
 	}
 
-	public void removeSession(Session s) {
-		sessions.remove(s);
-	}
-
 	public int getSessionCount() {
 		return sessions.size();
 	}
 
 	public ArrayList<Session> getSessionList() {
 		return sessions;
-	}
-
-	public Session getFirst() {
-		return sessions.get(0);
 	}
 }
