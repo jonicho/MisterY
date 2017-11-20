@@ -9,9 +9,20 @@ public class Users {
 		users = new ArrayList<User>();
 	}
 
-	public void addUser(User user) {
-		if (getUserByName(user.getPlayer().getName()) != null) {
+	/**
+	 * Adds the given user.
+	 * 
+	 * @param user
+	 *            The user to add
+	 * @throws IllegalArgumentException
+	 *             if this user or an user with this name does already exist
+	 */
+	public void addUser(User user) throws IllegalArgumentException {
+		if (users.contains(user)) {
 			throw new IllegalArgumentException("User does already exist!");
+		}
+		if (getUserByName(user.getPlayer().getName()) != null) {
+			throw new IllegalArgumentException("A user with this name does already exist!");
 		}
 		users.add(user);
 	}
@@ -21,11 +32,11 @@ public class Users {
 	}
 
 	/**
-	 * Returns a user with the given address.
+	 * Returns a user with the given ip and port.
 	 * 
-	 * @param ip
-	 * @param port
-	 * @return
+	 * @param ip The ip
+	 * @param port The port
+	 * @return a user with the given ip and port.
 	 */
 	public User getUserByAdress(String ip, int port) {
 		for (User user : users) {

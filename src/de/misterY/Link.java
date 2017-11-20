@@ -19,6 +19,9 @@ public class Link {
 	public Link(Station targetStation, boolean bus, boolean underground) {
 	}
 
+	/**
+	 * @return The station the link is pointing at
+	 */
 	public Station getStation() {
 		return station;
 	}

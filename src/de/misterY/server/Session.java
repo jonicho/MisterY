@@ -14,6 +14,12 @@ public class Session {
 	private boolean wasDoubleTurn;
 	private ArrayList<User> users;
 
+	/**
+	 * Creates a new session with the given users
+	 * 
+	 * @param user
+	 *            The users to add to the session
+	 */
 	public Session(User... user) {
 		users = new ArrayList<User>();
 	}
@@ -82,8 +88,11 @@ public class Session {
 	}
 
 	/**
+	 * Returns whether this session contains the given user
+	 * 
 	 * @param user
-	 * @return
+	 *            The user to check
+	 * @return true if this session contains the given user, false otherwise
 	 */
 	public boolean doesContain(User user) {
 		return false;
