@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Users {
 	private ArrayList<User> users = new ArrayList<User>();
+
 	public Users() {
 		users = new ArrayList<User>();
 	}
@@ -20,7 +21,8 @@ public class Users {
 	}
 
 	/**
-	 * Returns a user with the given adress.
+	 * Returns a user with the given address.
+	 * 
 	 * @param ip
 	 * @param port
 	 * @return
@@ -36,7 +38,9 @@ public class Users {
 
 	/**
 	 * Returns a user with the given name.
-	 * @param name The name.
+	 * 
+	 * @param name
+	 *            The name.
 	 * @return The user.
 	 */
 	public User getUserByName(String name) {
@@ -47,7 +51,7 @@ public class Users {
 		}
 		return null;
 	}
-	
+
 	public int getUserCount() {
 		return users.size();
 	}

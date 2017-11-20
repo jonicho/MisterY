@@ -10,7 +10,7 @@ public class GameClient extends Client {
 
 	@Override
 	public void processMessage(String pMessage) {
-		
+
 	}
 
 }

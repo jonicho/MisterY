@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Sessions {
 	private ArrayList<Session> sessions;
+
 	public Sessions() {
 		sessions = new ArrayList<Session>();
 	}
@@ -20,27 +21,30 @@ public class Sessions {
 		}
 		return null;
 	}
-	
-	/** Gets Session with specified ip
-	 * @param ip the ip to get the Session for
+
+	/**
+	 * Gets Session with specified ip
+	 * 
+	 * @param ip
+	 *            the ip to get the Session for
 	 * @return the Session
 	 */
 	public Session getSessionByIP(String ip) {
-		
+		return null;
 	}
-	
+
 	public void removeSession(Session s) {
 		sessions.remove(s);
 	}
-	
+
 	public int getSessionCount() {
-		return sessions.size(); 
+		return sessions.size();
 	}
-	
+
 	public ArrayList<Session> getSessionList() {
 		return sessions;
 	}
-	
+
 	public Session getFirst() {
 		return sessions.get(0);
 	}
