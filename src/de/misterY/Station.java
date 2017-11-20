@@ -41,13 +41,19 @@ public class Station {
 	}
 
 	/**
-	 * Adds a link
+	 * Adds a link if it does not already exist
 	 * 
 	 * @param link
 	 *            The link to add
+	 * @throws IllegalArgumentException
+	 *             If the link already exists in this station
 	 */
-	public void addLink(Link link) {
-
+	public void addLink(Link link) throws IllegalArgumentException {
+		if (getLink(link.getStation().getId()) == null) {
+			links.add(link);
+		} else {
+			throw new IllegalArgumentException("Link to Station id " + link.getStation().getId() + " already exists in this station!");
+		}
 	}
 
 	/**
