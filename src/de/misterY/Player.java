@@ -52,20 +52,43 @@ public class Player {
 	 * 
 	 * @param type
 	 *            the type of ticket
-	 * @return true if there are still tickets, false if there are not
+	 * @return true if use succeeded, false otherwise (there were not enough tickets)
 	 */
 	public boolean useTicket(MeansOfTransportation type) {
+		switch (type) {
+		case Taxi:
+			if (taxiTickets > 0) {
+				taxiTickets--;
+				return true;
+			}
+			break;
+		case Bus:
+			if (busTickets > 0) {
+				busTickets--;
+				return true;
+			}
+			break;
+		case Underground:
+			if (undergroundTickets > 0) {
+				undergroundTickets--;
+				return true;
+			}
+			break;
+
+		default:
+			throw new IllegalStateException("Unknown mean of transportaion: \"" + type + "\"");
+		}
 		return false;
 	}
 
 	public void setCurrentStation(Station currentStation) {
 		this.currentStation = currentStation;
 	}
-	
+
 	public void setMrY(boolean mrY) {
 		this.mrY = mrY;
 	}
-	
+
 	public void setMap(Map map) {
 		this.map = map;
 	}
@@ -89,11 +112,11 @@ public class Player {
 	public int getUndergroundTickets() {
 		return undergroundTickets;
 	}
-	
+
 	public Map getMap() {
 		return map;
 	}
-	
+
 	public boolean isMrY() {
 		return mrY;
 	}
