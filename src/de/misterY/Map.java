@@ -41,4 +41,13 @@ public class Map {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns the number of stations in this map. Map must be loaded.
+	 * 
+	 * @return the number of stations
+	 */
+	public int getStationCount() {
+		return stations.size();
+	}
 }
