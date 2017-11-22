@@ -41,10 +41,10 @@ public class Player {
 
 	/**
 	 * Chooses a random station to start on which is neither mister y nor another
-	 * player.
+	 * player and makes it to the current station.
 	 */
 	private void chooseRandomStartStation() {
-
+		currentStation = map.getStationById((int) Math.round(map.getStationCount() * Math.random()));
 	}
 
 	/**
