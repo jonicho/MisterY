@@ -34,11 +34,11 @@ public class Session {
 	 * has enough tickets
 	 * 
 	 * @param start
-	 *            The Starting Point
+	 *            The start station
 	 * @param type
 	 *            The mean of transportation
 	 * @param end
-	 *            The end Point
+	 *            The end station
 	 * @return True if movement is valid false if it is not
 	 */
 	public boolean validateMovement(Station start, MeansOfTransportation type, Station end, User user) {
@@ -47,13 +47,13 @@ public class Session {
 
 	/**
 	 * @return Returns all ips from all the users in the session
-	 */
+	 *///TODO users can have the same ip and different ports
 	public ArrayList<String> getAllips() {
 		return null;
 	}
 
 	/**
-	 * Return all the ticket information of a specified user Format is specified in
+	 * Return all the ticket information of a specified user. Format is specified in
 	 * PROTOCOL
 	 * 
 	 * @param user
