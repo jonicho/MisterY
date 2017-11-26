@@ -44,7 +44,7 @@ public class Player {
 	 * player and makes it to the current station.
 	 */
 	private void chooseRandomStartStation() {
-		currentStation = map.getStationById((int) Math.round(map.getStationCount() * Math.random()));
+		currentStation = map.getRandomStartStation();
 	}
 
 	/**
@@ -52,7 +52,8 @@ public class Player {
 	 * 
 	 * @param type
 	 *            the type of ticket
-	 * @return true if use succeeded, false otherwise (there were not enough tickets)
+	 * @return true if use succeeded, false otherwise (there were not enough
+	 *         tickets)
 	 */
 	public boolean useTicket(MeansOfTransportation type) {
 		switch (type) {

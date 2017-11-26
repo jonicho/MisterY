@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Map {
 	private ArrayList<Station> stations;
+	private ArrayList<Station> startStations;
 
 	/**
 	 * Constructs a new map from the given map file.
@@ -40,6 +41,20 @@ public class Map {
 				return station;
 		}
 		return null;
+	}
+
+	/**
+	 * Returns an available random station to start from and deletes it from the
+	 * available start stations.
+	 * 
+	 * @return The station. Null if there are no available start stations.
+	 */
+	public Station getRandomStartStation() {
+		if (startStations.isEmpty())
+			return null;
+		Station station = startStations.get((int) (startStations.size() * Math.random()));
+		startStations.remove(station);
+		return station;
 	}
 
 	/**
