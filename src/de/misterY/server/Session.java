@@ -56,9 +56,12 @@ public class Session {
 	}
 
 	/**
-	 * @return Returns all ips from all the users in the session
-	 */// TODO users can have the same ip and different ports
-	public ArrayList<String> getAllips() {
+	 * Returns all users of this session. Returned ArrayList is not the internal
+	 * ArrayList
+	 * 
+	 * @return all users of this session
+	 */
+	public ArrayList<User> getAllUsers() {
 		return null;
 	}
 
