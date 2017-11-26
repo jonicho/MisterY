@@ -1,5 +1,6 @@
 package de.misterY.server;
 
+import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
 
 public class GameServer extends Server {
@@ -7,34 +8,46 @@ public class GameServer extends Server {
 	private Sessions sessions;
 	private Users users;
 
-	public GameServer(int pPort) {
-		super(pPort);
+	public GameServer(int port) {
+		super(port);
 	}
 
 	@Override
-	public void processNewConnection(String pClientIP, int pClientPort) {
+	public void processNewConnection(String clientIP, int clientPort) {
 		// No double Names
 	}
 
 	@Override
-	public void processMessage(String pClientIP, int pClientPort, String pMessage) {
-
+	public void processMessage(String clientIP, int clientPort, String message) {
+		
 	}
 
 	@Override
-	public void processClosingConnection(String pClientIP, int pClientPort) {
+	public void processClosingConnection(String clientIP, int clientPort) {
 		// Send Errorcode
+	}
+	
+	/**
+	 * Sends a server message to the given user
+	 * 
+	 * @param msg
+	 *            The message to send
+	 * @param user
+	 *            The user to send the message to
+	 */
+	private void sendToUser(String msg, User user) {
+		
 	}
 
 	/**
-	 * Sends a Server Message to all clients in the Specified Session
+	 * Sends a server message to all clients in the given session
 	 * 
 	 * @param msg
-	 *            The Message to send
+	 *            The message to send
 	 * @param session
-	 *            The Session to send it to
+	 *            The session to send the message to
 	 */
-	public void sendToSession(String msg, Session session) {
+	private void sendToSession(String msg, Session session) {
 
 	}
 
@@ -46,7 +59,7 @@ public class GameServer extends Server {
 	 * @param askingUser
 	 *            the user the update will be sent to
 	 */
-	public void sendInfoUpdate(String name, User askingUser) {
+	private void sendInfoUpdate(String name, User askingUser) {
 
 	}
 }
