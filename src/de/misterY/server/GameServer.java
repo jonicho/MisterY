@@ -19,7 +19,30 @@ public class GameServer extends Server {
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
+		User user = users.getUserByAdress(clientIP, clientPort);
+		String[] msgParts = message.split(PROTOCOL.SPLIT);
 		
+		switch (msgParts[0]) {
+		case PROTOCOL.CS.LOGIN:
+			
+			break;
+		case PROTOCOL.CS.REQUEST_MOVEMENT:
+			
+			break;
+		case PROTOCOL.CS.CHAT_POST:
+			
+			break;
+		case PROTOCOL.CS.REQUEST_INFO:
+			
+			break;
+		case PROTOCOL.CS.REQUEST_BOT:
+			
+			break;
+
+		default:
+			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.INVALID_MESSAGE)), user);
+			break;
+		}
 	}
 
 	@Override
