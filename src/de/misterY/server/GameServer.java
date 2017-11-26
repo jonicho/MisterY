@@ -1,6 +1,5 @@
 package de.misterY.server;
 
-import de.misterY.Station;
 import de.misterY.net.Server;
 
 public class GameServer extends Server {
@@ -37,22 +36,6 @@ public class GameServer extends Server {
 	 */
 	public void sendToSession(String msg, Session session) {
 
-	}
-
-	/**
-	 * The method is called after the movement was verified to actually do the
-	 * movement
-	 * 
-	 * @param ip
-	 *            the ip of the user to move
-	 * @param end
-	 *            the station to move the user to
-	 */
-	public void doMovement(String ip, Station end) {
-		// Get User By IP
-		// Get session with user
-		// move
-		// end turn
 	}
 
 	/**

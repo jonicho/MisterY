@@ -29,25 +29,35 @@ public class Session {
 	}
 
 	/**
-	 * Validates User movement by checking if a movement from the specified starting
-	 * point to the specified end point is possible, also considering if the user
-	 * has enough tickets
+	 * Lets the given user make a movement to the given end station with the given
+	 * means of transport.
 	 * 
-	 * @param start
-	 *            The start station
-	 * @param type
-	 *            The mean of transportation
+	 * @return Whether the movement was successful
+	 */
+	public boolean doMovement(User user, Station end, MeansOfTransportation type) {
+		return false;
+	}
+
+	/**
+	 * Validates the user's movement by checking whether a movement from the
+	 * specified starting point to the specified end point is possible, also
+	 * considering if the user has enough tickets.
+	 * 
+	 * @param user
+	 *            The user whose movement is to be checked.
 	 * @param end
 	 *            The end station
-	 * @return True if movement is valid false if it is not
+	 * @param type
+	 *            The mean of transportation
+	 * @return True if movement is valid, false otherwise
 	 */
-	public boolean validateMovement(Station start, MeansOfTransportation type, Station end, User user) {
+	public boolean validateMovement(User user, Station end, MeansOfTransportation type) {
 		return false;
 	}
 
 	/**
 	 * @return Returns all ips from all the users in the session
-	 *///TODO users can have the same ip and different ports
+	 */// TODO users can have the same ip and different ports
 	public ArrayList<String> getAllips() {
 		return null;
 	}
