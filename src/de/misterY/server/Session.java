@@ -65,18 +65,6 @@ public class Session {
 		return null;
 	}
 
-	/**
-	 * Return all the ticket information of a specified user. Format is specified in
-	 * PROTOCOL
-	 * 
-	 * @param user
-	 *            The user to get the info from
-	 * @return the String
-	 */
-	public String getInfoString(User user) {
-		return null;
-	}
-
 	public boolean doDoubleTurn() {
 		if (wasDoubleTurn) {
 			return false;

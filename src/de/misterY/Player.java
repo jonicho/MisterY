@@ -1,5 +1,7 @@
 package de.misterY;
 
+import de.misterY.server.User;
+
 public class Player {
 	private String name;
 	private Station currentStation;
@@ -80,6 +82,16 @@ public class Player {
 			throw new IllegalStateException("Unknown mean of transportaion: \"" + type + "\"");
 		}
 		return false;
+	}
+
+	/**
+	 * Return all the ticket information of this player. Format is specified in
+	 * PROTOCOL
+	 * 
+	 * @return the String
+	 */
+	public String getInfoString() {
+		return null;
 	}
 
 	public void setCurrentStation(Station currentStation) {
