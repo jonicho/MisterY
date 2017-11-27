@@ -59,7 +59,7 @@ public class GameServer extends Server {
 	 *            The user to send the message to
 	 */
 	private void sendToUser(String msg, User user) {
-		
+		send(user.getIp(), user.getPort(), msg);
 	}
 
 	/**
@@ -71,7 +71,9 @@ public class GameServer extends Server {
 	 *            The session to send the message to
 	 */
 	private void sendToSession(String msg, Session session) {
-
+		for(User user : session.getAllUsers()) {
+			sendToUser(msg, user);
+		}
 	}
 
 	/**
