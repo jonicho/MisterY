@@ -85,6 +85,7 @@ public class GameServer extends Server {
 	 *            the user the update will be sent to
 	 */
 	private void sendInfoUpdate(String name, User askingUser) {
-
+		String msg = PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, users.getUserByName(name).getPlayer().getInfoString());
+		sendToUser(msg, askingUser);
 	}
 }
