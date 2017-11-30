@@ -18,12 +18,34 @@ public class Map {
 	}
 
 	/**
+	 * Constructs a new map from the given map string.
+	 * 
+	 * @param mapString
+	 *            The string to load the map from.
+	 */
+	public Map(String mapString) {
+		load(mapString);
+	}
+
+	/**
 	 * Loads the map.
 	 * 
 	 * @param file
 	 *            The file to load the map from.
 	 */
 	private void load(File file) {
+		String mapString = "";;
+		//load string from file
+		load(mapString);
+	}
+
+	/**
+	 * Loads the map.
+	 * 
+	 * @param mapString
+	 *            The string to load the map from.
+	 */
+	private void load(String mapString) {
 
 	}
 
