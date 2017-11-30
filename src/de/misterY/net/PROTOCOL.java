@@ -4,7 +4,8 @@ public final class PROTOCOL {
 	private PROTOCOL() {}
 
 	public static final int PORT = 54699;
-	public static final String SPLIT = "\u2063"; // U+2063: Invisible separator
+	//public static final String SPLIT = "\u2063"; // U+2063: Invisible separator
+	public static final String SPLIT = " ";
 
 	public final class SC {
 		private SC() {}
