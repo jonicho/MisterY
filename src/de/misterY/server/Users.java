@@ -34,8 +34,10 @@ public class Users {
 	/**
 	 * Returns a user with the given ip and port.
 	 * 
-	 * @param ip The ip
-	 * @param port The port
+	 * @param ip
+	 *            The ip
+	 * @param port
+	 *            The port
 	 * @return a user with the given ip and port.
 	 */
 	public User getUserByAdress(String ip, int port) {
@@ -62,9 +64,12 @@ public class Users {
 		}
 		return null;
 	}
-	/**Checks if a username is already taken
+
+	/**
+	 * Checks if a username is already taken
 	 * 
-	 * @param the username to check
+	 * @param the
+	 *            username to check
 	 * 
 	 * @return true if the username is already taken, false if it is not
 	 */

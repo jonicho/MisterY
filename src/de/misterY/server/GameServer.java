@@ -14,41 +14,42 @@ public class GameServer extends Server {
 
 	@Override
 	public void processNewConnection(String clientIP, int clientPort) {
-	
+
 	}
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
 		User user = users.getUserByAdress(clientIP, clientPort); // This wont work before we logged in
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
-		
+
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
-			if(users.isNameTaken(msgParts[1])) {
-				this.send(clientIP,clientPort,PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
-			}
-			else {
-				User nUser = new User(clientIP,clientPort,msgParts[1]);
+			if (users.isNameTaken(msgParts[1])) {
+				this.send(clientIP, clientPort, PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
+						String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
+			} else {
+				User nUser = new User(clientIP, clientPort, msgParts[1]);
 				users.addUser(nUser);
-				this.send(clientIP,clientPort,PROTOCOL.SC.OK);
+				this.send(clientIP, clientPort, PROTOCOL.SC.OK);
 			}
-			
+
 			break;
 		case PROTOCOL.CS.REQUEST_MOVEMENT:
-			
+
 			break;
 		case PROTOCOL.CS.CHAT_POST:
-			
+
 			break;
 		case PROTOCOL.CS.REQUEST_INFO:
-			
+
 			break;
 		case PROTOCOL.CS.REQUEST_BOT:
-			
+
 			break;
 
 		default:
-			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.INVALID_MESSAGE)), user);
+			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.INVALID_MESSAGE)),
+					user);
 			break;
 		}
 	}
@@ -57,7 +58,7 @@ public class GameServer extends Server {
 	public void processClosingConnection(String clientIP, int clientPort) {
 		// Send Errorcode
 	}
-	
+
 	/**
 	 * Sends a server message to the given user
 	 * 
@@ -79,7 +80,7 @@ public class GameServer extends Server {
 	 *            The session to send the message to
 	 */
 	private void sendToSession(String msg, Session session) {
-		for(User user : session.getAllUsers()) {
+		for (User user : session.getAllUsers()) {
 			sendToUser(msg, user);
 		}
 	}
@@ -93,7 +94,8 @@ public class GameServer extends Server {
 	 *            the user the update will be sent to
 	 */
 	private void sendInfoUpdate(String name, User askingUser) {
-		String msg = PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, users.getUserByName(name).getPlayer().getInfoString());
+		String msg = PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,
+				users.getUserByName(name).getPlayer().getInfoString());
 		sendToUser(msg, askingUser);
 	}
 }

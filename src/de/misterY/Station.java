@@ -52,7 +52,8 @@ public class Station {
 		if (getLink(link.getStation().getId()) == null) {
 			links.add(link);
 		} else {
-			throw new IllegalArgumentException("Link to Station id " + link.getStation().getId() + " already exists in this station!");
+			throw new IllegalArgumentException(
+					"Link to Station id " + link.getStation().getId() + " already exists in this station!");
 		}
 	}
 

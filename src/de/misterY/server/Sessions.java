@@ -8,7 +8,7 @@ public class Sessions {
 	public Sessions() {
 		sessions = new ArrayList<Session>();
 	}
-	
+
 	public void addSession(Session s) {
 		sessions.add(s);
 	}
