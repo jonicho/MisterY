@@ -25,12 +25,12 @@ public class GameServer extends Server {
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
 			if(users.isNameTaken(msgParts[1])) {
-				this.send(pClientIP,clientPort,PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)))
+				this.send(clientIP,clientPort,PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
 			}
 			else {
-				User nUser = new User(pClientIP,clientPort,msgParts[1]);
+				User nUser = new User(clientIP,clientPort,msgParts[1]);
 				users.addUser(nUser);
-				this.send(pClientIP,clientPort,PROTOCOL.SC.OK);
+				this.send(clientIP,clientPort,PROTOCOL.SC.OK);
 			}
 			
 			break;
