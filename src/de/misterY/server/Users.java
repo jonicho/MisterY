@@ -66,12 +66,12 @@ public class Users {
 	}
 
 	/**
-	 * Checks if a username is already taken
+	 * Checks whether a user name is already taken
 	 * 
-	 * @param the
-	 *            username to check
+	 * @param name
+	 *            the user name to check
 	 * 
-	 * @return true if the username is already taken, false if it is not
+	 * @return true if the user name is already taken, false if it is not
 	 */
 	public boolean isNameTaken(String name) {
 		for (User user : users) {
