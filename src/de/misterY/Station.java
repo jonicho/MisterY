@@ -2,6 +2,10 @@ package de.misterY;
 
 import java.util.ArrayList;
 
+/**
+ * A station where the players can travel to with the set means of transport.
+ * Each station has a list of links pointing to the next station.
+ */
 public class Station {
 	private ArrayList<Link> links;
 
