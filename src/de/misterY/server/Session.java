@@ -21,7 +21,9 @@ public class Session {
 	 *            The users to add to the session
 	 */
 	public Session(User... user) {
-		users = new ArrayList<User>();
+		for (int i = 0; i < user.length; i++) {
+			users.add(user[i]);
+		}
 	}
 
 	public User getMrY() {
