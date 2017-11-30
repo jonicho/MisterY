@@ -1,7 +1,5 @@
 package de.misterY;
 
-import de.misterY.server.User;
-
 public class Player {
 	private String name;
 	private Station currentStation;
