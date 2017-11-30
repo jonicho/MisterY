@@ -37,10 +37,10 @@ public final class PROTOCOL {
 	}
 
 	/**
-	 * Builds a massage by connect all arguments in one String, separated by SPLIT.
+	 * Builds a massage by connecting all arguments into one String, separated by SPLIT.
 	 * 
-	 * @param msgParts The massage parts to connect
-	 * @return The builded String
+	 * @param msgParts The message parts to connect
+	 * @return The built String
 	 */
 	public static String buildMessage(String... msgParts) {
 		String result = msgParts[0];

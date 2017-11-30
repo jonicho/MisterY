@@ -33,19 +33,6 @@ public class Sessions {
 		return null;
 	}
 
-	/**
-	 * Returns Session which contains user with given ip and port
-	 * 
-	 * @param ip
-	 *            the user's ip
-	 * @param port
-	 *            the user's port
-	 * @return the Session
-	 */
-	public Session getSessionByAdress(String ip, int port) {
-		return null;
-	}
-
 	public int getSessionCount() {
 		return sessions.size();
 	}

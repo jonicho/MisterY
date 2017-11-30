@@ -62,6 +62,20 @@ public class Users {
 		}
 		return null;
 	}
+	/**Checks if a username is already taken
+	 * 
+	 * @param the username to check
+	 * 
+	 * @return true if the username is already taken, false if it is not
+	 */
+	public boolean isNameTaken(String name) {
+		for (User user : users) {
+			if (user.getPlayer().getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public int getUserCount() {
 		return users.size();

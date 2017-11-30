@@ -12,7 +12,7 @@ public class Session {
 	private int turn = 0;
 	private boolean isDoubleTurn;
 	private boolean wasDoubleTurn;
-	private ArrayList<User> users;
+	private ArrayList<User> users = new ArrayList<User>();
 
 	/**
 	 * Creates a new session with the given users
@@ -62,7 +62,7 @@ public class Session {
 	 * @return all users of this session
 	 */
 	public ArrayList<User> getAllUsers() {
-		return null;
+		return users;
 	}
 
 	public boolean doDoubleTurn() {
@@ -96,6 +96,11 @@ public class Session {
 	 * @return true if this session contains the given user, false otherwise
 	 */
 	public boolean doesContain(User user) {
+		for (User cUser : users) {
+			if (cUser == user) {
+				return true;
+			}
+		}
 		return false;
 	}
 

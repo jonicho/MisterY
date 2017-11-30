@@ -14,16 +14,24 @@ public class GameServer extends Server {
 
 	@Override
 	public void processNewConnection(String clientIP, int clientPort) {
-		// No double Names
+	
 	}
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
-		User user = users.getUserByAdress(clientIP, clientPort);
+		User user = users.getUserByAdress(clientIP, clientPort); // This wont work before we logged in
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 		
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
+			if(users.isNameTaken(msgParts[1])) {
+				this.send(pClientIP,clientPort,PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)))
+			}
+			else {
+				User nUser = new User(pClientIP,clientPort,msgParts[1]);
+				users.addUser(nUser);
+				this.send(pClientIP,clientPort,PROTOCOL.SC.OK);
+			}
 			
 			break;
 		case PROTOCOL.CS.REQUEST_MOVEMENT:
