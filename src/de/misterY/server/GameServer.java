@@ -5,8 +5,8 @@ import de.misterY.net.Server;
 
 public class GameServer extends Server {
 
-	private Sessions sessions;
-	private Users users;
+	private Sessions sessions = new Sessions();
+	private Users users = new Users();
 
 	public GameServer(int port) {
 		super(port);
@@ -24,15 +24,7 @@ public class GameServer extends Server {
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
-			if (users.isNameTaken(msgParts[1])) {
-				this.send(clientIP, clientPort, PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
-						String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
-			} else {
-				User nUser = new User(clientIP, clientPort, msgParts[1]);
-				users.addUser(nUser);
-				this.send(clientIP, clientPort, PROTOCOL.SC.OK);
-			}
-
+			processLogin(clientIP, clientPort, msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_MOVEMENT:
 
@@ -57,6 +49,24 @@ public class GameServer extends Server {
 	@Override
 	public void processClosingConnection(String clientIP, int clientPort) {
 		// Send Errorcode
+	}
+	
+	/**
+	 * Processes a login.
+	 * 
+	 * @param clientIP
+	 * @param clientPort
+	 * @param msgParts
+	 */
+	private void processLogin(String clientIP, int clientPort, String[] msgParts) {
+		if (users.isNameTaken(msgParts[1])) {
+			this.send(clientIP, clientPort, PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
+					String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
+		} else {
+			User nUser = new User(clientIP, clientPort, msgParts[1]);
+			users.addUser(nUser);
+			this.send(clientIP, clientPort, PROTOCOL.SC.OK);
+		}
 	}
 
 	/**
