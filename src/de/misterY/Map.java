@@ -34,7 +34,7 @@ public class Map {
 	 *            The file to load the map from.
 	 */
 	private void load(File file) {
-		String mapString = "";;
+		String mapString = "";
 		//load string from file
 		load(mapString);
 	}
