@@ -7,7 +7,7 @@ public class GameServer extends Server {
 
 	private Sessions sessions = new Sessions();
 	private Users users = new Users();
-	
+
 	public static void main(String[] args) {
 		new GameServer(PROTOCOL.PORT);
 	}
@@ -23,12 +23,20 @@ public class GameServer extends Server {
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
-		User user = users.getUserByAdress(clientIP, clientPort); // This wont work before we logged in
+		User user = users.getUserByAdress(clientIP, clientPort);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
+		if (user == null) {
+			user = new User(clientIP, clientPort, "tmpuser" + clientIP + ":" + clientPort);
+			if (!msgParts[0].equals(PROTOCOL.CS.LOGIN)) {
+				sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.NOT_LOGGED_IN)),
+						user);
+				return;
+			}
+		}
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
-			processLogin(clientIP, clientPort, msgParts);
+			processLogin(user, msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_MOVEMENT:
 
@@ -54,7 +62,7 @@ public class GameServer extends Server {
 	public void processClosingConnection(String clientIP, int clientPort) {
 		// Send Errorcode
 	}
-	
+
 	/**
 	 * Processes a login.
 	 * 
@@ -62,14 +70,16 @@ public class GameServer extends Server {
 	 * @param clientPort
 	 * @param msgParts
 	 */
-	private void processLogin(String clientIP, int clientPort, String[] msgParts) {
-		if (users.isNameTaken(msgParts[1])) {
-			this.send(clientIP, clientPort, PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
-					String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)));
+	private void processLogin(User user, String[] msgParts) {
+		if (users.getUserByAdress(user.getIp(), user.getPort()) != null) {
+			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.ALREADY_LOGGED_IN)), user);
+		} else if (users.isNameTaken(msgParts[1])) {
+			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
+					String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)), user);
 		} else {
-			User nUser = new User(clientIP, clientPort, msgParts[1]);
+			User nUser = new User(user.getIp(), user.getPort(), msgParts[1]);
 			users.addUser(nUser);
-			this.send(clientIP, clientPort, PROTOCOL.SC.OK);
+			sendToUser(PROTOCOL.SC.OK, nUser);
 		}
 	}
 
