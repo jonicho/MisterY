@@ -7,6 +7,10 @@ public class GameServer extends Server {
 
 	private Sessions sessions = new Sessions();
 	private Users users = new Users();
+	
+	public static void main(String[] args) {
+		new GameServer(PROTOCOL.PORT);
+	}
 
 	public GameServer(int port) {
 		super(port);
