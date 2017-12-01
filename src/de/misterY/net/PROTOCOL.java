@@ -50,4 +50,15 @@ public final class PROTOCOL {
 		}
 		return result;
 	}
+	
+	/**
+	 * Returns an error message based on the following pattern:</br>
+	 * {@code SC.ERROR + SPLIT + errorcode}
+	 * 
+	 * @param errorcode The error code
+	 * @return The error message
+	 */
+	public static String getErrorMessage(int errorcode) {
+		return buildMessage(SC.ERROR, String.valueOf(errorcode));
+	}
 }

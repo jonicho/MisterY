@@ -28,7 +28,7 @@ public class GameServer extends Server {
 		if (user == null) {
 			user = new User(clientIP, clientPort, "tmpuser" + clientIP + ":" + clientPort);
 			if (!msgParts[0].equals(PROTOCOL.CS.LOGIN)) {
-				sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.NOT_LOGGED_IN)),
+				sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.NOT_LOGGED_IN),
 						user);
 				return;
 			}
@@ -52,7 +52,7 @@ public class GameServer extends Server {
 			break;
 
 		default:
-			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.INVALID_MESSAGE)),
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE),
 					user);
 			break;
 		}
@@ -72,10 +72,9 @@ public class GameServer extends Server {
 	 */
 	private void processLogin(User user, String[] msgParts) {
 		if (users.getUserByAdress(user.getIp(), user.getPort()) != null) {
-			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR, String.valueOf(PROTOCOL.ERRORCODES.ALREADY_LOGGED_IN)), user);
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.ALREADY_LOGGED_IN), user);
 		} else if (users.isNameTaken(msgParts[1])) {
-			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.ERROR,
-					String.valueOf(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE)), user);
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE), user);
 		} else {
 			User nUser = new User(user.getIp(), user.getPort(), msgParts[1]);
 			users.addUser(nUser);
