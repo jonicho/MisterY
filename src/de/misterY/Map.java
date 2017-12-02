@@ -33,10 +33,8 @@ public class Map {
 	 * @param file
 	 *            The file to load the map from.
 	 */
-	private void load(File file) {
-		String mapString = "";
-		//load string from file
-		load(mapString);
+	private void load(File mapFile) {
+		MapLoader.loadMap(stations, startStations, mapFile);
 	}
 
 	/**
@@ -46,7 +44,7 @@ public class Map {
 	 *            The string to load the map from.
 	 */
 	private void load(String mapString) {
-		
+		MapLoader.loadMap(stations, startStations, mapString);
 	}
 
 	/**
