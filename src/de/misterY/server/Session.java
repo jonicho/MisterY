@@ -30,6 +30,19 @@ public class Session {
 		return mrY;
 	}
 
+	
+	/** Adds a user to a session
+	 * @param u the user to add
+	 * @return If the users could be added or not
+	 */
+	public boolean addUser(User u) {
+		if (users.size() >= 6) {
+			return false;
+		}
+		users.add(u);
+		return true;
+	}
+	
 	/**
 	 * Lets the given user make a movement to the given end station with the given
 	 * means of transport if the movement is valid.
