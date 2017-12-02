@@ -1,5 +1,7 @@
 package de.misterY;
 
+import de.misterY.server.User;
+
 public class Player {
 	private String name;
 	private Station currentStation;
@@ -48,6 +50,60 @@ public class Player {
 	}
 
 	/**
+	 * Moves to the given station with the given means of transportation if
+	 * possible.
+	 * 
+	 * @param station
+	 *            The station to move to.
+	 * @param type
+	 * @return
+	 */
+	public boolean moveTo(Station end, MeansOfTransportation type) {
+		if (!validateMovement(end, type)) {
+			return false;
+		}
+		if (!useTicket(type)) {
+			return false;
+		}
+		currentStation = end;
+		return true;
+	}
+
+	/**
+	 * Validates this player's movement by checking whether a movement from the
+	 * specified starting point to the specified end point is possible, also
+	 * considering if this player has enough tickets.
+	 * 
+	 * @param end
+	 *            The end station
+	 * @param type
+	 *            The mean of transportation
+	 * @return True if movement is valid, false otherwise
+	 */
+	public boolean validateMovement(Station end, MeansOfTransportation type) {
+		if (!hasEnoughTickets(type)) {
+			return false;
+		}
+		Link link = currentStation.getLink(end);
+		if (link == null) {
+			return false;
+		}
+		switch (type) {
+		case Bus:
+			if (!link.isBus())
+				return false;
+			break;
+		case Underground:
+			if (!link.isUnderground())
+				return false;
+			break;
+		default:
+			throw new IllegalStateException("Unknown mean of transportaion: \"" + type + "\"");
+		}
+		return true;
+	}
+
+	/**
 	 * Use a ticket
 	 * 
 	 * @param type
@@ -72,6 +128,38 @@ public class Player {
 		case Underground:
 			if (undergroundTickets > 0) {
 				undergroundTickets--;
+				return true;
+			}
+			break;
+
+		default:
+			throw new IllegalStateException("Unknown mean of transportaion: \"" + type + "\"");
+		}
+		return false;
+	}
+
+	/**
+	 * Checks whether this player has enough tickets for the given means of
+	 * transport.
+	 * 
+	 * @param type
+	 *            The means of transport.
+	 * @return Whether this player has enough tickets.
+	 */
+	public boolean hasEnoughTickets(MeansOfTransportation type) {
+		switch (type) {
+		case Taxi:
+			if (taxiTickets > 0) {
+				return true;
+			}
+			break;
+		case Bus:
+			if (busTickets > 0) {
+				return true;
+			}
+			break;
+		case Underground:
+			if (undergroundTickets > 0) {
 				return true;
 			}
 			break;
