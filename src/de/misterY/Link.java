@@ -17,6 +17,9 @@ public class Link {
 	 *            Whether the link is a underground link.
 	 */
 	public Link(Station targetStation, boolean bus, boolean underground) {
+		this.station = targetStation;
+		this.bus = bus;
+		this.underground = underground;
 	}
 
 	/**

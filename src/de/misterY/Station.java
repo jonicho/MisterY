@@ -23,6 +23,8 @@ public class Station {
 	 *            Whether the station is an underground station.
 	 */
 	public Station(boolean bus, boolean underground, int id) {
+		this.bus = bus;
+		this.underground = underground;
 		this.id = id;
 	}
 
