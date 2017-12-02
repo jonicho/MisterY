@@ -46,7 +46,7 @@ public class GameServer extends Server {
 			processChatPost(user,msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_INFO:
-
+			sendInfoUpdate(msgParts, user);
 			break;
 		case PROTOCOL.CS.REQUEST_BOT:
 
@@ -165,9 +165,16 @@ public class GameServer extends Server {
 	 * @param askingUser
 	 *            the user the update will be sent to
 	 */
-	private void sendInfoUpdate(String name, User askingUser) {
-		String msg = PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,
-				users.getUserByName(name).getPlayer().getInfoString());
-		sendToUser(msg, askingUser);
+	private void sendInfoUpdate(String[] msgParts, User askingUser) {
+		if (msgParts.length < 2) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), askingUser);
+			return;
+		}
+		if (users.getUserByName(msgParts[1]) == null) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USER_DOES_NOT_EXIST), askingUser);
+			return;
+		}
+		User u = users.getUserByName(msgParts[1]);
+		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,u.getPlayer().getName(),u.getPlayer().getInfoString()),askingUser);
 	}
 }
