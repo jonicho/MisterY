@@ -48,7 +48,9 @@ public class GameServer extends Server {
 			sendInfoUpdate(msgParts, user);
 			break;
 		case PROTOCOL.CS.REQUEST_BOT:
-
+			break;
+		case PROTOCOL.CS.READY:
+			handleReady();
 			break;
 
 		default:
@@ -158,7 +160,13 @@ public class GameServer extends Server {
 			sendToUser(msg, user);
 		}
 	}
-
+	
+	private void handleReady(User u) {
+		Session s = sessions.getSessionByUser(u);
+		u.getPlayer().setReady(true);
+		s.checkReady();
+	}
+	
 	/**
 	 * Sends an info update for the specified player to the asking user
 	 * 

@@ -12,6 +12,7 @@ public class Session {
 	private int turn = 0;
 	private boolean isDoubleTurn;
 	private boolean wasDoubleTurn;
+	private boolean isActive = false;
 	private ArrayList<User> users = new ArrayList<User>();
 
 	/**
@@ -30,6 +31,17 @@ public class Session {
 		return mrY;
 	}
 
+	public void checkReady() {
+		int ready = 0;
+		for (User u : users) {
+			if (u.getPlayer().isReady()) {
+				ready++;
+			}
+		}
+		if (users.size() == ready) {
+			this.isActive = true;
+		}
+	}
 	
 	/** Adds a user to a session
 	 * @param u the user to add
@@ -50,6 +62,7 @@ public class Session {
 	 * @return Whether the movement was successful
 	 */
 	public boolean doMovement(User user, int endId, MeansOfTransportation type) {
+		endTurn();
 		return user.getPlayer().moveTo(map.getStationById(endId), type);
 	}
 

@@ -6,6 +6,7 @@ public class Player {
 	private String name;
 	private Station currentStation;
 	private Map map;
+	private boolean isReady;
 	private int taxiTickets;
 	private int busTickets;
 	private int undergroundTickets;
@@ -218,6 +219,14 @@ public class Player {
 
 	public boolean isMrY() {
 		return mrY;
+	}
+	
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
+	}
+	
+	public boolean isReady() {
+		return this.isReady;
 	}
 
 }

@@ -16,7 +16,7 @@ public final class PROTOCOL {
 				CHAT_UPDATE = "cupdt", // Base [split] name [split] message
 				INFO_UPDATE = "upinf", // Base [split] name [split] info //TODO which info?
 				MAP = "map", // Base [split] map
-				YOUR_TURN = "yturn", // Base
+				TURN = "yturn", // Base [split] name
 				PLAYER_LEFT = "plleft"; // Base [split] name
 	}
 
@@ -27,7 +27,8 @@ public final class PROTOCOL {
 				REQUEST_MOVEMENT = "reqmv", // Base [split] end id [split] type
 				CHAT_POST = "cpst", // Base [split] message
 				REQUEST_INFO = "reqinfo", // Base [split] name
-				REQUEST_BOT = "reqbot"; // Base
+				REQUEST_BOT = "reqbot", // Base
+				READY = "rdy"; // Base
 	}
 
 	public final class ERRORCODES {
