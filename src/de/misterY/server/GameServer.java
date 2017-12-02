@@ -33,6 +33,9 @@ public class GameServer extends Server {
 				return;
 			}
 		}
+		if (user != null) {
+			sessions.placeUserInSession(user);
+		}
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
@@ -50,7 +53,7 @@ public class GameServer extends Server {
 		case PROTOCOL.CS.REQUEST_BOT:
 			break;
 		case PROTOCOL.CS.READY:
-			handleReady();
+			handleReady(user);
 			break;
 
 		default:
@@ -161,6 +164,9 @@ public class GameServer extends Server {
 		}
 	}
 	
+	/** Handles a "Ready" from the user 
+	 * @param u the user
+	 */
 	private void handleReady(User u) {
 		Session s = sessions.getSessionByUser(u);
 		u.getPlayer().setReady(true);
