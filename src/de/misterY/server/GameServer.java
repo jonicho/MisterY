@@ -43,7 +43,7 @@ public class GameServer extends Server {
 			processMovementRequest(user, msgParts);
 			break;
 		case PROTOCOL.CS.CHAT_POST:
-
+			processChatPost(user,msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_INFO:
 
@@ -114,6 +114,21 @@ public class GameServer extends Server {
 		} else {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}
+	}
+	
+	/** Processes a chat post
+	 * @param user the user that sent the chat post
+	 * @param msgParts the messageparts
+	 */
+	private void processChatPost(User user, String[] msgParts) {
+		if (msgParts.length < 2) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
+			return;
+		}
+		String message = msgParts[1];
+		String username = user.getPlayer().getName();
+		Session csession = sessions.getSessionByUser(user);
+		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.CHAT_UPDATE,username,message), csession);
 	}
 
 	/**
