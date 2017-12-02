@@ -1,5 +1,7 @@
 package de.misterY;
 
+import de.misterY.net.PROTOCOL;
+
 public class Player {
 	private String name;
 	private Station currentStation;
@@ -169,13 +171,13 @@ public class Player {
 	}
 
 	/**
-	 * Return all the ticket information of this player. Format is specified in
-	 * PROTOCOL
+	 * Return all the ticket information of this player. 
+	 * Message: taxitickets | bustickets | traintickets
 	 * 
 	 * @return the String
 	 */
 	public String getInfoString() {
-		return null;
+		return PROTOCOL.buildMessage(this.getTaxiTickets()+"",this.getBusTickets()+"",this.getUndergroundTickets()+"");
 	}
 
 	public void setCurrentStation(Station currentStation) {
