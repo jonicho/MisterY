@@ -13,6 +13,9 @@ public class Station {
 
 	private boolean bus;
 	private boolean underground;
+	
+	private float x;
+	private float y;
 
 	/**
 	 * Constructs a new station.
@@ -21,11 +24,22 @@ public class Station {
 	 *            Whether the station is a bus station.
 	 * @param underground
 	 *            Whether the station is an underground station.
+	 * @param id
+	 *            The station's id
+	 * @param x
+	 *            The x-coordinate. Must be between 0.0 and 1.0.
+	 * @param y
+	 *            The y-coordinate. Must be between 0.0 and 1.0.
 	 */
-	public Station(boolean bus, boolean underground, int id) {
+	public Station(boolean bus, boolean underground, int id, float x, float y) {
+		if (x < 0.0 || x > 1.0 || y < 0.0 || y > 1.0) {
+			throw new IllegalArgumentException("The coordinates must be between 0.0 and 1.0!");
+		}
 		this.bus = bus;
 		this.underground = underground;
 		this.id = id;
+		this.x = x;
+		this.y = y;
 	}
 
 	/**
@@ -92,5 +106,13 @@ public class Station {
 	 */
 	public Link getLink(Station station) {
 		return getLink(station.getId());
+	}
+	
+	public float getX() {
+		return x;
+	}
+	
+	public float getY() {
+		return y;
 	}
 }
