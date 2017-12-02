@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<station bus="true" underground="false" id="1" x="0.5" y="0.5" start="true">
+		<link station="2" bus="false" underground="false"></link>
+	</station>
+	<station bus="true" underground="true" id="2" x="0.3" y="0.8" start="false">
+		<link station="1" bus="false" underground="false"></link>
+	</station>
+</map>
