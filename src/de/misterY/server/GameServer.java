@@ -29,8 +29,7 @@ public class GameServer extends Server {
 		if (user == null) {
 			user = new User(clientIP, clientPort, "tmpuser" + clientIP + ":" + clientPort);
 			if (!msgParts[0].equals(PROTOCOL.CS.LOGIN)) {
-				sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.NOT_LOGGED_IN),
-						user);
+				sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.NOT_LOGGED_IN), user);
 				return;
 			}
 		}
@@ -43,7 +42,7 @@ public class GameServer extends Server {
 			processMovementRequest(user, msgParts);
 			break;
 		case PROTOCOL.CS.CHAT_POST:
-			processChatPost(user,msgParts);
+			processChatPost(user, msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_INFO:
 
@@ -53,8 +52,7 @@ public class GameServer extends Server {
 			break;
 
 		default:
-			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE),
-					user);
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
 			break;
 		}
 	}
@@ -86,7 +84,7 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.SC.OK, nUser);
 		}
 	}
-	
+
 	/**
 	 * Processes a movement request.
 	 * 
@@ -98,7 +96,7 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
 			return;
 		}
-		Session session = sessions.getSessionByUser(user);//TODO can be null
+		Session session = sessions.getSessionByUser(user);// TODO can be null
 		int stationId;
 		MeansOfTransportation type;
 		try {
@@ -115,10 +113,14 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}
 	}
-	
-	/** Processes a chat post
-	 * @param user the user that sent the chat post
-	 * @param msgParts the messageparts
+
+	/**
+	 * Processes a chat post
+	 * 
+	 * @param user
+	 *            the user that sent the chat post
+	 * @param msgParts
+	 *            the messageparts
 	 */
 	private void processChatPost(User user, String[] msgParts) {
 		if (msgParts.length < 2) {
@@ -128,7 +130,7 @@ public class GameServer extends Server {
 		String message = msgParts[1];
 		String username = user.getPlayer().getName();
 		Session csession = sessions.getSessionByUser(user);
-		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.CHAT_UPDATE,username,message), csession);
+		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.CHAT_UPDATE, username, message), csession);
 	}
 
 	/**
