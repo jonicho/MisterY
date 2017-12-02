@@ -32,7 +32,7 @@ public class GameClient extends Client {
 		case PROTOCOL.SC.MAP:
 			
 			break;
-		case PROTOCOL.SC.YOUR_TURN:
+		case PROTOCOL.SC.TURN:
 			
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
