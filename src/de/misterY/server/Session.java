@@ -36,8 +36,8 @@ public class Session {
 	 * 
 	 * @return Whether the movement was successful
 	 */
-	public boolean doMovement(User user, Station end, MeansOfTransportation type) {
-		return user.getPlayer().moveTo(end, type);
+	public boolean doMovement(User user, int endId, MeansOfTransportation type) {
+		return user.getPlayer().moveTo(map.getStationById(endId), type);
 	}
 
 	/**

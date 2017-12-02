@@ -1,5 +1,6 @@
 package de.misterY.server;
 
+import de.misterY.MeansOfTransportation;
 import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
 
@@ -39,7 +40,7 @@ public class GameServer extends Server {
 			processLogin(user, msgParts);
 			break;
 		case PROTOCOL.CS.REQUEST_MOVEMENT:
-
+			processMovementRequest(user, msgParts);
 			break;
 		case PROTOCOL.CS.CHAT_POST:
 
@@ -83,6 +84,35 @@ public class GameServer extends Server {
 			User nUser = new User(user.getIp(), user.getPort(), msgParts[1]);
 			users.addUser(nUser);
 			sendToUser(PROTOCOL.SC.OK, nUser);
+		}
+	}
+	
+	/**
+	 * Processes a movement request.
+	 * 
+	 * @param user
+	 * @param msgParts
+	 */
+	private void processMovementRequest(User user, String[] msgParts) {
+		if (msgParts.length < 3) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
+			return;
+		}
+		Session session = sessions.getSessionByUser(user);//TODO can be null
+		int stationId;
+		MeansOfTransportation type;
+		try {
+			stationId = Integer.parseInt(msgParts[1]);
+			type = MeansOfTransportation.valueOf(msgParts[2]);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
+			return;
+		}
+		if (session.doMovement(user, stationId, type)) {
+			sendToUser(PROTOCOL.SC.OK, user);
+		} else {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}
 	}
 

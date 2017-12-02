@@ -24,7 +24,7 @@ public final class PROTOCOL {
 		private CS() {}
 
 		public static final String LOGIN = "lgn", // Base [split] name
-				REQUEST_MOVEMENT = "reqmv", // Base [split] Start id [split] type [split] end id
+				REQUEST_MOVEMENT = "reqmv", // Base [split] end id [split] type
 				CHAT_POST = "cpst", // Base [split] message
 				REQUEST_INFO = "reqinfo", // Base [split] name
 				REQUEST_BOT = "reqbot"; // Base
@@ -34,7 +34,7 @@ public final class PROTOCOL {
 		private ERRORCODES() {}
 
 		public static final int UNKNOWN_ERROR = -1, CONNECTION_CLOSED = 0, CONNECTION_REFUSED = 1, INVALID_MESSAGE = 2,
-				USERNAME_ALREADY_IN_USE = 3, USER_DOES_NOT_EXIST = 4, NOT_LOGGED_IN = 5, ALREADY_LOGGED_IN = 6;
+				USERNAME_ALREADY_IN_USE = 3, USER_DOES_NOT_EXIST = 4, NOT_LOGGED_IN = 5, ALREADY_LOGGED_IN = 6, INVALID_MOVEMENT = 7;
 	}
 
 	/**

@@ -18,11 +18,13 @@ public class Sessions {
 	}
 
 	/**
-	 * Returns the session containing the given user
+	 * Returns the session containing the given user or null if no session contains
+	 * the user.
 	 * 
 	 * @param user
 	 *            The user
-	 * @return The session containing the given user
+	 * @return The session containing the given user or null if no session contains
+	 *         the user.
 	 */
 	public Session getSessionByUser(User user) {
 		for (Session session : sessions) {
