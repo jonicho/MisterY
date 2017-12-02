@@ -75,6 +75,13 @@ public class Session {
 	public ArrayList<User> getAllUsers() {
 		return users;
 	}
+	
+	public boolean isFull() {
+		if (users.size() >= 6) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean doDoubleTurn() {
 		if (wasDoubleTurn) {
