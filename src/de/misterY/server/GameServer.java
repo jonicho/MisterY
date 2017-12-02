@@ -33,7 +33,7 @@ public class GameServer extends Server {
 				return;
 			}
 		}
-		if (user != null) {
+		if (user != null && !user.isInSession()) {
 			sessions.placeUserInSession(user);
 		}
 
