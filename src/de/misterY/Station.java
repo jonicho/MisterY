@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Each station has a list of links pointing to the next station.
  */
 public class Station {
-	private ArrayList<Link> links;
+	private ArrayList<Link> links = new ArrayList<Link>();
 
 	private final int id;
 
@@ -114,5 +114,9 @@ public class Station {
 	
 	public float getY() {
 		return y;
+	}
+	
+	public ArrayList<Link> getLinks() {
+		return links;
 	}
 }

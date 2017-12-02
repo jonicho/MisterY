@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Map {
-	private ArrayList<Station> stations;
-	private ArrayList<Station> startStations;
+	private ArrayList<Station> stations = new ArrayList<Station>();
+	private ArrayList<Station> startStations = new ArrayList<Station>();
 
 	/**
 	 * Constructs a new map from the given map file.
@@ -46,7 +46,7 @@ public class Map {
 	 *            The string to load the map from.
 	 */
 	private void load(String mapString) {
-
+		
 	}
 
 	/**
@@ -86,5 +86,9 @@ public class Map {
 	 */
 	public int getStationCount() {
 		return stations.size();
+	}
+	
+	public ArrayList<Station> getStations() {
+		return stations;
 	}
 }
