@@ -73,7 +73,7 @@ public class Session {
 	 * @return all users of this session
 	 */
 	public ArrayList<User> getAllUsers() {
-		return users;
+		return (ArrayList<User>) users.clone();
 	}
 	
 	public boolean isFull() {
