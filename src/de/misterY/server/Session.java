@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
-import de.misterY.Station;
 
 public class Session {
 	private Map map;
@@ -31,10 +30,13 @@ public class Session {
 		return mrY;
 	}
 
+	/**
+	 * Checks whether all users are ready. If so, set isActive to true.
+	 */
 	public void checkReady() {
 		int ready = 0;
-		for (User u : users) {
-			if (u.getPlayer().isReady()) {
+		for (User user : users) {
+			if (user.getPlayer().isReady()) {
 				ready++;
 			}
 		}
@@ -58,7 +60,7 @@ public class Session {
 		user.setInSession(true);
 		return true;
 	}
-	
+
 	/**
 	 * Lets the given user make a movement to the given end station with the given
 	 * means of transport if the movement is valid.
@@ -79,7 +81,7 @@ public class Session {
 	public ArrayList<User> getAllUsers() {
 		return (ArrayList<User>) users.clone();
 	}
-	
+
 	public boolean isFull() {
 		if (users.size() >= 6) {
 			return true;
