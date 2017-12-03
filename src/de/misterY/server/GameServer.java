@@ -33,9 +33,6 @@ public class GameServer extends Server {
 				return;
 			}
 		}
-		if (user != null && !user.isInSession()) {
-			sessions.placeUserInSession(user);
-		}
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
@@ -87,6 +84,9 @@ public class GameServer extends Server {
 		} else {
 			User nUser = new User(user.getIp(), user.getPort(), msgParts[1]);
 			users.addUser(nUser);
+			if (nUser != null && !nUser.isInSession()) {
+				sessions.placeUserInSession(nUser);
+			}
 			sendToUser(PROTOCOL.SC.OK, nUser);
 		}
 	}
