@@ -64,7 +64,8 @@ public class GameServer extends Server {
 
 	@Override
 	public void processClosingConnection(String clientIP, int clientPort) {
-		// Send Errorcode
+		users.removeUser(users.getUserByAdress(clientIP, clientPort));
+		//TODO remove user from session
 	}
 
 	/**
