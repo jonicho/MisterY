@@ -1,11 +1,10 @@
 package de.misterY;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,13 +26,22 @@ public class MapLoader {
 	 *            The start stations
 	 * @param mapFile
 	 *            The file to load the map from.
+	 * @return The map string, an empty string if an error occurred.
 	 */
-	public static void loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, File mapFile) {
+	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, File mapFile) {
 		try {
-			loadMap(stations, startStations, new FileInputStream(mapFile));
-		} catch (FileNotFoundException e) {
+			String mapString = "";
+			BufferedReader bf = new BufferedReader(new FileReader(mapFile));
+			String line;
+			while ((line = bf.readLine()) != null) {
+				mapString += line;
+			}
+			bf.close();
+			return loadMap(stations, startStations, mapString);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return "";
 	}
 
 	/**
@@ -45,24 +53,12 @@ public class MapLoader {
 	 *            The start stations
 	 * @param mapString
 	 *            The string to load the map from.
+	 * @return The map string, an empty string if an error occurred.
 	 */
-	public static void loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, String mapString) {
-		loadMap(stations, startStations, new ByteArrayInputStream(mapString.getBytes()));
-	}
-
-	/**
-	 * Loads a map by inserting the Stations into the given ArrayLists
-	 * 
-	 * @param stations
-	 *            The stations
-	 * @param startStations
-	 *            The start stations
-	 * @param inputStream
-	 *            The input stream to load the map from.
-	 */
-	private static void loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, InputStream inputStream) {
+	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, String mapString) {
 		try {
-			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputStream);
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(new ByteArrayInputStream(mapString.getBytes()));
 			doc.getDocumentElement().normalize();
 			NodeList stationElements = doc.getElementsByTagName("station");
 			for (int i = 0; i < stationElements.getLength(); i++) {
@@ -110,10 +106,12 @@ public class MapLoader {
 					station.addLink(new Link(targetStation, bus, underground));
 				}
 			}
+			return mapString;
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (NullPointerException | NumberFormatException e) {
 			e.printStackTrace();
 		}
+		return "";
 	}
 }
