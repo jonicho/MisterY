@@ -68,8 +68,14 @@ public class Session {
 	 * @return Whether the movement was successful
 	 */
 	public boolean doMovement(User user, int endId, MeansOfTransportation type) {
-		endTurn();
-		return user.getPlayer().moveTo(map.getStationById(endId), type);
+		if (!(user == getCurrentUser())) {
+			return false;
+		}
+		boolean success = user.getPlayer().moveTo(map.getStationById(endId), type);
+		if (success) {
+			endTurn();
+		}
+		return success;
 	}
 
 	/**
