@@ -4,6 +4,10 @@ import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
 
 public class GameClient extends Client {
+	
+	private Runnable updateRunnable;
+	private String[] playerList;
+	private String mapString;
 
 	public GameClient(String serverIP, int serverPort) {
 		super(serverIP, serverPort);
@@ -11,6 +15,7 @@ public class GameClient extends Client {
 
 	@Override
 	public void processMessage(String message) {
+		System.out.println(message);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 		
 		switch (msgParts[0]) {
@@ -30,7 +35,7 @@ public class GameClient extends Client {
 			
 			break;
 		case PROTOCOL.SC.MAP:
-			
+			mapString = msgParts[1];
 			break;
 		case PROTOCOL.SC.TURN:
 			
@@ -42,6 +47,16 @@ public class GameClient extends Client {
 		default:
 			break;
 		}
+		if (updateRunnable != null) {
+			updateRunnable.run();
+		}
 	}
-
+	
+	public void setUpdateRunnable(Runnable updateRunnable) {
+		this.updateRunnable = updateRunnable;
+	}
+	
+	public String getMapString() {
+		return mapString;
+	}
 }
