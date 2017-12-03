@@ -65,7 +65,7 @@ public class GameServer extends Server {
 	@Override
 	public void processClosingConnection(String clientIP, int clientPort) {
 		users.removeUser(users.getUserByAdress(clientIP, clientPort));
-		//TODO remove user from session
+		// TODO remove user from session
 	}
 
 	/**
@@ -164,16 +164,19 @@ public class GameServer extends Server {
 			sendToUser(msg, user);
 		}
 	}
-	
-	/** Handles a "Ready" from the user 
-	 * @param u the user
+
+	/**
+	 * Handles a "Ready" from the user
+	 * 
+	 * @param u
+	 *            the user
 	 */
 	private void handleReady(User u) {
 		Session s = sessions.getSessionByUser(u);
 		u.getPlayer().setReady(true);
 		s.checkReady();
 	}
-	
+
 	/**
 	 * Sends an info update for the specified player to the asking user
 	 * 
@@ -192,6 +195,8 @@ public class GameServer extends Server {
 			return;
 		}
 		User u = users.getUserByName(msgParts[1]);
-		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,u.getPlayer().getName(),u.getPlayer().getInfoString()),askingUser);
+		sendToUser(
+				PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, u.getPlayer().getInfoString()),
+				askingUser);
 	}
 }

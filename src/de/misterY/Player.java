@@ -172,13 +172,16 @@ public class Player {
 	}
 
 	/**
-	 * Return all the ticket information of this player. 
-	 * Message: taxitickets | bustickets | traintickets
+	 * Return all the ticket information of this player.</br>
+	 * Returns the following separated by {@code PROTOCOL.SPLIT}: user name, taxi
+	 * tickets, bus tickets, underground tickets, current station id, whether this
+	 * player is mrY
 	 * 
-	 * @return the String
+	 * @return the info string
 	 */
 	public String getInfoString() {
-		return PROTOCOL.buildMessage(this.getTaxiTickets()+"",this.getBusTickets()+"",this.getUndergroundTickets()+"");
+		return PROTOCOL.buildMessage(name, getTaxiTickets() + "", getBusTickets() + "", getUndergroundTickets() + "",
+				currentStation.getId() + "", mrY + "");
 	}
 
 	public void setCurrentStation(Station currentStation) {
@@ -220,11 +223,11 @@ public class Player {
 	public boolean isMrY() {
 		return mrY;
 	}
-	
+
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
 	}
-	
+
 	public boolean isReady() {
 		return this.isReady;
 	}
