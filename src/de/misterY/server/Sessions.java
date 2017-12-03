@@ -24,7 +24,6 @@ public class Sessions {
 	public void placeUserInSession(User u) {
 		if (!fillingSession.isFull()) {
 			fillingSession.addUser(u);
-			u.setInSession(true);
 		}
 		else {
 			fillingSession.checkReady();
@@ -32,7 +31,6 @@ public class Sessions {
 			sessions.add(s);
 			fillingSession = s;
 			fillingSession.addUser(u);
-			u.setInSession(true);
 		}
 	}
 	

@@ -42,16 +42,20 @@ public class Session {
 			this.isActive = true;
 		}
 	}
-	
-	/** Adds a user to a session
-	 * @param u the user to add
+
+	/**
+	 * Adds a user to a session
+	 * 
+	 * @param user
+	 *            the user to add
 	 * @return If the users could be added or not
 	 */
-	public boolean addUser(User u) {
+	public boolean addUser(User user) {
 		if (users.size() >= 6) {
 			return false;
 		}
-		users.add(u);
+		users.add(user);
+		user.setInSession(true);
 		return true;
 	}
 	
