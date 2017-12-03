@@ -26,7 +26,6 @@ public class Sessions {
 			fillingSession.addUser(u);
 		}
 		else {
-			fillingSession.checkReady();
 			Session s = new Session();
 			sessions.add(s);
 			fillingSession = s;

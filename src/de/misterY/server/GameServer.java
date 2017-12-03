@@ -1,5 +1,8 @@
 package de.misterY.server;
 
+import java.io.File;
+
+import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
 import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
@@ -24,6 +27,7 @@ public class GameServer extends Server {
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
+		System.out.println(message);
 		User user = users.getUserByAdress(clientIP, clientPort);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 		if (user == null) {
@@ -175,6 +179,14 @@ public class GameServer extends Server {
 		Session s = sessions.getSessionByUser(u);
 		u.getPlayer().setReady(true);
 		s.checkReady();
+		if (s.isActive()) {
+			s.prepareGame(new Map(new File("src/de/misterY/maps/TestMap.xml")));//TODO
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, s.getMap().getMapString()), s);
+			for (User user : s.getAllUsers()) {
+				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), s);
+			}
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, s.getCurrentUser().getPlayer().getName()), s);
+		}
 	}
 
 	/**
@@ -195,8 +207,6 @@ public class GameServer extends Server {
 			return;
 		}
 		User u = users.getUserByName(msgParts[1]);
-		sendToUser(
-				PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, u.getPlayer().getInfoString()),
-				askingUser);
+		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, u.getPlayer().getInfoString()), askingUser);
 	}
 }

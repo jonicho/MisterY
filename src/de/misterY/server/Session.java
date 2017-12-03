@@ -1,6 +1,7 @@
 package de.misterY.server;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
@@ -12,6 +13,7 @@ public class Session {
 	private boolean isDoubleTurn;
 	private boolean wasDoubleTurn;
 	private boolean isActive = false;
+	private boolean gameStarted = false;
 	private ArrayList<User> users = new ArrayList<User>();
 
 	/**
@@ -29,11 +31,27 @@ public class Session {
 	public User getMrY() {
 		return mrY;
 	}
+	
+	/**
+	 * Returns the user whose turn it is.
+	 * 
+	 * @return the user whose turn it is.
+	 */
+	public User getCurrentUser() {
+		return users.get(turn % users.size());
+	}
+	
+	public Map getMap() {
+		return map;
+	}
 
 	/**
 	 * Checks whether all users are ready. If so, set isActive to true.
 	 */
 	public void checkReady() {
+		if (isActive) {
+			return;
+		}
 		int ready = 0;
 		for (User user : users) {
 			if (user.getPlayer().isReady()) {
@@ -44,6 +62,29 @@ public class Session {
 			this.isActive = true;
 		}
 	}
+	
+	/**
+	 * Prepares the game by doing the following things:<br>
+	 * -shuffle user list<br>
+	 * -make user 0 to misterY<br>
+	 * -call start() an every player
+	 * 
+	 * @param map The map
+	 */
+	public void prepareGame(Map map) {
+		if (gameStarted) {
+			return;
+		}
+		Collections.shuffle(users);
+		mrY = users.get(0);
+		mrY.getPlayer().setMrY(true);
+		
+		for (User user : users) {
+			user.getPlayer().start(map, 10, 10, 10);//TODO use any config constants
+		}
+		this.map = map;
+		gameStarted = true;
+	}
 
 	/**
 	 * Adds a user to a session
@@ -53,6 +94,9 @@ public class Session {
 	 * @return If the users could be added or not
 	 */
 	public boolean addUser(User user) {
+		if (isActive) {
+			return false;
+		}
 		if (users.size() >= 6) {
 			return false;
 		}
@@ -136,5 +180,9 @@ public class Session {
 
 	public boolean wasDoubleTurn() {
 		return wasDoubleTurn;
+	}
+	
+	public boolean isActive() {
+		return isActive;
 	}
 }
