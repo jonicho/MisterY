@@ -11,18 +11,18 @@ public class PositionPredicter {
 	}
 
 	/**
-	 * Predicts all Possible Movements the Specified player can make from the
+	 * Predicts all possible movements the specified player can make from the
 	 * specified station with his tickets
 	 * 
 	 * @param station
 	 *            the station the player is on
 	 * @param player
 	 *            the player to predict
-	 * @return All Possible Positions in an ArrayList
+	 * @return All possible positions in an ArrayList
 	 */
 	private ArrayList<Station> PredictPositions(Station station, Player player) {
 		boolean hasBusTickets;
-		boolean hasTrainTickets;
+		boolean hasUndergroundTickets;
 		boolean hasTaxiTickets;
 		if (player.getBusTickets() > 0)
 			hasBusTickets = true;
@@ -33,15 +33,15 @@ public class PositionPredicter {
 		else
 			hasTaxiTickets = false;
 		if (player.getUndergroundTickets() > 0)
-			hasTrainTickets = true;
+			hasUndergroundTickets = true;
 		else
-			hasTrainTickets = false;
+			hasUndergroundTickets = false;
 		ArrayList<Link> stationLinks = station.getLinks();
 		ArrayList<Link> possibleLinks = new ArrayList<Link>();
 		for (Link l : stationLinks) {
 			if (l.isBus() && hasBusTickets)
 				possibleLinks.add(l);
-			if (l.isUnderground() && hasTrainTickets)
+			if (l.isUnderground() && hasUndergroundTickets)
 				possibleLinks.add(l);
 			if (!l.isBus() && !l.isUnderground() && hasTaxiTickets)
 				possibleLinks.add(l);

@@ -8,34 +8,34 @@ import de.misterY.Station;
 
 public class PositionResolver {
 	private Station lastStation;
-	private ArrayList<MeansOfTransportation> TicketRecord = new ArrayList<MeansOfTransportation>();
-	private Station[][] ResolvedLayers = new Station[5][200];
+	private ArrayList<MeansOfTransportation> ticketRecord = new ArrayList<MeansOfTransportation>();
+	private Station[][] resolvedLayers = new Station[5][200];
 	private Integer currentLayer;
 
 	public PositionResolver(Station pStation) {
 		currentLayer = 0;
 		lastStation = pStation;
-		ResolvedLayers[0][0] = lastStation;
+		resolvedLayers[0][0] = lastStation;
 	}
 
 	/**
-	 * Resolves the Possible Positions of MRY
+	 * Resolves the possible positions of MRY
 	 */
 	private void resolve() {
-		// Increase the Layer and Clear the Last Results
+		// Increase the layer and clear the last results
 		currentLayer++;
 		for (int y = 0; y < 5; y++) {
 			for (int z = 0; z < 200; z++) {
-				ResolvedLayers[y][z] = null;
+				resolvedLayers[y][z] = null;
 			}
 		}
-		// Get Links
+		// Get links
 		for (int i = 0; i < currentLayer + 1; i++) {
 			ArrayList<Link> PossibleLinks = new ArrayList<Link>();
 			ArrayList<Station> LayerStations = new ArrayList<Station>();
 			for (int x = 0; x < 200; x++) {
-				if (ResolvedLayers[i - 1][x] != null) {
-					PossibleLinks.addAll(ResolvedLayers[currentLayer - 1][x].getLinks());
+				if (resolvedLayers[i - 1][x] != null) {
+					PossibleLinks.addAll(resolvedLayers[currentLayer - 1][x].getLinks());
 				}
 			}
 			// Trace
@@ -48,42 +48,42 @@ public class PositionResolver {
 			// Output
 			for (int k = 0; k < LayerStations.size(); k++) {
 				Station temp = LayerStations.get(k);
-				ResolvedLayers[i][k] = temp;
+				resolvedLayers[i][k] = temp;
 				LayerStations.remove(temp);
 			}
 		}
 	}
 
 	/**
-	 * Feeds the Resolver the last ticket used by MRY
+	 * Feeds the resolver the last ticket used by MRY
 	 * 
 	 * @param ticket
 	 */
 	public void feedTicketUpdate(MeansOfTransportation ticket) {
-		TicketRecord.add(ticket);
+		ticketRecord.add(ticket);
 		resolve();
 	}
 
 	/**
-	 * Feeds the Resolver a new position once MRY has become visible
+	 * Feeds the resolver a new position once MRY has become visible
 	 * 
 	 * @param pStation
 	 */
 	public void feedPositionUpdate(Station pStation) {
 		lastStation = pStation;
-		TicketRecord.clear();
+		ticketRecord.clear();
 	}
 
 	/**
-	 * Returns the Resolved Positions
+	 * Returns the resolved positions
 	 * 
 	 * @return
 	 */
 	public ArrayList<Station> getResolvedStations() {
 		ArrayList<Station> ret = new ArrayList<Station>();
 		for (int i = 0; i < 200; i++) {
-			if (ResolvedLayers[currentLayer][i] != null) {
-				ret.add(ResolvedLayers[currentLayer][i]);
+			if (resolvedLayers[currentLayer][i] != null) {
+				ret.add(resolvedLayers[currentLayer][i]);
 			}
 		}
 		return ret;
