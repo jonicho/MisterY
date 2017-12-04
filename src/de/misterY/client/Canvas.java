@@ -28,7 +28,7 @@ public class Canvas extends JPanel {
 				int x1 = station.getPos().getDrawX(getWidth());
 				int y1 = station.getPos().getDrawY(getHeight());
 				int x2 = link.getStation().getPos().getDrawX(getWidth());
-				int y2 = link.getStation().getPos().getDrawX(getHeight());
+				int y2 = link.getStation().getPos().getDrawY(getHeight());
 				g.drawLine(x1, y1, x2, y2);
 			}
 		}
