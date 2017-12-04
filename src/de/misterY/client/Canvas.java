@@ -25,16 +25,16 @@ public class Canvas extends JPanel {
 		}
 		for (Station station : map.getStations()) {
 			for (Link link : station.getLinks()) {
-				int x1 = (int) (station.getX() * getWidth());
-				int y1 = (int) (station.getY() * getHeight());
-				int x2 = (int) (link.getStation().getX() * getWidth());
-				int y2 = (int) (link.getStation().getY() * getHeight());
+				int x1 = station.getPos().getDrawX(getWidth());
+				int y1 = station.getPos().getDrawY(getHeight());
+				int x2 = link.getStation().getPos().getDrawX(getWidth());
+				int y2 = link.getStation().getPos().getDrawX(getHeight());
 				g.drawLine(x1, y1, x2, y2);
 			}
 		}
 		for (Station station : map.getStations()) {
-			int x = (int) (station.getX() * getWidth());
-			int y = (int) (station.getY() * getHeight());
+			int x = station.getPos().getDrawX(getWidth());
+			int y = station.getPos().getDrawY(getHeight());
 			int size = 10;
 			g.fillOval(x - size / 2, y - size / 2, size, size);
 		}

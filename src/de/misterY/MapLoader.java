@@ -67,11 +67,11 @@ public class MapLoader {
 				boolean bus = Boolean.parseBoolean(stationElement.getAttribute("bus"));
 				boolean underground = Boolean.parseBoolean(stationElement.getAttribute("underground"));
 				int id = Integer.parseInt(stationElement.getAttribute("id"));
-				float x = Float.parseFloat(stationElement.getAttribute("x"));
-				float y = Float.parseFloat(stationElement.getAttribute("y"));
+				double x = Float.parseFloat(stationElement.getAttribute("x"));
+				double y = Float.parseFloat(stationElement.getAttribute("y"));
 				boolean start = Boolean.parseBoolean(stationElement.getAttribute("start"));
 
-				Station station = new Station(bus, underground, id, x, y);
+				Station station = new Station(bus, underground, id, new Vector2D(x, y));
 				stations.add(station);
 
 				if (start) {

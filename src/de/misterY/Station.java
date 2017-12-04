@@ -13,9 +13,8 @@ public class Station {
 
 	private boolean bus;
 	private boolean underground;
-	
-	private float x;
-	private float y;
+
+	private Vector2D pos;
 
 	/**
 	 * Constructs a new station.
@@ -26,20 +25,17 @@ public class Station {
 	 *            Whether the station is an underground station.
 	 * @param id
 	 *            The station's id
-	 * @param x
-	 *            The x-coordinate. Must be between 0.0 and 1.0.
-	 * @param y
-	 *            The y-coordinate. Must be between 0.0 and 1.0.
+	 * @param pos
+	 *            The station's position. The x and y components must each be between 0.0 and 1.0.
 	 */
-	public Station(boolean bus, boolean underground, int id, float x, float y) {
-		if (x < 0.0 || x > 1.0 || y < 0.0 || y > 1.0) {
+	public Station(boolean bus, boolean underground, int id, Vector2D pos) {
+		if (pos.getX() < 0.0 || pos.getX() > 1.0 || pos.getY() < 0.0 || pos.getY() > 1.0) {
 			throw new IllegalArgumentException("The coordinates must be between 0.0 and 1.0!");
 		}
 		this.bus = bus;
 		this.underground = underground;
 		this.id = id;
-		this.x = x;
-		this.y = y;
+		this.pos = pos;
 	}
 
 	/**
@@ -107,15 +103,11 @@ public class Station {
 	public Link getLink(Station station) {
 		return getLink(station.getId());
 	}
-	
-	public float getX() {
-		return x;
+
+	public Vector2D getPos() {
+		return pos;
 	}
-	
-	public float getY() {
-		return y;
-	}
-	
+
 	public ArrayList<Link> getLinks() {
 		return links;
 	}
