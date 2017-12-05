@@ -31,25 +31,25 @@ public class PositionResolver {
 		}
 		// Get links
 		for (int i = 0; i < currentLayer + 1; i++) {
-			ArrayList<Link> PossibleLinks = new ArrayList<Link>();
-			ArrayList<Station> LayerStations = new ArrayList<Station>();
+			ArrayList<Link> possibleLinks = new ArrayList<Link>();
+			ArrayList<Station> layerStations = new ArrayList<Station>();
 			for (int x = 0; x < 200; x++) {
 				if (resolvedLayers[i - 1][x] != null) {
-					PossibleLinks.addAll(resolvedLayers[currentLayer - 1][x].getLinks());
+					possibleLinks.addAll(resolvedLayers[currentLayer - 1][x].getLinks());
 				}
 			}
 			// Trace
-			for (Link l : PossibleLinks) {
+			for (Link l : possibleLinks) {
 				Station target = l.getStation();
-				if (!LayerStations.contains(target)) {
-					LayerStations.add(target);
+				if (!layerStations.contains(target)) {
+					layerStations.add(target);
 				}
 			}
 			// Output
-			for (int k = 0; k < LayerStations.size(); k++) {
-				Station temp = LayerStations.get(k);
+			for (int k = 0; k < layerStations.size(); k++) {
+				Station temp = layerStations.get(k);
 				resolvedLayers[i][k] = temp;
-				LayerStations.remove(temp);
+				layerStations.remove(temp);
 			}
 		}
 	}
