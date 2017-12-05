@@ -62,19 +62,24 @@ public class Vector2D {
 	 * 
 	 * @param length
 	 *            The target length.
+	 * @return this
 	 */
-	public void setLength(double length) {
+	public Vector2D setLength(double length) {
 		normalize();
 		multiply(length);
+		return this;
 	}
 
 	/**
 	 * Normalizes this vector
+	 * 
+	 * @return this
 	 */
-	public void normalize() {
+	public Vector2D normalize() {
 		double length = getLength();
 		x /= length;
 		y /= length;
+		return this;
 	}
 
 	/**
@@ -82,10 +87,12 @@ public class Vector2D {
 	 * 
 	 * @param m
 	 *            The number to multiply this vector with.
+	 * @return this
 	 */
-	public void multiply(double m) {
+	public Vector2D multiply(double m) {
 		x *= m;
 		y *= m;
+		return this;
 	}
 
 	/**
@@ -93,10 +100,12 @@ public class Vector2D {
 	 * 
 	 * @param vec
 	 *            The vector to add to this vector.
+	 * @return this
 	 */
-	public void add(Vector2D vec) {
+	public Vector2D add(Vector2D vec) {
 		x += vec.x;
 		y += vec.y;
+		return this;
 	}
 
 	/**
@@ -104,10 +113,12 @@ public class Vector2D {
 	 * 
 	 * @param vec
 	 *            The vector to subtract from this vector.
+	 * @return this
 	 */
-	public void subtract(Vector2D vec) {
+	public Vector2D subtract(Vector2D vec) {
 		x -= vec.x;
 		y -= vec.y;
+		return this;
 	}
 
 	/**
