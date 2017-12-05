@@ -57,6 +57,7 @@ public class MapLoader {
 	 */
 	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, String mapString) {
 		try {
+			mapString = mapString.replaceAll("[\\>][\\t]+[\\<]", "><"); // remove unnecessary tabs
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new ByteArrayInputStream(mapString.getBytes()));
 			doc.getDocumentElement().normalize();
