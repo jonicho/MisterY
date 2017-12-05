@@ -32,7 +32,7 @@ public class Vector2D {
 	public int getDrawX(int width) {
 		return (int) (x * width);
 	}
-	
+
 	/**
 	 * Returns the y-component of this vector multiplied by the given height as an
 	 * integer to get an y-position to draw with.
@@ -97,6 +97,17 @@ public class Vector2D {
 	public void add(Vector2D vec) {
 		x += vec.x;
 		y += vec.y;
+	}
+
+	/**
+	 * Subtracts the given vector from this vector.
+	 * 
+	 * @param vec
+	 *            The vector to subtract from this vector.
+	 */
+	public void subtract(Vector2D vec) {
+		x -= vec.x;
+		y -= vec.y;
 	}
 
 	/**
