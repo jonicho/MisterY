@@ -131,8 +131,10 @@ public class Vector2D {
 	public Vector2D rotate(double radians) {
 		double sin = Math.sin(radians);
 		double cos = Math.cos(radians);
-		x = cos * x - sin * y;
-		y = sin * x + cos * y;
+		double ox = x;
+		double oy = y;
+		x = cos * ox - sin * oy;
+		y = sin * ox + cos * oy;
 		return this;
 	}
 
