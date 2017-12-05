@@ -122,6 +122,21 @@ public class Vector2D {
 	}
 
 	/**
+	 * Rotates this vector by the given angle in radians.
+	 * 
+	 * @param radians
+	 *            The angle in radians to rotate the vector by.
+	 * @return this
+	 */
+	public Vector2D rotate(double radians) {
+		double sin = Math.sin(radians);
+		double cos = Math.cos(radians);
+		x = cos * x - sin * y;
+		y = sin * x + cos * y;
+		return this;
+	}
+
+	/**
 	 * Returns a clone of this vector.
 	 * 
 	 * @return A clone of this vector.
