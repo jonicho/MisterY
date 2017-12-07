@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+
 import javax.swing.JPanel;
 
 import de.misterY.Link;
@@ -161,7 +162,19 @@ public class Canvas extends JPanel {
 		g.setColor(Color.BLACK);
 		int x = station.getPos().getDrawX(getWidth());
 		int y = station.getPos().getDrawY(getHeight());
-		int size = 10;
+		int size;
+		if (station.isUnderground()) {
+			size = 20;
+			g.setColor(Color.RED);
+			g.fillOval(x - size / 2, y - size / 2, size, size);
+		}
+		if (station.isBus()) {
+			size = 16;
+			g.setColor(Color.GREEN);
+			g.fillOval(x - size / 2, y - size / 2, size, size);
+		}
+		size = 12;
+		g.setColor(Color.YELLOW);
 		g.fillOval(x - size / 2, y - size / 2, size, size);
 	}
 
