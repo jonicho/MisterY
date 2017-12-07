@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import de.misterY.Map;
 import de.misterY.net.PROTOCOL;
 
 public class Main {
@@ -135,8 +134,8 @@ public class Main {
 	 */
 	private void createUpdateRunnable() {
 		gameClient.setUpdateRunnable(() -> {
-			if (gameClient.getMapString() != null)
-				canvas.setMap(new Map(gameClient.getMapString()));
+			if (gameClient.getMap() != null)
+				canvas.setMap(gameClient.getMap());
 			canvas.repaint();
 		});
 	}

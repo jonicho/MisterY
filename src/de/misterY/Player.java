@@ -196,6 +196,18 @@ public class Player {
 	public void setMrY(boolean mrY) {
 		this.mrY = mrY;
 	}
+	
+	public void setBusTickets(int busTickets) {
+		this.busTickets = busTickets;
+	}
+	
+	public void setTaxiTickets(int taxiTickets) {
+		this.taxiTickets = taxiTickets;
+	}
+	
+	public void setUndergroundTickets(int undergroundTickets) {
+		this.undergroundTickets = undergroundTickets;
+	}
 
 	public void setMap(Map map) {
 		this.map = map;
