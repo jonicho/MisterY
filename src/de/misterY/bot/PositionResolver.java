@@ -8,7 +8,7 @@ import de.misterY.Station;
 
 public class PositionResolver {
 	private Station lastStation;
-	private ArrayList<MeansOfTransportation> ticketRecord = new ArrayList<MeansOfTransportation>();
+	private MeansOfTransportation lastTicket;
 	private Station[][] resolvedLayers = new Station[5][200];
 	private Integer currentLayer;
 
@@ -40,9 +40,13 @@ public class PositionResolver {
 			}
 			// Trace
 			for (Link l : possibleLinks) {
-				Station target = l.getStation();
-				if (!layerStations.contains(target)) {
-					layerStations.add(target);
+				if (l.isBus() && lastTicket.equals(MeansOfTransportation.Bus)
+						|| l.isUnderground() && lastTicket.equals(MeansOfTransportation.Underground)
+						|| !l.isBus() && !l.isUnderground() && lastTicket.equals(MeansOfTransportation.Taxi)) {
+					Station target = l.getStation();
+					if (!layerStations.contains(target)) {
+						layerStations.add(target);
+					}
 				}
 			}
 			// Output
@@ -60,7 +64,7 @@ public class PositionResolver {
 	 * @param ticket
 	 */
 	public void feedTicketUpdate(MeansOfTransportation ticket) {
-		ticketRecord.add(ticket);
+		lastTicket = ticket;
 		resolve();
 	}
 
@@ -71,7 +75,7 @@ public class PositionResolver {
 	 */
 	public void feedPositionUpdate(Station pStation) {
 		lastStation = pStation;
-		ticketRecord.clear();
+		lastTicket = null;
 	}
 
 	/**
