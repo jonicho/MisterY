@@ -22,9 +22,6 @@ public class GameClient extends Client {
 		case PROTOCOL.SC.ERROR:
 			
 			break;
-		case PROTOCOL.SC.POSITION_UPDATE:
-			
-			break;
 		case PROTOCOL.SC.OK:
 			
 			break;
