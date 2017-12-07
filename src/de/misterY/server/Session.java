@@ -31,7 +31,7 @@ public class Session {
 	public User getMrY() {
 		return mrY;
 	}
-	
+
 	/**
 	 * Returns the user whose turn it is.
 	 * 
@@ -40,7 +40,7 @@ public class Session {
 	public User getCurrentUser() {
 		return users.get(turn % users.size());
 	}
-	
+
 	public Map getMap() {
 		return map;
 	}
@@ -49,6 +49,10 @@ public class Session {
 	 * Checks whether all users are ready. If so, set isActive to true.
 	 */
 	public void checkReady() {
+		if (users.size() < 3) {
+			return;
+		}
+
 		if (isActive) {
 			return;
 		}
@@ -62,14 +66,15 @@ public class Session {
 			this.isActive = true;
 		}
 	}
-	
+
 	/**
 	 * Prepares the game by doing the following things:<br>
 	 * -shuffle user list<br>
 	 * -make user 0 to misterY<br>
 	 * -call start() an every player
 	 * 
-	 * @param map The map
+	 * @param map
+	 *            The map
 	 */
 	public void prepareGame(Map map) {
 		if (gameStarted) {
@@ -78,9 +83,9 @@ public class Session {
 		Collections.shuffle(users);
 		mrY = users.get(0);
 		mrY.getPlayer().setMrY(true);
-		
+
 		for (User user : users) {
-			user.getPlayer().start(map, 10, 10, 10);//TODO use any config constants
+			user.getPlayer().start(map, 10, 10, 10);// TODO use any config constants
 		}
 		this.map = map;
 		gameStarted = true;
@@ -181,7 +186,7 @@ public class Session {
 	public boolean wasDoubleTurn() {
 		return wasDoubleTurn;
 	}
-	
+
 	public boolean isActive() {
 		return isActive;
 	}

@@ -11,7 +11,6 @@ public final class PROTOCOL {
 		private SC() {}
 
 		public static final String ERROR = "err", // Base [split] errorcode
-				POSITION_UPDATE = "posupdt", // Base [split] name [split] position [split] used ticket
 				OK = "ok", // Base
 				CHAT_UPDATE = "cupdt", // Base [split] name [split] message
 				INFO_UPDATE = "upinf", // Base [split] name [split] taxi tickets [split] bus tickets [split] underground tickets [split] current station id [split] is mrY
