@@ -39,6 +39,9 @@ public class Player {
 	 */
 	public void start(Map map, int taxiTickets, int busTickets, int undergroundTickets) {
 		this.map = map;
+		this.taxiTickets = taxiTickets;
+		this.busTickets = busTickets;
+		this.undergroundTickets = undergroundTickets;
 		chooseRandomStartStation();
 	}
 
@@ -90,6 +93,8 @@ public class Player {
 			return false;
 		}
 		switch (type) {
+		case Taxi:
+			return true;
 		case Bus:
 			if (!link.isBus())
 				return false;
