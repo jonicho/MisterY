@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-
 import javax.swing.JPanel;
 
 import de.misterY.Link;
@@ -107,27 +106,41 @@ public class Canvas extends JPanel {
 	 */
 	private void drawLinks(Graphics2D g, Station station) {
 		for (Link link : station.getLinks()) {
+			g.setColor(Color.BLACK);
 			int x1 = station.getPos().getDrawX(getWidth());
 			int y1 = station.getPos().getDrawY(getHeight());
 			int x2 = link.getStation().getPos().getDrawX(getWidth());
 			int y2 = link.getStation().getPos().getDrawY(getHeight());
 			g.drawLine(x1, y1, x2, y2);
-			drawArrow(g, link.getStation().getPos().getClone(),
-					station.getPos().getClone().subtract(link.getStation().getPos()));
+			Vector2D pos = link.getStation().getPos().getClone();
+			Vector2D vec = station.getPos().getClone().subtract(link.getStation().getPos());
+			g.setColor(Color.YELLOW);
+			drawArrow(g, pos, vec, 0.02);
+			if (link.isBus()) {
+				g.setColor(Color.GREEN);
+				drawArrow(g, pos, vec, 0.03);
+			}
+			if (link.isUnderground()) {
+				g.setColor(Color.RED);
+				drawArrow(g, pos, vec, 0.04);
+			}
 		}
 	}
 
 	/**
-	 * Draws an arrow pointing to pos with the direction of vec.
+	 * Draws an arrow pointing to pos with the direction of vec and the distance
+	 * dis.
 	 * 
 	 * @param pos
 	 *            The position the arrow will be pointing to
 	 * @param vec
 	 *            The direction in which the arrow will point
+	 * @param dis
+	 *            The distance from pos
 	 */
-	private void drawArrow(Graphics2D g, Vector2D pos, Vector2D vec) {
+	private void drawArrow(Graphics2D g, Vector2D pos, Vector2D vec, double dis) {
 		vec.setLength(0.03);
-		pos.add(vec);
+		pos.add(vec.getClone().setLength(dis));
 		Vector2D left = vec.getClone().rotate(Math.toRadians(30)).add(pos);
 		Vector2D right = vec.getClone().rotate(Math.toRadians(-30)).add(pos);
 		g.drawLine(pos.getDrawX(getWidth()), pos.getDrawY(getHeight()), left.getDrawX(getWidth()),
@@ -145,6 +158,7 @@ public class Canvas extends JPanel {
 	 *            The station which is drawn
 	 */
 	private void drawStations(Graphics2D g, Station station) {
+		g.setColor(Color.BLACK);
 		int x = station.getPos().getDrawX(getWidth());
 		int y = station.getPos().getDrawY(getHeight());
 		int size = 10;
