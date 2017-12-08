@@ -176,6 +176,23 @@ public class Canvas extends JPanel {
 		size = 12;
 		g.setColor(Color.YELLOW);
 		g.fillOval(x - size / 2, y - size / 2, size, size);
+		
+		g.setColor(Color.BLACK);
+		drawCenteredString(g, station.getId() + "", x, y);
+	}
+	
+	/**
+	 * Draws the given string onto the given graphics
+	 * 
+	 * @param g The graphics to draw the string on
+	 * @param string The string to draw
+	 * @param x The center-x-coordinate
+	 * @param y The center-y-coordinate
+	 */
+	private void drawCenteredString(Graphics2D g, String string, int x, int y) {
+		int width = g.getFontMetrics().stringWidth(string);
+		int height = g.getFontMetrics().getHeight();
+		g.drawString(string, x - width / 2, y - height / 2 + g.getFontMetrics().getAscent());
 	}
 
 	public void setMap(Map map) {
