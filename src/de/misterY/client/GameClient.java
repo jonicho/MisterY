@@ -79,6 +79,10 @@ public class GameClient extends Client {
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
 	}
+	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
 
 	public void setUpdateRunnable(Runnable updateRunnable) {
 		this.updateRunnable = updateRunnable;
