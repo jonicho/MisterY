@@ -23,8 +23,8 @@ public class Canvas extends JPanel {
 	private Map map;
 	private ArrayList<Player> players;
 	private double scale = 1;
-	private int x = 0;
-	private int y = 0;
+	private double x = 0;
+	private double y = 0;
 	private int mouseX;
 	private int mouseY;
 
@@ -41,8 +41,8 @@ public class Canvas extends JPanel {
 				if (scaleSteps < 0)
 					scaleSteps = 0;
 				scale = 1 + 0.2 * scaleSteps;
-				x = (int) (mouseX * ((lastScale / scale) - 1) + (lastScale / scale) * x);
-				y = (int) (mouseY * ((lastScale / scale) - 1) + (lastScale / scale) * y);
+				x = (int) ((mouseX - x / scale) * ((lastScale / scale) - 1) + (lastScale / scale) * x);
+				y = (int) ((mouseY - y / scale) * ((lastScale / scale) - 1) + (lastScale / scale) * y);
 				lastScale = scale;
 				repaint();
 			}
@@ -57,8 +57,8 @@ public class Canvas extends JPanel {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				x += e.getX() - mouseX;
-				y += e.getY() - mouseY;
+				x += (e.getX() - mouseX) / scale;
+				y += (e.getY() - mouseY) / scale;
 				mouseX = e.getX();
 				mouseY = e.getY();
 				repaint();
