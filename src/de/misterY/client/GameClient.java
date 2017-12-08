@@ -10,7 +10,7 @@ import de.misterY.net.PROTOCOL;
 public class GameClient extends Client {
 
 	private Runnable updateRunnable;
-	private ArrayList<Player> players;
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private Map map;
 
 	public GameClient(String serverIP, int serverPort) {
