@@ -7,11 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import de.misterY.Link;
 import de.misterY.Map;
+import de.misterY.Player;
 import de.misterY.Station;
 import de.misterY.Vector2D;
 
@@ -19,6 +21,7 @@ public class Canvas extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Map map;
+	private ArrayList<Player> players;
 	private double scale = 1;
 	private int x = 0;
 	private int y = 0;
@@ -76,6 +79,8 @@ public class Canvas extends JPanel {
 
 		g.setColor(Color.BLACK);
 		drawMap(g);
+		g.setColor(Color.BLACK);
+		drawPlayers(g);
 	}
 
 	/**
@@ -176,18 +181,38 @@ public class Canvas extends JPanel {
 		size = 12;
 		g.setColor(Color.YELLOW);
 		g.fillOval(x - size / 2, y - size / 2, size, size);
-		
+
 		g.setColor(Color.BLACK);
 		drawCenteredString(g, station.getId() + "", x, y);
 	}
-	
+
+	/**
+	 * Draws all player names onto the given graphics
+	 * 
+	 * @param g
+	 *            The graphics to draw the player names on
+	 */
+	private void drawPlayers(Graphics2D g) {
+		if (players == null) {
+			return;
+		}
+		for (Player player : players) {
+			drawCenteredString(g, player.getName(), player.getCurrentStation().getPos().getDrawX(getWidth()),
+					player.getCurrentStation().getPos().getDrawY(getHeight()));
+		}
+	}
+
 	/**
 	 * Draws the given string onto the given graphics
 	 * 
-	 * @param g The graphics to draw the string on
-	 * @param string The string to draw
-	 * @param x The center-x-coordinate
-	 * @param y The center-y-coordinate
+	 * @param g
+	 *            The graphics to draw the string on
+	 * @param string
+	 *            The string to draw
+	 * @param x
+	 *            The center-x-coordinate
+	 * @param y
+	 *            The center-y-coordinate
 	 */
 	private void drawCenteredString(Graphics2D g, String string, int x, int y) {
 		int width = g.getFontMetrics().stringWidth(string);
@@ -197,5 +222,9 @@ public class Canvas extends JPanel {
 
 	public void setMap(Map map) {
 		this.map = map;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 }

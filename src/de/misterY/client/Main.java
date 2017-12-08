@@ -134,8 +134,12 @@ public class Main {
 	 */
 	private void createUpdateRunnable() {
 		gameClient.setUpdateRunnable(() -> {
-			if (gameClient.getMap() != null)
+			if (gameClient.getMap() != null) {
 				canvas.setMap(gameClient.getMap());
+			}
+			if (gameClient.getPlayers() != null) {
+				canvas.setPlayers(gameClient.getPlayers());
+			}
 			canvas.repaint();
 		});
 	}
