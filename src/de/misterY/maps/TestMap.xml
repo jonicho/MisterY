@@ -4,26 +4,26 @@
 		<link station="2" bus="false" underground="true"></link>
 		<link station="3" bus="false" underground="true"></link>
 	</station>
-	<station bus="true" underground="true" id="2" x="0.1" y="0.4" start="false">
+	<station bus="true" underground="true" id="2" x="0.1" y="0.4" start="true">
 		<link station="1" bus="false" underground="true"></link>
 		<link station="3" bus="true" underground="false"></link>
 		<link station="6" bus="true" underground="true"></link>
 	</station>
-	<station bus="true" underground="false" id="3" x="0.3" y="0.4" start="false">
+	<station bus="true" underground="false" id="3" x="0.3" y="0.4" start="true">
 		<link station="1" bus="false" underground="true"></link>
 		<link station="2" bus="true" underground="false"></link>
 		<link station="4" bus="true" underground="true"></link>
 	</station>
-	<station bus="false" underground="false" id="4" x="0.5" y="0.3" start="false">
+	<station bus="false" underground="false" id="4" x="0.5" y="0.3" start="true">
 		<link station="3" bus="true" underground="true"></link>
 		<link station="5" bus="true" underground="true"></link>
 		<link station="6" bus="false" underground="false"></link>
 	</station>
-	<station bus="true" underground="false" id="5" x="0.9" y="0.25" start="false">
+	<station bus="true" underground="false" id="5" x="0.9" y="0.25" start="true">
 		<link station="4" bus="true" underground="true"></link>
 		<link station="7" bus="true" underground="true"></link>
 	</station>
-	<station bus="true" underground="false" id="6" x="0.25" y="0.75" start="false">
+	<station bus="true" underground="false" id="6" x="0.25" y="0.75" start="true">
 		<link station="2" bus="true" underground="true"></link>
 		<link station="4" bus="false" underground="false"></link>
 		<link station="7" bus="true" underground="true"></link>
