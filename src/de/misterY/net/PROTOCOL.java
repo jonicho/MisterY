@@ -38,9 +38,11 @@ public final class PROTOCOL {
 	}
 
 	/**
-	 * Builds a massage by connecting all arguments into one String, separated by SPLIT.
+	 * Builds a massage by connecting all arguments into one String, separated by
+	 * SPLIT.
 	 * 
-	 * @param msgParts The message parts to connect
+	 * @param msgParts
+	 *            The message parts to connect
 	 * @return The built String
 	 */
 	public static String buildMessage(String... msgParts) {
@@ -50,12 +52,13 @@ public final class PROTOCOL {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Returns an error message based on the following pattern:</br>
 	 * {@code SC.ERROR + SPLIT + errorcode}
 	 * 
-	 * @param errorcode The error code
+	 * @param errorcode
+	 *            The error code
 	 * @return The error message
 	 */
 	public static String getErrorMessage(int errorcode) {

@@ -25,11 +25,11 @@ public class User {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public void setInSession(boolean isInSession) {
 		this.isInSession = isInSession;
 	}
-	
+
 	public boolean isInSession() {
 		return isInSession;
 	}

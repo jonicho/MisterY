@@ -26,7 +26,8 @@ public class Station {
 	 * @param id
 	 *            The station's id
 	 * @param pos
-	 *            The station's position. The x and y components must each be between 0.0 and 1.0.
+	 *            The station's position. The x and y components must each be
+	 *            between 0.0 and 1.0.
 	 */
 	public Station(boolean bus, boolean underground, int id, Vector2D pos) {
 		if (pos.getX() < 0.0 || pos.getX() > 1.0 || pos.getY() < 0.0 || pos.getY() > 1.0) {

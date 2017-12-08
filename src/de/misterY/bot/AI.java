@@ -45,15 +45,15 @@ public class AI {
 
 	public void generateMove() {
 		switch (moveState) {
-		case 0: //Nothing usefull todo, just go in a random direction
-			break; 
-		case 1: //Go to Definitive Position
+		case 0: // Nothing usefull todo, just go in a random direction
 			break;
-		case 2: //Go to Predcted Position
+		case 1: // Go to Definitive Position
+			break;
+		case 2: // Go to Predcted Position
 			break;
 		case 3: // Go in the middle of multiple Resolved Positions
 			break;
-		case 4: //  
+		case 4: //
 			break;
 		}
 	}

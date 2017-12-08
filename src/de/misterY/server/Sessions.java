@@ -20,19 +20,18 @@ public class Sessions {
 	public void removeSession(Session s) {
 		sessions.remove(s);
 	}
-	
+
 	public void placeUserInSession(User u) {
 		if (!fillingSession.isFull()) {
 			fillingSession.addUser(u);
-		}
-		else {
+		} else {
 			Session s = new Session();
 			sessions.add(s);
 			fillingSession = s;
 			fillingSession.addUser(u);
 		}
 	}
-	
+
 	/**
 	 * Returns the session containing the given user or null if no session contains
 	 * the user.
