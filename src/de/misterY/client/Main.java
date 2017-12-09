@@ -3,9 +3,11 @@ package de.misterY.client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.GridBagLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,8 +16,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
+import de.misterY.Player;
 import de.misterY.net.PROTOCOL;
 
 public class Main {
@@ -24,6 +31,8 @@ public class Main {
 	private GameClient gameClient;
 	private JLabel infoLabel;
 	private Canvas canvas;
+	private JTable playersTable;
+	private String ownName;
 
 	/**
 	 * Launch the application.
@@ -92,12 +101,24 @@ public class Main {
 
 		JPanel panel = new JPanel();
 		splitPane.setRightComponent(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0 };
-		gbl_panel.rowHeights = new int[] { 0 };
-		gbl_panel.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { Double.MIN_VALUE };
-		panel.setLayout(gbl_panel);
+		panel.setLayout(new GridLayout(1, 1, 0, 0));
+
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+
+		JLabel lblPlayerInfo = new JLabel("Player info:");
+		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_2.add(lblPlayerInfo, BorderLayout.NORTH);
+
+		JScrollPane scrollPane = new JScrollPane();
+		panel_2.add(scrollPane);
+
+		playersTable = new JTable();
+		scrollPane.setViewportView(playersTable);
+		playersTable.setDefaultEditor(Object.class, null);
+		playersTable.setFocusable(false);
 
 		infoLabel = new JLabel("New label");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
@@ -141,11 +162,38 @@ public class Main {
 				canvas.setPlayers(gameClient.getPlayers());
 			}
 			canvas.repaint();
+			updatePlayersTable();
 		});
 	}
 
 	/**
-	 * Asks the user to enter a username and logs in using that usename.
+	 * Updates the players table
+	 */
+	private void updatePlayersTable() {
+		ArrayList<Player> players = gameClient.getPlayers();
+		if (players.isEmpty()) {
+			return;
+		}
+		String[] columnNames = { "Name", "Taxi tickets", "Bus tickets", "Underground tickets", "MrY" };
+		String[][] data = new String[players.size()][5];
+		int thisPlayerIndex = 0;
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			data[i][0] = player.getName();
+			data[i][1] = player.getTaxiTickets() + "";
+			data[i][2] = player.getBusTickets() + "";
+			data[i][3] = player.getUndergroundTickets() + "";
+			data[i][4] = player.isMrY() ? "X" : "";
+			if (ownName.equals(player.getName())) {
+				thisPlayerIndex = i;
+			}
+		}
+		playersTable.setModel(new DefaultTableModel(data, columnNames));
+		playersTable.setRowSelectionInterval(thisPlayerIndex, thisPlayerIndex);
+	}
+
+	/**
+	 * Asks the user to enter a username and logs in using that username.
 	 */
 	private void login() {
 		if (!gameClient.isConnected()) {
@@ -153,6 +201,7 @@ public class Main {
 			return;
 		}
 		String username = JOptionPane.showInputDialog(frame, "Enter your user name:");
+		ownName = username;
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
 		infoLabel.setText("Logged in.");
