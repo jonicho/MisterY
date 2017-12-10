@@ -231,6 +231,9 @@ public class Main {
 			return;
 		}
 		String username = JOptionPane.showInputDialog(frame, "Enter your user name:");
+		if (username == null) {
+			return;
+		}
 		ownName = username;
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
