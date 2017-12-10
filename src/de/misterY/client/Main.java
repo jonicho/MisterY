@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -190,6 +192,34 @@ public class Main {
 		}
 		playersTable.setModel(new DefaultTableModel(data, columnNames));
 		playersTable.setRowSelectionInterval(thisPlayerIndex, thisPlayerIndex);
+		for (MouseListener l : playersTable.getMouseListeners()) {
+			playersTable.removeMouseListener(l);
+		}
+		final int index = thisPlayerIndex;
+		playersTable.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				playersTable.setRowSelectionInterval(index, index);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				playersTable.setRowSelectionInterval(index, index);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 	}
 
 	/**
