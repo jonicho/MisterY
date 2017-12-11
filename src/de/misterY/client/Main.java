@@ -226,6 +226,10 @@ public class Main {
 	 * Asks the user to enter a username and logs in using that username.
 	 */
 	private void login() {
+		if (ownName != null) {
+			JOptionPane.showMessageDialog(frame, "You are already logged in!");
+			return;
+		}
 		if (!gameClient.isConnected()) {
 			JOptionPane.showMessageDialog(frame, "You have to be connected to the server!");
 			return;
