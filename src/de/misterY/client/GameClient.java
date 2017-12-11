@@ -10,8 +10,10 @@ import de.misterY.net.PROTOCOL;
 public class GameClient extends Client {
 
 	private Runnable updateRunnable;
+	private Runnable errorRunnable;
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private Map map;
+	private int errorCode;
 
 	public GameClient(String serverIP, int serverPort) {
 		super(serverIP, serverPort);
@@ -24,8 +26,11 @@ public class GameClient extends Client {
 
 		switch (msgParts[0]) {
 		case PROTOCOL.SC.ERROR:
-
-			break;
+			if (errorRunnable != null) {
+				errorCode = Integer.parseInt(msgParts[1]);
+				errorRunnable.run();
+			}
+			return;
 		case PROTOCOL.SC.OK:
 
 			break;
@@ -83,9 +88,17 @@ public class GameClient extends Client {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
+	
+	public int getErrorCode() {
+		return errorCode;
+	}
 
 	public void setUpdateRunnable(Runnable updateRunnable) {
 		this.updateRunnable = updateRunnable;
+	}
+	
+	public void setErrorRunnable(Runnable errorRunnable) {
+		this.errorRunnable = errorRunnable;
 	}
 
 	public Map getMap() {

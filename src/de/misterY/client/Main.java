@@ -139,6 +139,7 @@ public class Main {
 			if (gameClient.isConnected()) {
 				infoLabel.setText("Connected.");
 				createUpdateRunnable();
+				createErrorRunnable();
 			} else {
 				infoLabel.setForeground(Color.RED);
 				infoLabel.setText("Connection failed!");
@@ -165,6 +166,17 @@ public class Main {
 			}
 			canvas.repaint();
 			updatePlayersTable();
+		});
+	}
+	
+	/**
+	 * Creates an update runnable and gives it to the game client to let the gui
+	 * react to incoming error messages
+	 */
+	private void createErrorRunnable() {
+		gameClient.setErrorRunnable(() -> {
+			int errorCode = gameClient.getErrorCode();
+			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error", JOptionPane.ERROR_MESSAGE);
 		});
 	}
 
