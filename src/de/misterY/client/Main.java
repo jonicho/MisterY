@@ -176,6 +176,12 @@ public class Main {
 	private void createErrorRunnable() {
 		gameClient.setErrorRunnable(() -> {
 			int errorCode = gameClient.getErrorCode();
+			if (errorCode == PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE) {
+				ownName = null;
+				JOptionPane.showMessageDialog(frame, "This username is already in use! Please take another one.", "Error", JOptionPane.ERROR_MESSAGE);
+				login();
+				return;
+			}
 			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error", JOptionPane.ERROR_MESSAGE);
 		});
 	}
@@ -235,7 +241,7 @@ public class Main {
 	}
 
 	/**
-	 * Asks the user to enter a username and logs in using that username.
+	 * Asks the user to enter a user name and logs in using that user name.
 	 */
 	private void login() {
 		if (ownName != null) {
