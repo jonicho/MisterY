@@ -137,6 +137,16 @@ public class Vector2D {
 		y = sin * ox + cos * oy;
 		return this;
 	}
+	
+	/**
+	 * Returns the distance between this vector and the given vector
+	 * 
+	 * @param vec
+	 * @return
+	 */
+	public double getDistance(Vector2D vec) {
+		return getClone().subtract(vec).getLength();
+	}
 
 	/**
 	 * Returns a clone of this vector.
