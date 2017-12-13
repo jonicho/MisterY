@@ -27,6 +27,7 @@ public class Canvas extends JPanel {
 	private double y = 0;
 	private int mouseX;
 	private int mouseY;
+	private Vector2D mousePos;
 
 	public Canvas() {
 		addMouseWheelListener(new MouseWheelListener() {
@@ -53,6 +54,7 @@ public class Canvas extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				mouseX = e.getX();
 				mouseY = e.getY();
+				repaint();
 			}
 
 			@Override
@@ -68,6 +70,7 @@ public class Canvas extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics gg) {
+		mousePos = new Vector2D((mouseX / scale - x) / getWidth(), (mouseY / scale - y) / getHeight());
 		Graphics2D g = (Graphics2D) gg;
 		g.clearRect(0, 0, getWidth(), getHeight());
 
@@ -168,17 +171,21 @@ public class Canvas extends JPanel {
 		int x = station.getPos().getDrawX(getWidth());
 		int y = station.getPos().getDrawY(getHeight());
 		int size;
+		double sizeFactor = 1;
+		if (station.getPos().getDistance(mousePos) < 0.01) {
+			sizeFactor = 1.5;
+		}
 		if (station.isUnderground()) {
-			size = 20;
+			size = (int) (20 * sizeFactor);
 			g.setColor(Color.RED);
 			g.fillOval(x - size / 2, y - size / 2, size, size);
 		}
 		if (station.isBus()) {
-			size = 16;
+			size = (int) (16 * sizeFactor);
 			g.setColor(Color.GREEN);
 			g.fillOval(x - size / 2, y - size / 2, size, size);
 		}
-		size = 12;
+		size = (int) (12 * sizeFactor);
 		g.setColor(Color.YELLOW);
 		g.fillOval(x - size / 2, y - size / 2, size, size);
 
