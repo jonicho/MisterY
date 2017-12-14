@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -28,6 +29,8 @@ public class Canvas extends JPanel {
 	private int mouseX;
 	private int mouseY;
 	private Vector2D mousePos;
+	private Station hoveredStation;
+	private Runnable stationClickedRunnable;
 
 	public Canvas() {
 		addMouseWheelListener(new MouseWheelListener() {
@@ -64,6 +67,36 @@ public class Canvas extends JPanel {
 				mouseX = e.getX();
 				mouseY = e.getY();
 				repaint();
+			}
+		});
+		addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (stationClickedRunnable != null) {
+					calculateHoveredStation();
+					stationClickedRunnable.run();
+				}
 			}
 		});
 	}
@@ -226,6 +259,20 @@ public class Canvas extends JPanel {
 		int height = g.getFontMetrics().getHeight();
 		g.drawString(string, x - width / 2, y - height / 2 + g.getFontMetrics().getAscent());
 	}
+	
+	private void calculateHoveredStation() {
+		for (Station station : map.getStations()) {
+			if (mousePos.getDistance(station.getPos()) < 0.01) {
+				hoveredStation = station;
+				return;
+			}
+		}
+		hoveredStation = null;
+	}
+	
+	public void setStationClickedRunnable(Runnable stationClickedRunnable) {
+		this.stationClickedRunnable = stationClickedRunnable;
+	}
 
 	public void setMap(Map map) {
 		this.map = map;
@@ -233,5 +280,9 @@ public class Canvas extends JPanel {
 
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
+	}
+	
+	public Station getHoveredStation() {
+		return hoveredStation;
 	}
 }

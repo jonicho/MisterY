@@ -140,6 +140,7 @@ public class Main {
 				infoLabel.setText("Connected.");
 				createUpdateRunnable();
 				createErrorRunnable();
+				createStationClickedRunnable();
 			} else {
 				infoLabel.setForeground(Color.RED);
 				infoLabel.setText("Connection failed!");
@@ -183,6 +184,12 @@ public class Main {
 				return;
 			}
 			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error", JOptionPane.ERROR_MESSAGE);
+		});
+	}
+	
+	private void createStationClickedRunnable() {
+		canvas.setStationClickedRunnable(() -> {
+			
 		});
 	}
 
