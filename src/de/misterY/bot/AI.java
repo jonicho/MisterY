@@ -38,7 +38,7 @@ public class AI {
 		resolver = new PositionResolver(pStation);
 		mapHandle = pMap;
 		predicter = new PositionPredicter();
-		pathfinder = new PathFinding(pMap);
+		pathfinder = new PathFinding();
 		localPlayer = pPlayer;
 		lastMRYStation = pStation;
 		moveState = 0;
@@ -89,7 +89,10 @@ public class AI {
 			moveState = 5;
 			return;
 		}
-		// Need a method to check for nearby Trainstations for moveState 4
+		if (pathfinder.findFirstTrainStation(localPlayer.getCurrentStation()).getStationCount() - 1 <= 3) {
+			moveState = 4;
+			return;
+		}
 		if (resolvedPositions.size() <= 10) {
 			moveState = 3;
 			return;
