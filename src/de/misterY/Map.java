@@ -86,16 +86,18 @@ public class Map {
 	public int getStationCount() {
 		return stations.size();
 	}
-	
-	/** Returns the number of links the map has. Map must be loaded.
+
+	/**
+	 * Returns the number of links the map has. Map must be loaded.
+	 * 
 	 * @return the number of links
 	 */
 	public int getLinkCount() {
-		ArrayList<Link> temp = new ArrayList<Link>();
+		int result = 0;
 		for (Station s : stations) {
-			temp.addAll(s.getLinks());
+			result += s.getLinks().size();
 		}
-		return temp.size();
+		return result;
 	}
 
 	public ArrayList<Station> getStations() {
