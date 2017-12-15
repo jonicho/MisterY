@@ -3,6 +3,7 @@ package de.misterY.client;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -105,6 +106,8 @@ public class Canvas extends JPanel {
 	protected void paintComponent(Graphics gg) {
 		mousePos = new Vector2D((mouseX / scale - x) / getWidth(), (mouseY / scale - y) / getHeight());
 		Graphics2D g = (Graphics2D) gg;
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.clearRect(0, 0, getWidth(), getHeight());
 
 		g.scale(scale, scale);
