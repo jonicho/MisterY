@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.net.PROTOCOL;
 
@@ -41,6 +42,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Main window = new Main();
@@ -80,6 +82,7 @@ public class Main {
 
 		JMenuItem mntmLogin = new JMenuItem("Login");
 		mntmLogin.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				login();
 			}
@@ -88,6 +91,7 @@ public class Main {
 
 		JMenuItem mntmReady = new JMenuItem("Ready");
 		mntmReady.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameClient.send(PROTOCOL.CS.READY); // TODO
 			}
@@ -169,7 +173,7 @@ public class Main {
 			updatePlayersTable();
 		});
 	}
-	
+
 	/**
 	 * Creates an update runnable and gives it to the game client to let the gui
 	 * react to incoming error messages
@@ -179,17 +183,39 @@ public class Main {
 			int errorCode = gameClient.getErrorCode();
 			if (errorCode == PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE) {
 				ownName = null;
-				JOptionPane.showMessageDialog(frame, "This username is already in use! Please take another one.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "This username is already in use! Please take another one.",
+						"Error", JOptionPane.ERROR_MESSAGE);
 				login();
 				return;
 			}
-			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error",
+					JOptionPane.ERROR_MESSAGE);
 		});
 	}
-	
+
 	private void createStationClickedRunnable() {
 		canvas.setStationClickedRunnable(() -> {
-			
+			if (!gameClient.isStarted()) {
+				JOptionPane.showMessageDialog(frame, "The game has not started yet!", "The game has not started yet!",
+						JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			if (!gameClient.getPlayerByName(ownName).isTurn()) {
+				JOptionPane.showMessageDialog(frame, "It is " + gameClient.getCurrentPlayer().getName() + "'s turn!",
+						"It is not your turn!", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			MeansOfTransportation selection = (MeansOfTransportation) JOptionPane.showInputDialog(frame,
+					"Choose a means of transportation", "", JOptionPane.QUESTION_MESSAGE, null,
+					MeansOfTransportation.values(), MeansOfTransportation.Taxi);
+			if (selection == null) { // user canceled
+				return;
+			}
+			if (!gameClient.getPlayerByName(ownName).validateMovement(canvas.getHoveredStation(), selection)) {
+				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId() + "", selection + ""));
 		});
 	}
 

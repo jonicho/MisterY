@@ -96,7 +96,9 @@ public class Canvas extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (stationClickedRunnable != null) {
 					calculateHoveredStation();
-					stationClickedRunnable.run();
+					if (hoveredStation != null) {
+						stationClickedRunnable.run();
+					}
 				}
 			}
 		});

@@ -79,7 +79,7 @@ public class GameClient extends Client {
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
 	}
-	
+
 	private void handleTurn(String[] msgParts) {
 		started = true;
 		String name = msgParts[1];
@@ -96,9 +96,9 @@ public class GameClient extends Client {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-	
+
 	/**
-	 * Returns the player with the given name.
+	 * Returns the player with the given name.<br>
 	 * Returns null if there is no player with the given name.
 	 * 
 	 * @param name
@@ -112,7 +112,22 @@ public class GameClient extends Client {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Returns the current player.<br>
+	 * Returns null if there is no current player (which should not happen).
+	 * 
+	 * @return
+	 */
+	public Player getCurrentPlayer() {
+		for (Player player : players) {
+			if (player.isTurn()) {
+				return player;
+			}
+		}
+		return null;
+	}
+
 	public int getErrorCode() {
 		return errorCode;
 	}
@@ -120,12 +135,16 @@ public class GameClient extends Client {
 	public void setUpdateRunnable(Runnable updateRunnable) {
 		this.updateRunnable = updateRunnable;
 	}
-	
+
 	public void setErrorRunnable(Runnable errorRunnable) {
 		this.errorRunnable = errorRunnable;
 	}
 
 	public Map getMap() {
 		return map;
+	}
+
+	public boolean isStarted() {
+		return started;
 	}
 }
