@@ -66,13 +66,7 @@ public class GameClient extends Client {
 		int currentStationId = Integer.parseInt(msgParts[5]);
 		boolean isMrY = Boolean.parseBoolean(msgParts[6]);
 
-		Player player = null;
-		for (Player p : players) {
-			if (p.getName().equals(name)) {
-				player = p;
-				break;
-			}
-		}
+		Player player = getPlayerByName(name);
 		if (player == null) {
 			player = new Player(name);
 			player.setMap(map);
@@ -87,6 +81,22 @@ public class GameClient extends Client {
 
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+	
+	/**
+	 * Returns the player with the given name.
+	 * Returns null if there is no player with the given name.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Player getPlayerByName(String name) {
+		for (Player player : players) {
+			if (player.getName().equals(name)) {
+				return player;
+			}
+		}
+		return null;
 	}
 	
 	public int getErrorCode() {
