@@ -28,7 +28,7 @@ public class MapLoader {
 	 *            The file to load the map from.
 	 * @return The map string, an empty string if an error occurred.
 	 */
-	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, File mapFile) {
+	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, File mapFile) {
 		try {
 			String mapString = "";
 			BufferedReader bf = new BufferedReader(new FileReader(mapFile));
@@ -37,7 +37,7 @@ public class MapLoader {
 				mapString += line;
 			}
 			bf.close();
-			return loadMap(stations, startStations, mapString);
+			return loadMap(stations, startStations, initialTickets, mapString);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,12 +55,16 @@ public class MapLoader {
 	 *            The string to load the map from.
 	 * @return The map string, an empty string if an error occurred.
 	 */
-	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, String mapString) {
+	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, String mapString) {
 		try {
 			mapString = mapString.replaceAll("[\\>][\\t]+[\\<]", "><"); // remove unnecessary tabs
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new ByteArrayInputStream(mapString.getBytes()));
 			doc.getDocumentElement().normalize();
+			Element initialTicketsElement = (Element) doc.getElementsByTagName("initialTickets").item(0);
+			initialTickets[0] = Integer.parseInt(initialTicketsElement.getAttribute("taxi"));
+			initialTickets[1] = Integer.parseInt(initialTicketsElement.getAttribute("bus"));
+			initialTickets[2] = Integer.parseInt(initialTicketsElement.getAttribute("underground"));
 			NodeList stationElements = doc.getElementsByTagName("station");
 			for (int i = 0; i < stationElements.getLength(); i++) {
 				Element stationElement = (Element) stationElements.item(i);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
+	<initialTickets taxi="10" bus="7" underground="3"></initialTickets>
 	<station bus="false" underground="true" id="1" x="0.2" y="0.1" start="true">
 		<link station="2" bus="false" underground="true"></link>
 		<link station="3" bus="false" underground="true"></link>

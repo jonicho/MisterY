@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Map {
 	private ArrayList<Station> stations = new ArrayList<Station>();
 	private ArrayList<Station> startStations = new ArrayList<Station>();
+	private int[] initialTickets = new int[3];
 	private final String mapString;
 
 	/**
@@ -35,7 +36,7 @@ public class Map {
 	 *            The file to load the map from.
 	 */
 	private String load(File mapFile) {
-		return MapLoader.loadMap(stations, startStations, mapFile);
+		return MapLoader.loadMap(stations, startStations, initialTickets, mapFile);
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class Map {
 	 *            The string to load the map from.
 	 */
 	private String load(String mapString) {
-		return MapLoader.loadMap(stations, startStations, mapString);
+		return MapLoader.loadMap(stations, startStations, initialTickets, mapString);
 	}
 
 	/**
@@ -109,5 +110,17 @@ public class Map {
 	 */
 	public String getMapString() {
 		return mapString;
+	}
+	
+	public int getInitialTaxiTickets() {
+		return initialTickets[0];
+	}
+	
+	public int getInitialBusTickets() {
+		return initialTickets[1];
+	}
+	
+	public int getInitialUndergroundTickets() {
+		return initialTickets[2];
 	}
 }

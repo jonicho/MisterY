@@ -71,7 +71,7 @@ public class Session {
 	 * Prepares the game by doing the following things:<br>
 	 * -shuffle user list<br>
 	 * -make user 0 to misterY<br>
-	 * -call start() an every player
+	 * -call start() on every player
 	 * 
 	 * @param map
 	 *            The map
@@ -85,7 +85,7 @@ public class Session {
 		mrY.getPlayer().setMrY(true);
 
 		for (User user : users) {
-			user.getPlayer().start(map, 10, 10, 10);// TODO use any config constants
+			user.getPlayer().start(map, map.getInitialTaxiTickets(), map.getInitialBusTickets(), map.getInitialUndergroundTickets());
 		}
 		this.map = map;
 		gameStarted = true;
