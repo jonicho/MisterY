@@ -10,6 +10,7 @@ public class Player {
 	private int taxiTickets;
 	private int busTickets;
 	private int undergroundTickets;
+	private boolean isTurn;
 
 	private boolean mrY;
 
@@ -240,9 +241,17 @@ public class Player {
 	public boolean isMrY() {
 		return mrY;
 	}
+	
+	public boolean isTurn() {
+		return isTurn;
+	}
 
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
+	}
+	
+	public void setTurn(boolean isTurn) {
+		this.isTurn = isTurn;
 	}
 
 	public boolean isReady() {

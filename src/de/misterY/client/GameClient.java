@@ -14,6 +14,7 @@ public class GameClient extends Client {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private Map map;
 	private int errorCode;
+	private boolean started;
 
 	public GameClient(String serverIP, int serverPort) {
 		super(serverIP, serverPort);
@@ -44,7 +45,7 @@ public class GameClient extends Client {
 			map = new Map(msgParts[1]);
 			break;
 		case PROTOCOL.SC.TURN:
-
+			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
 
@@ -77,6 +78,19 @@ public class GameClient extends Client {
 		player.setUndergroundTickets(undergroundTickets);
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
+	}
+	
+	private void handleTurn(String[] msgParts) {
+		started = true;
+		String name = msgParts[1];
+		Player player = getPlayerByName(name);
+		if (player == null) {
+			return;
+		}
+		for (Player p : players) {
+			p.setTurn(false);
+		}
+		player.setTurn(true);
 	}
 
 	public ArrayList<Player> getPlayers() {
