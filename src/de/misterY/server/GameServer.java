@@ -65,8 +65,13 @@ public class GameServer extends Server {
 
 	@Override
 	public void processClosingConnection(String clientIP, int clientPort) {
-		users.removeUser(users.getUserByAdress(clientIP, clientPort));
-		// TODO remove user from session
+		User user = users.getUserByAdress(clientIP, clientPort);
+		users.removeUser(user);
+		Session session = sessions.getSessionByUser(user);
+		if (session.removeUser(user) || session.isActive()) {
+			sessions.removeSession(session);
+		}
+		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.PLAYER_LEFT, user.getPlayer().getName()), session);
 	}
 
 	/**

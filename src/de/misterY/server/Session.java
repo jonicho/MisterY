@@ -8,7 +8,6 @@ import de.misterY.MeansOfTransportation;
 
 public class Session {
 	private Map map;
-	private User mrY;
 	private int turn = 0;
 	private boolean isDoubleTurn;
 	private boolean wasDoubleTurn;
@@ -29,7 +28,12 @@ public class Session {
 	}
 
 	public User getMrY() {
-		return mrY;
+		for (User user : users) {
+			if (user.getPlayer().isMrY()) {
+				return user;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -81,11 +85,11 @@ public class Session {
 			return;
 		}
 		Collections.shuffle(users);
-		mrY = users.get(0);
-		mrY.getPlayer().setMrY(true);
+		users.get(0).getPlayer().setMrY(true);
 
 		for (User user : users) {
-			user.getPlayer().start(map, map.getInitialTaxiTickets(), map.getInitialBusTickets(), map.getInitialUndergroundTickets());
+			user.getPlayer().start(map, map.getInitialTaxiTickets(), map.getInitialBusTickets(),
+					map.getInitialUndergroundTickets());
 		}
 		this.map = map;
 		gameStarted = true;
@@ -108,6 +112,18 @@ public class Session {
 		users.add(user);
 		user.setInSession(true);
 		return true;
+	}
+
+	/**
+	 * Removes the given user from session.
+	 * 
+	 * @param user
+	 *            The user to remove
+	 * @return Whether the session is empty after the given user was removed.
+	 */
+	public boolean removeUser(User user) {
+		users.remove(user);
+		return users.isEmpty();
 	}
 
 	/**
