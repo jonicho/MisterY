@@ -186,8 +186,8 @@ public class Player {
 	 * @return the info string
 	 */
 	public String getInfoString() {
-		return PROTOCOL.buildMessage(name, getTaxiTickets() + "", getBusTickets() + "", getUndergroundTickets() + "",
-				currentStation.getId() + "", mrY + "");
+		return PROTOCOL.buildMessage(name, getTaxiTickets(), getBusTickets(), getUndergroundTickets(),
+				currentStation.getId(), mrY);
 	}
 
 	public void setCurrentStation(Station currentStation) {

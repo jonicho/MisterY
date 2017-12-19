@@ -39,16 +39,17 @@ public final class PROTOCOL {
 
 	/**
 	 * Builds a massage by connecting all arguments into one String, separated by
-	 * SPLIT.
+	 * SPLIT.<br>
+	 * First it calls String.valueOf(x) on each given object.
 	 * 
 	 * @param msgParts
 	 *            The message parts to connect
 	 * @return The built String
 	 */
-	public static String buildMessage(String... msgParts) {
-		String result = msgParts[0];
+	public static String buildMessage(Object... msgParts) {
+		String result = String.valueOf(msgParts[0]);
 		for (int i = 1; i < msgParts.length; i++) {
-			result += SPLIT + msgParts[i];
+			result += SPLIT + String.valueOf(msgParts[i]);
 		}
 		return result;
 	}

@@ -220,7 +220,7 @@ public class Main {
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId() + "",
+			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId(),
 					selection + ""));
 		});
 	}
