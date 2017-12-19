@@ -125,6 +125,7 @@ public class GameServer extends Server {
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), session);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()), session);
 		} else {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}
