@@ -187,6 +187,10 @@ public class Main {
 						"Error", JOptionPane.ERROR_MESSAGE);
 				login();
 				return;
+			} else if (errorCode == PROTOCOL.ERRORCODES.INVALID_MOVEMENT) {
+				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!",
+						JOptionPane.ERROR_MESSAGE);
+				return;
 			}
 			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -212,10 +216,12 @@ public class Main {
 				return;
 			}
 			if (!gameClient.getPlayerByName(ownName).validateMovement(canvas.getHoveredStation(), selection)) {
-				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!",
+						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId() + "", selection + ""));
+			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId() + "",
+					selection + ""));
 		});
 	}
 
