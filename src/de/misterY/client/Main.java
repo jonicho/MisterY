@@ -233,8 +233,8 @@ public class Main {
 		if (players.isEmpty()) {
 			return;
 		}
-		String[] columnNames = { "Name", "Taxi tickets", "Bus tickets", "Underground tickets", "MrY" };
-		String[][] data = new String[players.size()][5];
+		String[] columnNames = { "Name", "Taxi tickets", "Bus tickets", "Underground tickets", "MrY", "Turn" };
+		String[][] data = new String[players.size()][6];
 		int thisPlayerIndex = 0;
 		for (int i = 0; i < players.size(); i++) {
 			Player player = players.get(i);
@@ -243,6 +243,7 @@ public class Main {
 			data[i][2] = player.getBusTickets() + "";
 			data[i][3] = player.getUndergroundTickets() + "";
 			data[i][4] = player.isMrY() ? "X" : "";
+			data[i][5] = player.isTurn() ? "X" : "";
 			if (ownName.equals(player.getName())) {
 				thisPlayerIndex = i;
 			}
