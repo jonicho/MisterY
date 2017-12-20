@@ -139,7 +139,7 @@ public class Main {
 		new Thread(() -> {
 			infoLabel.setForeground(Color.BLACK);
 			infoLabel.setText("Connecting...");
-			gameClient = new GameClient("localhost", PROTOCOL.PORT);
+			gameClient = new GameClient();
 			if (gameClient.isConnected()) {
 				infoLabel.setText("Connected.");
 				createUpdateRunnable();
