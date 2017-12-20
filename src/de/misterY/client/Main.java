@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +39,8 @@ public class Main {
 	private Canvas canvas;
 	private JTable playersTable;
 	private String ownName;
+	private JTextField chatTextField;
+	private JTextPane chatTextPane;
 
 	/**
 	 * Launch the application.
@@ -107,7 +112,7 @@ public class Main {
 
 		JPanel panel = new JPanel();
 		splitPane.setRightComponent(panel);
-		panel.setLayout(new GridLayout(1, 1, 0, 0));
+		panel.setLayout(new GridLayout(2, 1, 0, 0));
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -125,6 +130,29 @@ public class Main {
 		scrollPane.setViewportView(playersTable);
 		playersTable.setDefaultEditor(Object.class, null);
 		playersTable.setFocusable(false);
+
+		JPanel panel_3 = new JPanel();
+		panel.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+
+		chatTextPane = new JTextPane();
+		panel_3.add(chatTextPane);
+
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4, BorderLayout.SOUTH);
+		panel_4.setLayout(new BorderLayout(0, 0));
+
+		chatTextField = new JTextField();
+		panel_4.add(chatTextField);
+		chatTextField.setColumns(10);
+
+		JButton btnSend = new JButton("Send");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sendMessage();
+			}
+		});
+		panel_4.add(btnSend, BorderLayout.EAST);
 
 		infoLabel = new JLabel("New label");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
@@ -144,6 +172,7 @@ public class Main {
 				infoLabel.setText("Connected.");
 				createUpdateRunnable();
 				createErrorRunnable();
+				createChatRunnable();
 				createStationClickedRunnable();
 			} else {
 				infoLabel.setForeground(Color.RED);
@@ -194,6 +223,12 @@ public class Main {
 			}
 			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error",
 					JOptionPane.ERROR_MESSAGE);
+		});
+	}
+	
+	private void createChatRunnable() {
+		gameClient.setChatRunnable(() -> {
+			chatTextPane.setText(gameClient.getChatHandler().getMessageString());
 		});
 	}
 
@@ -300,5 +335,18 @@ public class Main {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
 		infoLabel.setText("Logged in.");
+	}
+
+	/**
+	 * Sends the message that is currently in the chat text field. Sends nothing if
+	 * the trimmed string is empty.
+	 */
+	private void sendMessage() {
+		String message = chatTextField.getText().trim();
+		if (message.isEmpty()) {
+			return;
+		}
+		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
+		chatTextField.setText("");
 	}
 }

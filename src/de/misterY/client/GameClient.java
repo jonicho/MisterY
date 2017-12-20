@@ -11,13 +11,15 @@ public class GameClient extends Client {
 
 	private Runnable updateRunnable;
 	private Runnable errorRunnable;
+	private Runnable chatRunnable;
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private Map map;
+	private ChatHandler chatHandler = new ChatHandler();
 	private int errorCode;
 	private boolean started;
 
-	public GameClient(String serverIP, int serverPort) {
-		super(serverIP, serverPort);
+	public GameClient() {
+		super(PROTOCOL.IP, PROTOCOL.PORT);
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class GameClient extends Client {
 
 			break;
 		case PROTOCOL.SC.CHAT_UPDATE:
-
+			handleChatUpdate(msgParts);
 			break;
 		case PROTOCOL.SC.INFO_UPDATE:
 			handleInfoUpdate(msgParts);
@@ -78,6 +80,13 @@ public class GameClient extends Client {
 		player.setUndergroundTickets(undergroundTickets);
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
+	}
+	
+	private void handleChatUpdate(String[] msgParts) {
+		chatHandler.addMessage(getPlayerByName(msgParts[1]), msgParts[2]);
+		if (chatRunnable != null) {
+			chatRunnable.run();
+		}
 	}
 
 	private void handleTurn(String[] msgParts) {
@@ -131,6 +140,10 @@ public class GameClient extends Client {
 	public int getErrorCode() {
 		return errorCode;
 	}
+	
+	public ChatHandler getChatHandler() {
+		return chatHandler;
+	}
 
 	public void setUpdateRunnable(Runnable updateRunnable) {
 		this.updateRunnable = updateRunnable;
@@ -138,6 +151,10 @@ public class GameClient extends Client {
 
 	public void setErrorRunnable(Runnable errorRunnable) {
 		this.errorRunnable = errorRunnable;
+	}
+	
+	public void setChatRunnable(Runnable chatRunnable) {
+		this.chatRunnable = chatRunnable;
 	}
 
 	public Map getMap() {
