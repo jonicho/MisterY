@@ -136,6 +136,7 @@ public class Main {
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		chatTextPane = new JTextPane();
+		chatTextPane.setEditable(false);
 		panel_3.add(chatTextPane);
 
 		JPanel panel_4 = new JPanel();
