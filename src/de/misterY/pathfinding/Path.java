@@ -27,9 +27,13 @@ public class Path {
 	public Station getNextStation(Station current) {
 		for (Station s : stationList) {
 			if (s.equals(current)) {
-				Station next = stationList.get(stationList.indexOf(s) + 1);
-				if (next != null)
-					return next;
+				Station next;
+				try {
+					next = stationList.get(stationList.indexOf(s) + 1);
+				} catch (Exception e) {
+					return null;
+				}
+				return next;
 			}
 		}
 		return null;
