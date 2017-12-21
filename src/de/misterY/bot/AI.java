@@ -6,6 +6,7 @@ import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.Station;
+import de.misterY.pathfinding.PathFinding;
 
 public class AI {
 	private ArrayList<Station> resolvedPositions = new ArrayList<Station>();
