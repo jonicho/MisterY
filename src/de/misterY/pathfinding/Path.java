@@ -5,53 +5,66 @@ import java.util.ArrayList;
 import de.misterY.Station;
 
 public class Path {
-	private ArrayList<Station> stationList = new ArrayList<Station>();
+	private ArrayList<Station> stations = new ArrayList<>();
 
-	public Path(ArrayList<Station> stations) {
-		stationList = stations;
-	}
-
-	public Path() {
-	}
-
-	public void setPath(ArrayList<Station> pPath) {
-		stationList = pPath;
+	/**
+	 * Constructs a path with the given stations as initial stations.
+	 * 
+	 * @param stations
+	 */
+	public Path(Station... stations) {
+		for (int i = 0; i < stations.length; i++) {
+			this.stations.add(stations[i]);
+		}
 	}
 
 	/**
-	 * Returns the next station on the path
+	 * Adds a station to the path
 	 * 
-	 * @param current
-	 * @return
+	 * @param station
 	 */
-	public Station getNextStation(Station current) {
-		for (Station s : stationList) {
-			if (s.equals(current)) {
-				Station next;
-				try {
-					next = stationList.get(stationList.indexOf(s) + 1);
-				} catch (Exception e) {
-					return null;
-				}
-				return next;
-			}
-		}
-		return null;
+	public void addStation(Station station) {
+		stations.add(station);
 	}
 
-	public void addStation(Station station) {
-		stationList.add(station);
+	/**
+	 * Appends the given path to this path
+	 * 
+	 * @param path
+	 */
+	public void appendPath(Path path) {
+		stations.addAll(path.getStations());
 	}
 
 	public ArrayList<Station> getStations() {
-		return stationList;
+		return stations;
 	}
 
 	public Station getLastStation() {
-		return stationList.get(stationList.size() - 1);
+		return stations.get(stations.size() - 1);
 	}
-	
-	public int getStationCount() {
-		return stationList.size();
+
+	/**
+	 * Returns the station followed by the given one.<br>
+	 * Returns null if there is no following station (the given station is the last
+	 * one).
+	 * 
+	 * @param station
+	 * @return
+	 */
+	public Station getFollowingStation(Station station) {
+		if (getLastStation() == station) {
+			return null;
+		}
+		return stations.get(stations.indexOf(station) + 1);
+	}
+
+	public Path getClone() {
+		return (Path) clone();
+	}
+
+	@Override
+	protected Object clone() {
+		return new Path(stations.toArray(new Station[stations.size()]));
 	}
 }

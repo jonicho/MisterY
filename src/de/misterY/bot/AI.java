@@ -6,7 +6,7 @@ import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.Station;
-import de.misterY.pathfinding.PathFinding;
+import de.misterY.pathfinding.PathFinder;
 
 public class AI {
 	private ArrayList<Station> resolvedPositions = new ArrayList<Station>();
@@ -88,7 +88,7 @@ public class AI {
 			moveState = 5;
 			return;
 		}
-		if (PathFinding.findFirstTrainStation(localPlayer.getCurrentStation()).getStationCount() - 1 <= 3) {
+		if (PathFinder.findFirstTrainStation(localPlayer.getCurrentStation()).getStationCount() - 1 <= 3) {
 			moveState = 4;
 			return;
 		}
