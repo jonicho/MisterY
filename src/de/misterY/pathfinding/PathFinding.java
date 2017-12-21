@@ -7,7 +7,7 @@ import de.misterY.Station;
 
 public class PathFinding {
 
-	public PathFinding() {}
+	private PathFinding() {}
 
 	/**
 	 * Finds the fastest path between two stations
@@ -18,7 +18,7 @@ public class PathFinding {
 	 *            The second station
 	 * @return the Path as a Path object
 	 */
-	public Path findPath(Station start, Station end) {
+	public static Path findPath(Station start, Station end) {
 		ArrayList<Path> paths = new ArrayList<Path>();
 		ArrayList<Station> traceStations = new ArrayList<Station>();
 		Path initial = new Path();
@@ -62,7 +62,7 @@ public class PathFinding {
 	 * @param start The current position
 	 * @return The Path to the Trainstation as a Path object
 	 */
-	public Path findFirstTrainStation(Station start) {
+	public static Path findFirstTrainStation(Station start) {
 		ArrayList<Path> paths = new ArrayList<Path>();
 		ArrayList<Station> traceStations = new ArrayList<Station>();
 		Path initial = new Path();
@@ -112,7 +112,7 @@ public class PathFinding {
 	 *            The second station
 	 * @return The distance
 	 */
-	public int getDistance(Station start, Station end) {
+	public static int getDistance(Station start, Station end) {
 		return findPath(start, end).getStationCount() - 1;
 	}
 }

@@ -14,7 +14,6 @@ public class AI {
 	private ArrayList<MeansOfTransportation> ticketRecordMRY = new ArrayList<MeansOfTransportation>();
 	private PositionResolver resolver;
 	private PositionPredicter predicter;
-	private PathFinding pathfinder;
 	private Station lastMRYStation;
 	private Player localPlayer;
 	private Integer moveState;
@@ -39,7 +38,6 @@ public class AI {
 		resolver = new PositionResolver(pStation);
 		mapHandle = pMap;
 		predicter = new PositionPredicter();
-		pathfinder = new PathFinding();
 		localPlayer = pPlayer;
 		lastMRYStation = pStation;
 		moveState = 0;
@@ -90,7 +88,7 @@ public class AI {
 			moveState = 5;
 			return;
 		}
-		if (pathfinder.findFirstTrainStation(localPlayer.getCurrentStation()).getStationCount() - 1 <= 3) {
+		if (PathFinding.findFirstTrainStation(localPlayer.getCurrentStation()).getStationCount() - 1 <= 3) {
 			moveState = 4;
 			return;
 		}
