@@ -1,4 +1,4 @@
-package de.misterY.bot;
+package de.misterY.pathfinding;
 
 import java.util.ArrayList;
 
