@@ -71,6 +71,7 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		updateTitle("");
 		frame.setBounds(100, 100, 1080, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -160,6 +161,16 @@ public class Main {
 
 		connect();
 	}
+	
+	/**
+	 * Updates the title with the given user name in the following way:
+	 * "MisterY" + (username.isEmpty() ? "" : " - " + username)
+	 * 
+	 * @param username
+	 */
+	private void updateTitle(String username) {
+		frame.setTitle("MisterY" + (username.isEmpty() ? "" : " - " + username));
+	}
 
 	/**
 	 * Connects to server using a separate thread to avoid blocking the gui.
@@ -215,6 +226,7 @@ public class Main {
 				ownName = null;
 				JOptionPane.showMessageDialog(frame, "This username is already in use! Please take another one.",
 						"Error", JOptionPane.ERROR_MESSAGE);
+				updateTitle("");
 				login();
 				return;
 			} else if (errorCode == PROTOCOL.ERRORCODES.INVALID_MOVEMENT) {
@@ -336,6 +348,7 @@ public class Main {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
 		infoLabel.setText("Logged in.");
+		updateTitle(username);
 	}
 
 	/**
