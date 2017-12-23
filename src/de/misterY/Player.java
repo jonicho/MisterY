@@ -1,6 +1,7 @@
 package de.misterY;
 
 import de.misterY.net.PROTOCOL;
+import de.misterY.pathfinding.PathFinder;
 
 public class Player {
 	private String name;
@@ -86,28 +87,8 @@ public class Player {
 	 * @return True if movement is valid, false otherwise
 	 */
 	public boolean validateMovement(Station end, MeansOfTransportation type) {
-		if (!hasEnoughTickets(type)) {
-			return false;
-		}
-		Link link = currentStation.getLink(end);
-		if (link == null) {
-			return false;
-		}
-		switch (type) {
-		case Taxi:
-			return true;
-		case Bus:
-			if (!link.isBus())
-				return false;
-			break;
-		case Underground:
-			if (!link.isUnderground())
-				return false;
-			break;
-		default:
-			throw new IllegalStateException("Unknown mean of transportaion: \"" + type + "\"");
-		}
-		return true;
+		return currentStation.isMeansOfTransportation(type) && hasEnoughTickets(type)
+				&& PathFinder.isReachable(currentStation, end, type);
 	}
 
 	/**
@@ -241,7 +222,7 @@ public class Player {
 	public boolean isMrY() {
 		return mrY;
 	}
-	
+
 	public boolean isTurn() {
 		return isTurn;
 	}
@@ -249,7 +230,7 @@ public class Player {
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
 	}
-	
+
 	public void setTurn(boolean isTurn) {
 		this.isTurn = isTurn;
 	}

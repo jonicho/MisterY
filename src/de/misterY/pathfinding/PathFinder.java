@@ -3,6 +3,7 @@ package de.misterY.pathfinding;
 import java.util.ArrayList;
 
 import de.misterY.Link;
+import de.misterY.MeansOfTransportation;
 import de.misterY.Station;
 
 public class PathFinder {
@@ -28,7 +29,7 @@ public class PathFinder {
 		ArrayList<Station> consideredStations = new ArrayList<>();
 		consideredStations.add(start);
 		possiblePaths.add(new Path(start));
-		while(true) {
+		while (true) {
 			ArrayList<Path> toRemove = new ArrayList<>();
 			ArrayList<Path> toAdd = new ArrayList<>();
 			for (Path path : possiblePaths) {
@@ -52,5 +53,42 @@ public class PathFinder {
 				return null;
 			}
 		}
+	}
+
+	/**
+	 * Returns whether the end station is reachable from the start station with the
+	 * given means of transportation in one turn.
+	 * 
+	 * @param start
+	 * @param end
+	 * @param meansOfTransportation
+	 * @return
+	 */
+	public static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation) {
+		if (!end.isMeansOfTransportation(meansOfTransportation)) {
+			return false;
+		}
+		Link link = start.getLink(end);
+		if (link != null) {
+			return link.isMeansOfTransportation(meansOfTransportation);
+		}
+		boolean result = false;
+		for (Link l : start.getLinks()) {
+			if (l.getStation() == start || !l.isMeansOfTransportation(meansOfTransportation)) {
+				continue;
+			}
+			if (l.getStation().isMeansOfTransportation(meansOfTransportation)) {
+				if (l.getStation() == end) {
+					return true;
+				} else {
+					continue;
+				}
+			}
+			result = result || isReachable(l.getStation(), end, meansOfTransportation);
+			if (result) {
+				return true;
+			}
+		}
+		return result;
 	}
 }
