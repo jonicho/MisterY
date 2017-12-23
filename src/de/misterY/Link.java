@@ -37,6 +37,16 @@ public class Link {
 	}
 
 	/**
+	 * @param type
+	 * @return Whether the given means of transportation can use this link
+	 */
+	public boolean isMeansOfTransportation(MeansOfTransportation type) {
+		return (type.equals(MeansOfTransportation.Taxi))
+				|| (type.equals(MeansOfTransportation.Bus) && isBus())
+				|| (type.equals(MeansOfTransportation.Underground) && isUnderground());
+	}
+
+	/**
 	 * @return Whether an underground can use this link
 	 */
 	public boolean isUnderground() {
