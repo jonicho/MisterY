@@ -99,6 +99,7 @@ public class MapLoader {
 					Element linkElement = (Element) linkElements.item(j);
 
 					int targetStationId = Integer.parseInt(linkElement.getAttribute("station"));
+					boolean taxi = Boolean.parseBoolean(linkElement.getAttribute("taxi"));
 					boolean bus = Boolean.parseBoolean(linkElement.getAttribute("bus"));
 					boolean underground = Boolean.parseBoolean(linkElement.getAttribute("underground"));
 
@@ -108,7 +109,7 @@ public class MapLoader {
 							targetStation = ts;
 						}
 					}
-					station.addLink(new Link(targetStation, bus, underground));
+					station.addLink(new Link(targetStation, taxi, bus, underground));
 				}
 			}
 			return mapString;

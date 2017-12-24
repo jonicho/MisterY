@@ -55,8 +55,10 @@ public class MapDrawer {
 			g.drawLine(x1, y1, x2, y2);
 			Vector2D pos = link.getStation().getPos().getClone();
 			Vector2D vec = station.getPos().getClone().subtract(link.getStation().getPos());
-			g.setColor(Color.YELLOW);
-			drawArrow(g, pos, vec, 0.02);
+			if (link.isTaxi()) {
+				g.setColor(Color.YELLOW);
+				drawArrow(g, pos, vec, 0.02);
+			}
 			if (link.isBus()) {
 				g.setColor(Color.GREEN);
 				drawArrow(g, pos, vec, 0.03);
