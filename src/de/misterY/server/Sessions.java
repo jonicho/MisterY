@@ -22,12 +22,11 @@ public class Sessions {
 	}
 
 	public void placeUserInSession(User u) {
-		if (!fillingSession.isFull()) {
+		if (!fillingSession.isFull() && !fillingSession.isActive()) {
 			fillingSession.addUser(u);
 		} else {
-			Session s = new Session();
-			sessions.add(s);
-			fillingSession = s;
+			sessions.add(fillingSession);
+			fillingSession = new Session();
 			fillingSession.addUser(u);
 		}
 	}
@@ -42,6 +41,9 @@ public class Sessions {
 	 *         the user.
 	 */
 	public Session getSessionByUser(User user) {
+		if (fillingSession.doesContain(user)) {
+			return fillingSession;
+		}
 		for (Session session : sessions) {
 			if (session.doesContain(user)) {
 				return session;

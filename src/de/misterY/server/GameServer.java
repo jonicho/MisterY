@@ -93,9 +93,7 @@ public class GameServer extends Server {
 		} else {
 			User nUser = new User(user.getIp(), user.getPort(), msgParts[1]);
 			users.addUser(nUser);
-			if (nUser != null && !nUser.isInSession()) {
-				sessions.placeUserInSession(nUser);
-			}
+			sessions.placeUserInSession(nUser);
 			sendToUser(PROTOCOL.SC.OK, nUser);
 		}
 	}
@@ -125,7 +123,8 @@ public class GameServer extends Server {
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), session);
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()), session);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
+					session);
 		} else {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}
