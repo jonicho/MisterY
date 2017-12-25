@@ -2,10 +2,9 @@ package de.misterY.mapDesigner;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -15,16 +14,12 @@ import javax.swing.JTextArea;
 
 import de.misterY.Map;
 import de.misterY.client.Canvas;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Main {
 
 	private JFrame frame;
 	private Canvas canvas;
-	private JTextArea txtrMapstring;
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPane_1;
+	private JTextArea txtMapstring;
 
 	/**
 	 * Launch the application.
@@ -77,8 +72,8 @@ public class Main {
 		splitPane.setRightComponent(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		txtrMapstring = new JTextArea();
-		txtrMapstring.addKeyListener(new KeyAdapter() {
+		txtMapstring = new JTextArea();
+		txtMapstring.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				reloadMap();
@@ -95,13 +90,13 @@ public class Main {
 			}
 		});
 
-		scrollPane_1 = new JScrollPane(txtrMapstring);
-		panel.add(scrollPane_1, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(txtMapstring);
+		panel.add(scrollPane, BorderLayout.CENTER);
 	}
 
 	private void reloadMap() {
 		try {
-			canvas.setMap(new Map(txtrMapstring.getText()));
+			canvas.setMap(new Map(txtMapstring.getText()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
