@@ -19,6 +19,7 @@ public class Link {
 	 */
 	public Link(Station targetStation, boolean taxi, boolean bus, boolean underground) {
 		this.station = targetStation;
+		this.taxi = taxi;
 		this.bus = bus;
 		this.underground = underground;
 	}
