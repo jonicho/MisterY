@@ -91,4 +91,52 @@ public class PathFinder {
 		}
 		return result;
 	}
+
+	/**
+	 * Tries to find the shortest path to the nearest station of the given means of
+	 * transportation.<br>
+	 * If there is more than one shortest path to more than one station of the given
+	 * means of transportation, the first one is returned.<br>
+	 * Returns null if the nearest station of the given means of transportation is
+	 * not reachable.
+	 * 
+	 * @param start
+	 *            The station where the path starts
+	 * @param type
+	 *            The means of transportation of the end station
+	 * @return The path
+	 */
+	public static Path findPathToNearestStation(Station start, MeansOfTransportation type) {
+		if (start.isMeansOfTransportation(type)) {
+			return new Path(start);
+		}
+		ArrayList<Path> possiblePaths = new ArrayList<>();
+		ArrayList<Station> consideredStations = new ArrayList<>();
+		consideredStations.add(start);
+		possiblePaths.add(new Path(start));
+		while (true) {
+			ArrayList<Path> toRemove = new ArrayList<>();
+			ArrayList<Path> toAdd = new ArrayList<>();
+			for (Path path : possiblePaths) {
+				for (Link link : path.getLastStation().getLinks()) {
+					Station station = link.getStation();
+					if (!consideredStations.contains(station)) {
+						Path nextPath = path.getClone();
+						nextPath.addStation(station);
+						if (station.isMeansOfTransportation(type)) {
+							return nextPath;
+						}
+						consideredStations.add(station);
+						toAdd.add(nextPath);
+					}
+				}
+				toRemove.add(path);
+			}
+			possiblePaths.addAll(toAdd);
+			possiblePaths.removeAll(toRemove);
+			if (possiblePaths.isEmpty()) {
+				return null;
+			}
+		}
+	}
 }
