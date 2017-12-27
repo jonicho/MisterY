@@ -150,6 +150,7 @@ public class Main {
 
 		JButton btnSend = new JButton("Send");
 		btnSend.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				sendMessage();
 			}
