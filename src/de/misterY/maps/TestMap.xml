@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map>
-	<initialTickets taxi="10" bus="7" underground="3"></initialTickets>
-	<station bus="false" underground="true" id="1" x="0.2" y="0.1" start="true">
-		<link station="2" taxi="true" bus="false" underground="true"></link>
-		<link station="3" taxi="true" bus="false" underground="true"></link>
-	</station>
-	<station bus="true" underground="true" id="2" x="0.1" y="0.4" start="true">
-		<link station="1" taxi="true" bus="false" underground="true"></link>
-		<link station="3" taxi="true" bus="true" underground="false"></link>
-		<link station="6" taxi="true" bus="true" underground="true"></link>
-	</station>
-	<station bus="true" underground="false" id="3" x="0.3" y="0.4" start="true">
-		<link station="1" taxi="true" bus="false" underground="true"></link>
-		<link station="2" taxi="true" bus="true" underground="false"></link>
-		<link station="4" taxi="true" bus="true" underground="true"></link>
-	</station>
-	<station bus="false" underground="false" id="4" x="0.5" y="0.3" start="true">
-		<link station="3" taxi="true" bus="true" underground="true"></link>
-		<link station="5" taxi="true" bus="true" underground="true"></link>
-		<link station="6" taxi="true" bus="false" underground="false"></link>
-	</station>
-	<station bus="true" underground="false" id="5" x="0.9" y="0.25" start="true">
-		<link station="4" taxi="true" bus="true" underground="true"></link>
-		<link station="7" taxi="true" bus="true" underground="true"></link>
-	</station>
-	<station bus="true" underground="false" id="6" x="0.25" y="0.75" start="true">
-		<link station="2" taxi="true" bus="true" underground="true"></link>
-		<link station="4" taxi="true" bus="false" underground="false"></link>
-		<link station="7" taxi="true" bus="true" underground="true"></link>
-	</station>
-	<station bus="false" underground="true" id="7" x="0.7" y="0.8" start="false">
-		<link station="6" taxi="true" bus="true" underground="true"></link>
-		<link station="5" taxi="true" bus="true" underground="true"></link>
-	</station>
-</map>
+<m>
+	<iT t="10" b="7" u="3"></iT>
+	<s b="f" u="t" i="1" x="0.2" y="0.1" s="t">
+		<l s="2" t="t" b="f" u="t"></l>
+		<l s="3" t="t" b="f" u="t"></l>
+	</s>
+	<s b="t" u="t" i="2" x="0.1" y="0.4" s="t">
+		<l s="1" t="t" b="f" u="t"></l>
+		<l s="3" t="t" b="t" u="f"></l>
+		<l s="6" t="t" b="t" u="t"></l>
+	</s>
+	<s b="t" u="f" i="3" x="0.3" y="0.4" s="t">
+		<l s="1" t="t" b="f" u="t"></l>
+		<l s="2" t="t" b="t" u="f"></l>
+		<l s="4" t="t" b="t" u="t"></l>
+	</s>
+	<s b="f" u="f" i="4" x="0.5" y="0.3" s="t">
+		<l s="3" t="t" b="t" u="t"></l>
+		<l s="5" t="t" b="t" u="t"></l>
+		<l s="6" t="t" b="f" u="f"></l>
+	</s>
+	<s b="t" u="f" i="5" x="0.9" y="0.25" s="t">
+		<l s="4" t="t" b="t" u="t"></l>
+		<l s="7" t="t" b="t" u="t"></l>
+	</s>
+	<s b="t" u="f" i="6" x="0.25" y="0.75" s="t">
+		<l s="2" t="t" b="t" u="t"></l>
+		<l s="4" t="t" b="f" u="f"></l>
+		<l s="7" t="t" b="t" u="t"></l>
+	</s>
+	<s b="f" u="t" i="7" x="0.7" y="0.8" s="f">
+		<l s="6" t="t" b="t" u="t"></l>
+		<l s="5" t="t" b="t" u="t"></l>
+	</s>
+</m>
