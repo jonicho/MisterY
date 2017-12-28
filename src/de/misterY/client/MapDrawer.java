@@ -1,15 +1,7 @@
 package de.misterY.client;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.util.ArrayList;
 
 import de.misterY.Link;
@@ -60,7 +52,6 @@ public class MapDrawer {
 			int y1 = station.getPos().getDrawY(height);
 			int x2 = link.getStation().getPos().getDrawX(width);
 			int y2 = link.getStation().getPos().getDrawY(height);
-			g.setPaint(new GradientPaint(x1, y1, new Color(255, 255, 255, 0), x2, y2, Color.BLACK));
 			g.drawLine(x1, y1, x2, y2);
 			Vector2D pos = link.getStation().getPos().getClone();
 			Vector2D vec = station.getPos().getClone().subtract(link.getStation().getPos());
