@@ -109,7 +109,7 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
 			return;
 		}
-		Session session = sessions.getSessionByUser(user);// TODO can be null
+		Session session = sessions.getSessionByUser(user);
 		int stationId;
 		MeansOfTransportation type;
 		try {

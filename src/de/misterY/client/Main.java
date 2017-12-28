@@ -99,7 +99,7 @@ public class Main {
 		mntmReady.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameClient.send(PROTOCOL.CS.READY); // TODO
+				gameClient.send(PROTOCOL.CS.READY);
 			}
 		});
 		mnOptions.add(mntmReady);
