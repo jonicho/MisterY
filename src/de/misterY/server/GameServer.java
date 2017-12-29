@@ -186,7 +186,7 @@ public class GameServer extends Server {
 		u.getPlayer().setReady(true);
 		s.checkReady();
 		if (s.isActive()) {
-			s.prepareGame(new Map(new File("src/de/misterY/maps/TestMap.xml")));// TODO
+			s.prepareGame(new Map(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, s.getMap().getMapString()), s);
 			for (User user : s.getAllUsers()) {
 				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), s);
