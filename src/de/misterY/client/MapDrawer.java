@@ -37,7 +37,7 @@ public class MapDrawer {
 			drawLinks(g, station);
 		}
 		for (Station station : map.getStations()) {
-			drawStations(g, station);
+			drawStation(g, station);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class MapDrawer {
 	 * @param station
 	 *            The station which is drawn
 	 */
-	private void drawStations(Graphics2D g, Station station) {
+	private void drawStation(Graphics2D g, Station station) {
 		g.setColor(Color.BLACK);
 		int x = station.getPos().getDrawX(width);
 		int y = station.getPos().getDrawY(height);
