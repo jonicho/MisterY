@@ -129,7 +129,8 @@ public class MapDrawer {
 	}
 
 	/**
-	 * Draws all names of the given players onto the given graphics
+	 * Draws all names of the given players onto the given graphics below their
+	 * current stations.
 	 * 
 	 * @param g
 	 *            The graphics to draw the player names on
@@ -139,9 +140,25 @@ public class MapDrawer {
 		if (players == null) {
 			return;
 		}
-		for (Player player : players) {
-			drawCenteredString(g, player.getName(), player.getCurrentStation().getPos().getDrawX(width),
-					player.getCurrentStation().getPos().getDrawY(height), (float) (0.01 * avgSize));
+		ArrayList<ArrayList<Player>> playerListList = new ArrayList<ArrayList<Player>>();
+		outer: for (Player player : players) {
+			for (ArrayList<Player> arrayList : playerListList) {
+				if (arrayList.get(0).getCurrentStation() == player.getCurrentStation()) {
+					arrayList.add(player);
+					continue outer;
+				}
+			}
+			ArrayList<Player> newList = new ArrayList<Player>();
+			newList.add(player);
+			playerListList.add(newList);
+		}
+		for (ArrayList<Player> arrayList : playerListList) {
+			for (int i = 0; i < arrayList.size(); i++) {
+				Player player = arrayList.get(i);
+				drawCenteredString(g, player.getName(), player.getCurrentStation().getPos().getDrawX(width),
+						player.getCurrentStation().getPos().getDrawY(height) + (i + 1) * g.getFontMetrics().getHeight(),
+						(float) (0.01 * avgSize));
+			}
 		}
 	}
 
