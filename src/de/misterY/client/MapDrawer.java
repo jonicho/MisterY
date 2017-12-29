@@ -1,6 +1,8 @@
 package de.misterY.client;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -15,6 +17,7 @@ public class MapDrawer {
 	private Map map;
 	private int width;
 	private int height;
+	private int avgSize;
 	private Vector2D mousePos;
 
 	/**
@@ -25,6 +28,7 @@ public class MapDrawer {
 	 *            The graphics on which is drawn
 	 */
 	public void drawMap(Graphics2D g) {
+		avgSize = (width + height) / 2;
 		g.setColor(Color.BLACK);
 		if (map == null) {
 			return;
@@ -46,48 +50,47 @@ public class MapDrawer {
 	 *            The station to draw the links of
 	 */
 	private void drawLinks(Graphics2D g, Station station) {
+		g.setStroke(new BasicStroke((float) (0.002 * avgSize)));
 		for (Link link : station.getLinks()) {
-			g.setColor(Color.BLACK);
-			int x1 = station.getPos().getDrawX(width);
-			int y1 = station.getPos().getDrawY(height);
-			int x2 = link.getStation().getPos().getDrawX(width);
-			int y2 = link.getStation().getPos().getDrawY(height);
-			g.drawLine(x1, y1, x2, y2);
-			Vector2D pos = link.getStation().getPos().getClone();
-			Vector2D vec = station.getPos().getClone().subtract(link.getStation().getPos());
+			Vector2D ort = station.getPos().getClone().subtract(link.getStation().getPos()).rotate(Math.PI / 2)
+					.setLength(0.000002 * avgSize);
+			if (ort.getX() > 0) {
+				ort.multiply(-1);
+			}
 			if (link.isTaxi()) {
-				g.setColor(Color.YELLOW);
-				drawArrow(g, pos, vec, 0.02);
+				drawLink(g, station.getPos(), link.getStation().getPos(), Color.YELLOW);
 			}
 			if (link.isBus()) {
-				g.setColor(Color.GREEN);
-				drawArrow(g, pos, vec, 0.03);
+				drawLink(g, station.getPos().getClone().add(ort), link.getStation().getPos().getClone().add(ort),
+						Color.GREEN);
 			}
 			if (link.isUnderground()) {
-				g.setColor(Color.RED);
-				drawArrow(g, pos, vec, 0.04);
+				drawLink(g, station.getPos().getClone().subtract(ort),
+						link.getStation().getPos().getClone().subtract(ort), Color.RED);
 			}
 		}
 	}
 
 	/**
-	 * Draws an arrow pointing to pos with the direction of vec and the distance
-	 * dis.
+	 * Draws a link from v1 to v2 with the given color.<br>
+	 * Uses a gradient that has the given color at v1 and a transparent color at v2.
 	 * 
-	 * @param pos
-	 *            The position the arrow will be pointing to
-	 * @param vec
-	 *            The direction in which the arrow will point
-	 * @param dis
-	 *            The distance from pos
+	 * @param g
+	 *            The graphics on which is drawn
+	 * @param v1
+	 *            The start position of the link
+	 * @param v2
+	 *            The end position of the link
+	 * @param color
+	 *            The color of the link
 	 */
-	private void drawArrow(Graphics2D g, Vector2D pos, Vector2D vec, double dis) {
-		vec.setLength(0.03);
-		pos.add(vec.getClone().setLength(dis));
-		Vector2D left = vec.getClone().rotate(Math.toRadians(30)).add(pos);
-		Vector2D right = vec.getClone().rotate(Math.toRadians(-30)).add(pos);
-		g.drawLine(pos.getDrawX(width), pos.getDrawY(height), left.getDrawX(width), left.getDrawY(height));
-		g.drawLine(pos.getDrawX(width), pos.getDrawY(height), right.getDrawX(width), right.getDrawY(height));
+	private void drawLink(Graphics2D g, Vector2D v1, Vector2D v2, Color color) {
+		int x1 = v1.getDrawX(width);
+		int y1 = v1.getDrawY(height);
+		int x2 = v2.getDrawX(width);
+		int y2 = v2.getDrawY(height);
+		g.setPaint(new GradientPaint(x1, y1, color, x2, y2, new Color(0, 0, 0, 0)));
+		g.drawLine(x1, y1, x2, y2);
 	}
 
 	/**
@@ -103,9 +106,9 @@ public class MapDrawer {
 		int x = station.getPos().getDrawX(width);
 		int y = station.getPos().getDrawY(height);
 		int size;
-		double sizeFactor = 1;
+		double sizeFactor = 0.001 * avgSize;
 		if (station.getPos().getDistance(mousePos) < 0.01) {
-			sizeFactor = 1.5;
+			sizeFactor *= 1.5;
 		}
 		if (station.isUnderground()) {
 			size = (int) (20 * sizeFactor);
@@ -122,7 +125,7 @@ public class MapDrawer {
 		g.fillOval(x - size / 2, y - size / 2, size, size);
 
 		g.setColor(Color.BLACK);
-		drawCenteredString(g, station.getId() + "", x, y);
+		drawCenteredString(g, station.getId() + "", x, y, (float) (0.01 * avgSize * sizeFactor));
 	}
 
 	/**
@@ -138,7 +141,7 @@ public class MapDrawer {
 		}
 		for (Player player : players) {
 			drawCenteredString(g, player.getName(), player.getCurrentStation().getPos().getDrawX(width),
-					player.getCurrentStation().getPos().getDrawY(height));
+					player.getCurrentStation().getPos().getDrawY(height), (float) (0.01 * avgSize));
 		}
 	}
 
@@ -154,7 +157,8 @@ public class MapDrawer {
 	 * @param y
 	 *            The center-y-coordinate
 	 */
-	private void drawCenteredString(Graphics2D g, String string, int x, int y) {
+	private void drawCenteredString(Graphics2D g, String string, int x, int y, float size) {
+		g.setFont(g.getFont().deriveFont(size));
 		int width = g.getFontMetrics().stringWidth(string);
 		int height = g.getFontMetrics().getHeight();
 		g.drawString(string, x - width / 2, y - height / 2 + g.getFontMetrics().getAscent());
