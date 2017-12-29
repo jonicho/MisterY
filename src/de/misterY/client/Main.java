@@ -145,6 +145,11 @@ public class Main {
 		panel_4.setLayout(new BorderLayout(0, 0));
 
 		chatTextField = new JTextField();
+		chatTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sendMessage();
+			}
+		});
 		panel_4.add(chatTextField);
 		chatTextField.setColumns(10);
 
