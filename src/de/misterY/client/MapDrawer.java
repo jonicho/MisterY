@@ -125,7 +125,7 @@ public class MapDrawer {
 		g.fillOval(x - size / 2, y - size / 2, size, size);
 
 		g.setColor(Color.BLACK);
-		drawCenteredString(g, station.getId() + "", x, y, (float) (0.01 * avgSize * sizeFactor));
+		drawCenteredString(g, station.getId() + "", x, y, (float) (sizeFactor * 10));
 	}
 
 	/**
