@@ -65,6 +65,21 @@ public class PathFinder {
 	 * @return
 	 */
 	public static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation) {
+		return isReachable(start, end, meansOfTransportation, new ArrayList<Station>());
+	}
+	
+	/**
+	 * Returns whether the end station is reachable from the start station with the
+	 * given means of transportation in one turn, not considering the given considered stations.
+	 * 
+	 * @param start
+	 * @param end
+	 * @param meansOfTransportation
+	 * @param consideredStations
+	 * @return
+	 */
+	private static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation, ArrayList<Station> consideredStations) {
+		System.out.println(start.getId());
 		if (!end.isMeansOfTransportation(meansOfTransportation)) {
 			return false;
 		}
@@ -84,12 +99,17 @@ public class PathFinder {
 					continue;
 				}
 			}
-			result = result || isReachable(l.getStation(), end, meansOfTransportation);
+			if (consideredStations.contains(l.getStation())) {
+				continue;
+			}
+			consideredStations.add(l.getStation());
+			result = result || isReachable(l.getStation(), end, meansOfTransportation, consideredStations);
 			if (result) {
 				return true;
 			}
 		}
 		return result;
+		
 	}
 
 	/**
