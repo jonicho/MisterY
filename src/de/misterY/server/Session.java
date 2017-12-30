@@ -139,6 +139,7 @@ public class Session {
 		}
 		boolean success = user.getPlayer().moveTo(map.getStationById(endId), type);
 		if (success) {
+			getMrY().getPlayer().addTicket(type);
 			endTurn();
 		}
 		return success;

@@ -92,6 +92,28 @@ public class Player {
 	}
 
 	/**
+	 * Adds one ticket of the given means of transportation.
+	 * 
+	 * @param type
+	 */
+	public void addTicket(MeansOfTransportation type) {
+		switch (type) {
+		case Taxi:
+			taxiTickets++;
+			break;
+		case Bus:
+			busTickets++;
+			break;
+		case Underground:
+			undergroundTickets++;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/**
 	 * Use a ticket
 	 * 
 	 * @param type
