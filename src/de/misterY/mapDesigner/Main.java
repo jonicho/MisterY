@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
-import de.misterY.Map;
 import de.misterY.MapLoader;
 import de.misterY.client.Canvas;
 

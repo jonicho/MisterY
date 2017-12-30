@@ -2,7 +2,6 @@ package de.misterY.server;
 
 import java.io.File;
 
-import de.misterY.Map;
 import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.net.PROTOCOL;
