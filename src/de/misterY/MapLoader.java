@@ -28,7 +28,8 @@ public class MapLoader {
 	 *            The file to load the map from.
 	 * @return The map string, an empty string if an error occurred.
 	 */
-	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, File mapFile) {
+	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets,
+			File mapFile) {
 		try {
 			String mapString = "";
 			BufferedReader bf = new BufferedReader(new FileReader(mapFile));
@@ -65,6 +66,10 @@ public class MapLoader {
 			initialTickets[0] = Integer.parseInt(initialTicketsElement.getAttribute("t"));
 			initialTickets[1] = Integer.parseInt(initialTicketsElement.getAttribute("b"));
 			initialTickets[2] = Integer.parseInt(initialTicketsElement.getAttribute("u"));
+			Element initialTicketsMrYElement = (Element) doc.getElementsByTagName("iy").item(0);
+			initialTickets[3] = Integer.parseInt(initialTicketsMrYElement.getAttribute("t"));
+			initialTickets[4] = Integer.parseInt(initialTicketsMrYElement.getAttribute("b"));
+			initialTickets[5] = Integer.parseInt(initialTicketsMrYElement.getAttribute("u"));
 			NodeList stationElements = doc.getElementsByTagName("s");
 			for (int i = 0; i < stationElements.getLength(); i++) {
 				Element stationElement = (Element) stationElements.item(i);

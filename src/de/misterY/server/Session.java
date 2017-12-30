@@ -88,8 +88,9 @@ public class Session {
 		users.get(0).getPlayer().setMrY(true);
 
 		for (User user : users) {
-			user.getPlayer().start(map, map.getInitialTaxiTickets(), map.getInitialBusTickets(),
-					map.getInitialUndergroundTickets());
+			user.getPlayer().start(map, map.getInitialTickets(MeansOfTransportation.Taxi, user.getPlayer().isMrY()),
+					map.getInitialTickets(MeansOfTransportation.Bus, user.getPlayer().isMrY()),
+					map.getInitialTickets(MeansOfTransportation.Underground, user.getPlayer().isMrY()));
 		}
 		this.map = map;
 		gameStarted = true;

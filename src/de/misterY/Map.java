@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Map {
 	private ArrayList<Station> stations = new ArrayList<Station>();
 	private ArrayList<Station> startStations = new ArrayList<Station>();
-	private int[] initialTickets = new int[3];
+	private int[] initialTickets = new int[6];
 	private final String mapString;
 
 	/**
@@ -111,16 +111,32 @@ public class Map {
 	public String getMapString() {
 		return mapString;
 	}
-	
-	public int getInitialTaxiTickets() {
-		return initialTickets[0];
-	}
-	
-	public int getInitialBusTickets() {
-		return initialTickets[1];
-	}
-	
-	public int getInitialUndergroundTickets() {
-		return initialTickets[2];
+
+	/**
+	 * Returns the initial tickets of the given means of transportation.<br>
+	 * If the mrY boolean is true the initial tickets of misterY are returned.
+	 * 
+	 * @param type
+	 * @param mrY
+	 * @return
+	 */
+	public int getInitialTickets(MeansOfTransportation type, boolean mrY) {
+		int index = 0;
+		switch (type) {
+		case Taxi:
+			break;
+		case Bus:
+			index += 1;
+			break;
+		case Underground:
+			index += 2;
+			break;
+		default:
+			break;
+		}
+		if (mrY) {
+			index += 3;
+		}
+		return initialTickets[index];
 	}
 }
