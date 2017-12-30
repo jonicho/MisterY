@@ -246,7 +246,7 @@ public class Main {
 	
 	private void createChatRunnable() {
 		gameClient.setChatRunnable(() -> {
-			chatTextPane.setText(gameClient.getChatHandler().getMessageString());
+			chatTextPane.setText(gameClient.getChatHandler().getChatString());
 		});
 	}
 

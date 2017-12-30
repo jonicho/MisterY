@@ -11,7 +11,7 @@ public class ChatHandler {
 		messages.add(new ChatMessage(player, message));
 	}
 	
-	public String getMessageString() {
+	public String getChatString() {
 		String result = "";
 		for (ChatMessage chatMessage : messages) {
 			result += chatMessage.getPlayer().getName() + ": " + chatMessage.getMessage() + "\n";
