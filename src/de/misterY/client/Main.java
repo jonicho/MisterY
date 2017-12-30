@@ -138,6 +138,7 @@ public class Main {
 
 		chatTextPane = new JTextPane();
 		chatTextPane.setEditable(false);
+		chatTextPane.setContentType("text/html");
 		panel_3.add(chatTextPane);
 
 		JPanel panel_4 = new JPanel();

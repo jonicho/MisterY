@@ -12,10 +12,11 @@ public class ChatHandler {
 	}
 	
 	public String getChatString() {
-		String result = "";
+		String result = "<html>";
 		for (ChatMessage chatMessage : messages) {
-			result += chatMessage.getPlayer().getName() + ": " + chatMessage.getMessage() + "\n";
+			result += "<strong>" + chatMessage.getPlayer().getName() + ":</strong> " + chatMessage.getMessage() + "<br>";
 		}
+		result += "</html>";
 		return result;
 	}
 	
