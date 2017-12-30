@@ -18,18 +18,12 @@ import org.xml.sax.SAXException;
 public class MapLoader {
 
 	/**
-	 * Loads a map by inserting the Stations into the given ArrayLists
+	 * Loads a map from the given xml file.
 	 * 
-	 * @param stations
-	 *            The stations
-	 * @param startStations
-	 *            The start stations
 	 * @param mapFile
-	 *            The file to load the map from.
-	 * @return The map string, an empty string if an error occurred.
+	 * @return The map. null if an error occurred.
 	 */
-	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets,
-			File mapFile) {
+	public static Map loadMap(File mapFile) {
 		try {
 			String mapString = "";
 			BufferedReader bf = new BufferedReader(new FileReader(mapFile));
@@ -38,38 +32,39 @@ public class MapLoader {
 				mapString += line;
 			}
 			bf.close();
-			return loadMap(stations, startStations, initialTickets, mapString);
+			return loadMap(mapString);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 	/**
-	 * Loads a map by inserting the Stations into the given ArrayLists
+	 * Loads a map from the given xml string.
 	 * 
-	 * @param stations
-	 *            The stations
-	 * @param startStations
-	 *            The start stations
 	 * @param mapString
-	 *            The string to load the map from.
-	 * @return The map string, an empty string if an error occurred.
+	 * @return The map. null if an error occurred.
 	 */
-	public static String loadMap(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, String mapString) {
+	public static Map loadMap(String mapString) {
 		try {
+			ArrayList<Station> stations = new ArrayList<Station>();
+			ArrayList<Station> startStations = new ArrayList<Station>();
+			int[] initialTickets = new int[6];
 			mapString = mapString.replaceAll("[\\>][\\t]+[\\<]", "><"); // remove unnecessary tabs
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new ByteArrayInputStream(mapString.getBytes()));
 			doc.getDocumentElement().normalize();
+
 			Element initialTicketsElement = (Element) doc.getElementsByTagName("i").item(0);
 			initialTickets[0] = Integer.parseInt(initialTicketsElement.getAttribute("t"));
 			initialTickets[1] = Integer.parseInt(initialTicketsElement.getAttribute("b"));
 			initialTickets[2] = Integer.parseInt(initialTicketsElement.getAttribute("u"));
+
 			Element initialTicketsMrYElement = (Element) doc.getElementsByTagName("iy").item(0);
 			initialTickets[3] = Integer.parseInt(initialTicketsMrYElement.getAttribute("t"));
 			initialTickets[4] = Integer.parseInt(initialTicketsMrYElement.getAttribute("b"));
 			initialTickets[5] = Integer.parseInt(initialTicketsMrYElement.getAttribute("u"));
+
 			NodeList stationElements = doc.getElementsByTagName("s");
 			for (int i = 0; i < stationElements.getLength(); i++) {
 				Element stationElement = (Element) stationElements.item(i);
@@ -117,12 +112,12 @@ public class MapLoader {
 					station.addLink(new Link(targetStation, taxi, bus, underground));
 				}
 			}
-			return mapString;
+			return new Map(stations, startStations, initialTickets, mapString);
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (NullPointerException | NumberFormatException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 }

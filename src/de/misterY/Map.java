@@ -1,52 +1,18 @@
 package de.misterY;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class Map {
-	private ArrayList<Station> stations = new ArrayList<Station>();
-	private ArrayList<Station> startStations = new ArrayList<Station>();
-	private int[] initialTickets = new int[6];
+	private final ArrayList<Station> stations;
+	private final ArrayList<Station> startStations;
+	private final int[] initialTickets;
 	private final String mapString;
 
-	/**
-	 * Constructs a new map from the given map file.
-	 * 
-	 * @param file
-	 *            The file to load the map from.
-	 */
-	public Map(File file) {
-		mapString = load(file);
-	}
-
-	/**
-	 * Constructs a new map from the given map string.
-	 * 
-	 * @param mapString
-	 *            The string to load the map from.
-	 */
-	public Map(String mapString) {
-		this.mapString = load(mapString);
-	}
-
-	/**
-	 * Loads the map.
-	 * 
-	 * @param file
-	 *            The file to load the map from.
-	 */
-	private String load(File mapFile) {
-		return MapLoader.loadMap(stations, startStations, initialTickets, mapFile);
-	}
-
-	/**
-	 * Loads the map.
-	 * 
-	 * @param mapString
-	 *            The string to load the map from.
-	 */
-	private String load(String mapString) {
-		return MapLoader.loadMap(stations, startStations, initialTickets, mapString);
+	public Map(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, String mapString) {
+		this.stations = stations;
+		this.startStations = startStations;
+		this.initialTickets = initialTickets;
+		this.mapString = mapString;
 	}
 
 	/**
@@ -106,13 +72,6 @@ public class Map {
 	}
 
 	/**
-	 * @return The string that represents this map.
-	 */
-	public String getMapString() {
-		return mapString;
-	}
-
-	/**
 	 * Returns the initial tickets of the given means of transportation.<br>
 	 * If the mrY boolean is true the initial tickets of misterY are returned.
 	 * 
@@ -138,5 +97,12 @@ public class Map {
 			index += 3;
 		}
 		return initialTickets[index];
+	}
+
+	/**
+	 * @return The string that represents this map.
+	 */
+	public String getMapString() {
+		return mapString;
 	}
 }

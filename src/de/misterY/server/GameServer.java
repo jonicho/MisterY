@@ -3,6 +3,7 @@ package de.misterY.server;
 import java.io.File;
 
 import de.misterY.Map;
+import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
@@ -186,7 +187,7 @@ public class GameServer extends Server {
 		u.getPlayer().setReady(true);
 		s.checkReady();
 		if (s.isActive()) {
-			s.prepareGame(new Map(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
+			s.prepareGame(MapLoader.loadMap(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, s.getMap().getMapString()), s);
 			for (User user : s.getAllUsers()) {
 				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), s);

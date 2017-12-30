@@ -13,6 +13,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
 import de.misterY.Map;
+import de.misterY.MapLoader;
 import de.misterY.client.Canvas;
 
 public class Main {
@@ -96,7 +97,7 @@ public class Main {
 
 	private void reloadMap() {
 		try {
-			canvas.setMap(new Map(txtMapstring.getText()));
+			canvas.setMap(MapLoader.loadMap(txtMapstring.getText()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

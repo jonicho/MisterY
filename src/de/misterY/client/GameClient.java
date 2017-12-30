@@ -3,6 +3,7 @@ package de.misterY.client;
 import java.util.ArrayList;
 
 import de.misterY.Map;
+import de.misterY.MapLoader;
 import de.misterY.Player;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
@@ -44,7 +45,7 @@ public class GameClient extends Client {
 			handleInfoUpdate(msgParts);
 			break;
 		case PROTOCOL.SC.MAP:
-			map = new Map(msgParts[1]);
+			map = MapLoader.loadMap(msgParts[1]);
 			break;
 		case PROTOCOL.SC.TURN:
 			handleTurn(msgParts);
