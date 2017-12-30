@@ -30,6 +30,12 @@ import javax.swing.table.DefaultTableModel;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.net.PROTOCOL;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 
 public class Main {
 
@@ -41,6 +47,7 @@ public class Main {
 	private String ownName;
 	private JTextField chatTextField;
 	private JTextPane chatTextPane;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -113,7 +120,7 @@ public class Main {
 
 		JPanel panel = new JPanel();
 		splitPane.setRightComponent(panel);
-		panel.setLayout(new GridLayout(2, 1, 0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -124,10 +131,11 @@ public class Main {
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_2.add(lblPlayerInfo, BorderLayout.NORTH);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_2.add(scrollPane);
 
 		playersTable = new JTable();
+		playersTable.setPreferredScrollableViewportSize(new Dimension(1, 1));
 		scrollPane.setViewportView(playersTable);
 		playersTable.setDefaultEditor(Object.class, null);
 		playersTable.setFocusable(false);
@@ -135,11 +143,6 @@ public class Main {
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
-
-		chatTextPane = new JTextPane();
-		chatTextPane.setEditable(false);
-		chatTextPane.setContentType("text/html");
-		panel_3.add(chatTextPane);
 
 		JPanel panel_4 = new JPanel();
 		panel_3.add(panel_4, BorderLayout.SOUTH);
@@ -162,15 +165,22 @@ public class Main {
 		});
 		panel_4.add(btnSend, BorderLayout.EAST);
 
+		chatTextPane = new JTextPane();
+		chatTextPane.setEditable(false);
+		chatTextPane.setContentType("text/html");
+
+		JScrollPane scrollPane_1 = new JScrollPane(chatTextPane);
+		panel_3.add(scrollPane_1, BorderLayout.CENTER);
+
 		infoLabel = new JLabel("New label");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
 
 		connect();
 	}
-	
+
 	/**
-	 * Updates the title with the given user name in the following way:
-	 * "MisterY" + (username.isEmpty() ? "" : " - " + username)
+	 * Updates the title with the given user name in the following way: "MisterY" +
+	 * (username.isEmpty() ? "" : " - " + username)
 	 * 
 	 * @param username
 	 */
@@ -244,7 +254,7 @@ public class Main {
 					JOptionPane.ERROR_MESSAGE);
 		});
 	}
-	
+
 	private void createChatRunnable() {
 		gameClient.setChatRunnable(() -> {
 			chatTextPane.setText(gameClient.getChatHandler().getChatString());
@@ -332,6 +342,9 @@ public class Main {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
+		Dimension d = playersTable.getPreferredSize();
+		scrollPane.setPreferredSize(new Dimension(d.width, playersTable.getRowHeight() * 2));
+		System.out.println(scrollPane.getPreferredSize());
 	}
 
 	/**
