@@ -122,7 +122,9 @@ public class GameServer extends Server {
 		}
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), session);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,
+					user.getPlayer().getInfoString(!user.getPlayer().isMrY() || session.isMisterYShowing()),
+					user.getPlayer().isMrY() ? type : ""), session);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
 					session);
 		} else {
@@ -182,16 +184,16 @@ public class GameServer extends Server {
 	 *            the user
 	 */
 	private void handleReady(User u) {
-		Session s = sessions.getSessionByUser(u);
+		Session session = sessions.getSessionByUser(u);
 		u.getPlayer().setReady(true);
-		s.checkReady();
-		if (s.isActive()) {
-			s.prepareGame(MapLoader.loadMap(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, s.getMap().getMapString()), s);
-			for (User user : s.getAllUsers()) {
-				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString()), s);
+		session.checkReady();
+		if (session.isActive()) {
+			session.prepareGame(MapLoader.loadMap(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, session.getMap().getMapString()), session);
+			for (User user : session.getAllUsers()) {
+				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString(!user.getPlayer().isMrY() || session.isMisterYShowing())), session);
 			}
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, s.getCurrentUser().getPlayer().getName()), s);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()), session);
 		}
 	}
 
@@ -212,7 +214,7 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USER_DOES_NOT_EXIST), askingUser);
 			return;
 		}
-		User u = users.getUserByName(msgParts[1]);
-		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, u.getPlayer().getInfoString()), askingUser);
+		User user = users.getUserByName(msgParts[1]);
+		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString(!user.getPlayer().isMrY() || sessions.getSessionByUser(user).isMisterYShowing())), askingUser);
 	}
 }

@@ -1,6 +1,7 @@
 package de.misterY.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import de.misterY.Map;
@@ -8,11 +9,12 @@ import de.misterY.MeansOfTransportation;
 
 public class Session {
 	private Map map;
-	private int turn = 0;
+	private int currentUserIndex = 0;
 	private boolean isDoubleTurn;
 	private boolean wasDoubleTurn;
 	private boolean isActive = false;
 	private boolean gameStarted = false;
+	private int round = 1;
 	private ArrayList<User> users = new ArrayList<User>();
 
 	/**
@@ -37,12 +39,19 @@ public class Session {
 	}
 
 	/**
+	 * @return Whether misterY is showing.
+	 */
+	public boolean isMisterYShowing() {
+		return Arrays.binarySearch(map.getShowRounds(), round) >= 0;
+	}
+
+	/**
 	 * Returns the user whose turn it is.
 	 * 
 	 * @return the user whose turn it is.
 	 */
 	public User getCurrentUser() {
-		return users.get(turn % users.size());
+		return users.get(currentUserIndex);
 	}
 
 	public Map getMap() {
@@ -50,7 +59,7 @@ public class Session {
 	}
 
 	/**
-	 * Checks whether all users are ready. If so, set isActive to true.
+	 * Checks whether all users are ready. If so, sets isActive to true.
 	 */
 	public void checkReady() {
 		if (users.size() < 3) {
@@ -153,6 +162,7 @@ public class Session {
 	 * 
 	 * @return all users of this session
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<User> getAllUsers() {
 		return (ArrayList<User>) users.clone();
 	}
@@ -178,7 +188,11 @@ public class Session {
 	 */
 	public void endTurn() {
 		if (!isDoubleTurn) {
-			turn++;
+			currentUserIndex++;
+			if (currentUserIndex > users.size() - 1) {
+				currentUserIndex = 0;
+				round++;
+			}
 			wasDoubleTurn = false;
 		}
 		if (isDoubleTurn) {

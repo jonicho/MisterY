@@ -6,12 +6,17 @@ public class Map {
 	private final ArrayList<Station> stations;
 	private final ArrayList<Station> startStations;
 	private final int[] initialTickets;
+	private final int rounds;
+	private final int[] showRounds;
 	private final String mapString;
 
-	public Map(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, String mapString) {
+	public Map(ArrayList<Station> stations, ArrayList<Station> startStations, int[] initialTickets, int rounds,
+			int[] showRounds, String mapString) {
 		this.stations = stations;
 		this.startStations = startStations;
 		this.initialTickets = initialTickets;
+		this.rounds = rounds;
+		this.showRounds = showRounds;
 		this.mapString = mapString;
 	}
 
@@ -97,6 +102,20 @@ public class Map {
 			index += 3;
 		}
 		return initialTickets[index];
+	}
+	
+	/**
+	 * @return The number of rounds.
+	 */
+	public int getRounds() {
+		return rounds;
+	}
+	
+	/**
+	 * @return The rounds in which misterY shows himself.
+	 */
+	public int[] getShowRounds() {
+		return showRounds;
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -50,6 +51,8 @@ public class MapLoader {
 			ArrayList<Station> stations = new ArrayList<Station>();
 			ArrayList<Station> startStations = new ArrayList<Station>();
 			int[] initialTickets = new int[6];
+			int rounds;
+			int[] showRounds;
 			mapString = mapString.replaceAll("[\\>][\\t]+[\\<]", "><"); // remove unnecessary tabs
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new ByteArrayInputStream(mapString.getBytes()));
@@ -64,6 +67,15 @@ public class MapLoader {
 			initialTickets[3] = Integer.parseInt(initialTicketsMrYElement.getAttribute("t"));
 			initialTickets[4] = Integer.parseInt(initialTicketsMrYElement.getAttribute("b"));
 			initialTickets[5] = Integer.parseInt(initialTicketsMrYElement.getAttribute("u"));
+
+			Element roundInfo = (Element) doc.getElementsByTagName("r").item(0);
+			rounds = Integer.parseInt(roundInfo.getAttribute("t"));
+			String[] showRoundsStrings = roundInfo.getAttribute("s").split(",");
+			showRounds = new int[showRoundsStrings.length];
+			for (int i = 0; i < showRoundsStrings.length; i++) {
+				showRounds[i] = Integer.parseInt(showRoundsStrings[i]);
+			}
+			Arrays.sort(showRounds);
 
 			NodeList stationElements = doc.getElementsByTagName("s");
 			for (int i = 0; i < stationElements.getLength(); i++) {
@@ -112,7 +124,7 @@ public class MapLoader {
 					station.addLink(new Link(targetStation, taxi, bus, underground));
 				}
 			}
-			return new Map(stations, startStations, initialTickets, mapString);
+			return new Map(stations, startStations, initialTickets, rounds, showRounds, mapString);
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (NullPointerException | NumberFormatException e) {

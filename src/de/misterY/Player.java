@@ -186,11 +186,14 @@ public class Player {
 	 * tickets, bus tickets, underground tickets, current station id, whether this
 	 * player is mrY
 	 * 
+	 * @param showCurrentStation
+	 *            Whether the current station should be included. If false, -1 is
+	 *            used.
 	 * @return the info string
 	 */
-	public String getInfoString() {
+	public String getInfoString(boolean showCurrentStation) {
 		return PROTOCOL.buildMessage(name, getTaxiTickets(), getBusTickets(), getUndergroundTickets(),
-				currentStation.getId(), mrY);
+				showCurrentStation ? currentStation.getId() : -1, mrY);
 	}
 
 	public void setCurrentStation(Station currentStation) {
