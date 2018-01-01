@@ -26,7 +26,6 @@ public final class PROTOCOL {
 		public static final String LOGIN = "lgn", // Base [split] name
 				REQUEST_MOVEMENT = "reqmv", // Base [split] end id [split] type
 				CHAT_POST = "cpst", // Base [split] message
-				REQUEST_INFO = "reqinfo", // Base [split] name
 				REQUEST_BOT = "reqbot", // Base
 				READY = "rdy"; // Base
 	}

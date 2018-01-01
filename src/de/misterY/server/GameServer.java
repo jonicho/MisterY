@@ -48,9 +48,6 @@ public class GameServer extends Server {
 		case PROTOCOL.CS.CHAT_POST:
 			processChatPost(user, msgParts);
 			break;
-		case PROTOCOL.CS.REQUEST_INFO:
-			sendInfoUpdate(msgParts, user);
-			break;
 		case PROTOCOL.CS.REQUEST_BOT:
 			break;
 		case PROTOCOL.CS.READY:
@@ -195,26 +192,5 @@ public class GameServer extends Server {
 			}
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()), session);
 		}
-	}
-
-	/**
-	 * Sends an info update for the specified player to the asking user
-	 * 
-	 * @param name
-	 *            the name of the user to get the update from
-	 * @param askingUser
-	 *            the user the update will be sent to
-	 */
-	private void sendInfoUpdate(String[] msgParts, User askingUser) {
-		if (msgParts.length < 2) {
-			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), askingUser);
-			return;
-		}
-		if (users.getUserByName(msgParts[1]) == null) {
-			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USER_DOES_NOT_EXIST), askingUser);
-			return;
-		}
-		User user = users.getUserByName(msgParts[1]);
-		sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString(!user.getPlayer().isMrY() || sessions.getSessionByUser(user).isMisterYShowing())), askingUser);
 	}
 }
