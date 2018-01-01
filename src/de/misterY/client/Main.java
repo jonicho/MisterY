@@ -5,13 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,6 +44,7 @@ public class Main {
 	private JTextField chatTextField;
 	private JTextPane chatTextPane;
 	private JScrollPane scrollPane;
+	private JTable roundsTable;
 
 	/**
 	 * Launch the application.
@@ -115,19 +117,20 @@ public class Main {
 
 		JPanel panel = new JPanel();
 		splitPane.setRightComponent(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
-
-		JLabel lblPlayerInfo = new JLabel("Player info:");
-		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panel_2.add(lblPlayerInfo, BorderLayout.NORTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 5.0, 0.0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 1.0 };
+		gbl_panel.columnWidths = new int[] { 0, 0 };
+		panel.setLayout(gbl_panel);
 
 		scrollPane = new JScrollPane();
-		panel_2.add(scrollPane);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridy = 1;
+		gbc_scrollPane.gridx = 0;
+		panel.add(scrollPane, gbc_scrollPane);
 
 		playersTable = new JTable();
 		playersTable.setPreferredScrollableViewportSize(new Dimension(1, 1));
@@ -135,12 +138,51 @@ public class Main {
 		playersTable.setDefaultEditor(Object.class, null);
 		playersTable.setFocusable(false);
 
-		JPanel panel_3 = new JPanel();
-		panel.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JLabel lblChat = new JLabel("Chat:");
+		lblChat.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChat.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblChat = new GridBagConstraints();
+		gbc_lblChat.gridx = 0;
+		gbc_lblChat.gridy = 2;
+		panel.add(lblChat, gbc_lblChat);
+
+		JLabel lblRoundsInfo = new JLabel("Rounds info:");
+		lblRoundsInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRoundsInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblRoundsInfo = new GridBagConstraints();
+		gbc_lblRoundsInfo.gridx = 1;
+		gbc_lblRoundsInfo.gridy = 2;
+		panel.add(lblRoundsInfo, gbc_lblRoundsInfo);
+
+		roundsTable = new JTable();
+		roundsTable.setPreferredScrollableViewportSize(new Dimension(1, 1));
+		roundsTable.setFocusable(false);
+
+		JScrollPane scrollPane_2 = new JScrollPane(roundsTable);
+		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.gridheight = 2;
+		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_2.gridy = 3;
+		gbc_scrollPane_2.gridx = 1;
+		panel.add(scrollPane_2, gbc_scrollPane_2);
+
+		chatTextPane = new JTextPane();
+		chatTextPane.setEditable(false);
+		chatTextPane.setContentType("text/html");
+
+		JScrollPane scrollPane_1 = new JScrollPane(chatTextPane);
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridy = 3;
+		gbc_scrollPane_1.gridx = 0;
+		panel.add(scrollPane_1, gbc_scrollPane_1);
 
 		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4, BorderLayout.SOUTH);
+		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.fill = GridBagConstraints.BOTH;
+		gbc_panel_4.gridy = 4;
+		gbc_panel_4.gridx = 0;
+		panel.add(panel_4, gbc_panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 
 		chatTextField = new JTextField();
@@ -162,12 +204,15 @@ public class Main {
 		});
 		panel_4.add(btnSend, BorderLayout.EAST);
 
-		chatTextPane = new JTextPane();
-		chatTextPane.setEditable(false);
-		chatTextPane.setContentType("text/html");
-
-		JScrollPane scrollPane_1 = new JScrollPane(chatTextPane);
-		panel_3.add(scrollPane_1, BorderLayout.CENTER);
+		JLabel lblPlayerInfo = new JLabel("Player info:");
+		GridBagConstraints gbc_lblPlayerInfo = new GridBagConstraints();
+		gbc_lblPlayerInfo.gridwidth = 2;
+		gbc_lblPlayerInfo.fill = GridBagConstraints.BOTH;
+		gbc_lblPlayerInfo.gridy = 0;
+		gbc_lblPlayerInfo.gridx = 0;
+		panel.add(lblPlayerInfo, gbc_lblPlayerInfo);
+		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		infoLabel = new JLabel("New label");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
@@ -225,6 +270,7 @@ public class Main {
 			}
 			canvas.repaint();
 			updatePlayersTable();
+			updateRoundsTable();
 		});
 	}
 
@@ -341,7 +387,13 @@ public class Main {
 		});
 		Dimension d = playersTable.getPreferredSize();
 		scrollPane.setPreferredSize(new Dimension(d.width, playersTable.getRowHeight() * 2));
-		System.out.println(scrollPane.getPreferredSize());
+	}
+
+	/**
+	 * Updates the rounds table.
+	 */
+	private void updateRoundsTable() {
+		// TODO
 	}
 
 	/**
