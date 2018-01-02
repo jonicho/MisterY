@@ -18,7 +18,7 @@ public class MapDrawer {
 	private int width;
 	private int height;
 	private int avgSize;
-	private Vector2D mousePos;
+	private Station hoveredStation;
 
 	/**
 	 * Draws the map onto the given graphics.<br>
@@ -37,8 +37,9 @@ public class MapDrawer {
 			drawLinks(g, station);
 		}
 		for (Station station : map.getStations()) {
-			drawStation(g, station);
+			if (station != hoveredStation) drawStation(g, station);
 		}
+		if (hoveredStation != null) drawStation(g, hoveredStation);
 	}
 
 	/**
@@ -115,24 +116,27 @@ public class MapDrawer {
 		g.setColor(Color.BLACK);
 		int x = station.getPos().getDrawX(width);
 		int y = station.getPos().getDrawY(height);
-		int size;
 		double sizeFactor = 0.001 * avgSize;
-		if (station.getPos().getDistance(mousePos) < 0.01) {
+		if (hoveredStation != null && station == hoveredStation) {
 			sizeFactor *= 1.5;
 		}
-		if (station.isUnderground()) {
-			size = (int) (20 * sizeFactor);
-			g.setColor(Color.RED);
-			g.fillOval(x - size / 2, y - size / 2, size, size);
-		}
-		if (station.isBus()) {
-			size = (int) (16 * sizeFactor);
-			g.setColor(Color.GREEN);
-			g.fillOval(x - size / 2, y - size / 2, size, size);
-		}
-		size = (int) (12 * sizeFactor);
+		int size = (int) (12 * sizeFactor);
+		g.setStroke(new BasicStroke((float) (0.8 * sizeFactor)));
 		g.setColor(Color.YELLOW);
-		g.fillOval(x - size / 2, y - size / 2, size, size);
+		g.fillOval(x - size / 2, y, size, size);
+		g.setColor(Color.BLACK);
+		g.drawOval(x - size / 2, y, size, size);
+
+		g.setColor(station.isBus() ? Color.GREEN : Color.YELLOW);
+		g.fillOval(x - size / 2, y - size, size, size);
+		g.setColor(Color.BLACK);
+		g.drawOval(x - size / 2, y - size, size, size);
+
+		int arc = (int) (5 * sizeFactor);
+		g.setColor(station.isUnderground() ? Color.RED : Color.YELLOW);
+		g.fillRoundRect(x - size, y - size / 2, size * 2, size, arc, arc);
+		g.setColor(Color.BLACK);
+		g.drawRoundRect(x - size, y - size / 2, size * 2, size, arc, arc);
 
 		g.setColor(Color.BLACK);
 		drawCenteredString(g, station.getId() + "", x, y, (float) (sizeFactor * 10));
@@ -202,8 +206,8 @@ public class MapDrawer {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
-	public void setMousePos(Vector2D mousePos) {
-		this.mousePos = mousePos;
+	
+	public void setHoveredStation(Station hoveredStation) {
+		this.hoveredStation = hoveredStation;
 	}
 }

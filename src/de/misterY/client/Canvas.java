@@ -58,6 +58,7 @@ public class Canvas extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				mouseX = e.getX();
 				mouseY = e.getY();
+				calculateHoveredStation();
 				repaint();
 			}
 
@@ -67,6 +68,7 @@ public class Canvas extends JPanel {
 				y += (e.getY() - mouseY) / scale;
 				mouseX = e.getX();
 				mouseY = e.getY();
+				calculateHoveredStation();
 				repaint();
 			}
 		});
@@ -95,7 +97,6 @@ public class Canvas extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (stationClickedRunnable != null) {
-					calculateHoveredStation();
 					if (hoveredStation != null) {
 						stationClickedRunnable.run();
 					}
@@ -121,7 +122,7 @@ public class Canvas extends JPanel {
 		mapDrawer.setMap(map);
 		mapDrawer.setWidth(getWidth());
 		mapDrawer.setHeight(getHeight());
-		mapDrawer.setMousePos(mousePos);
+		mapDrawer.setHoveredStation(hoveredStation);
 
 		mapDrawer.drawMap(g);
 		mapDrawer.drawPlayers(g, players);
