@@ -129,13 +129,20 @@ public class Canvas extends JPanel {
 	}
 
 	private void calculateHoveredStation() {
+		Station closestStation = null;
+		double shortestDistance = Double.POSITIVE_INFINITY;
 		for (Station station : map.getStations()) {
-			if (mousePos.getDistance(station.getPos()) < 0.01) {
-				hoveredStation = station;
-				return;
+			if (mousePos.getDistance(station.getPos()) < shortestDistance) {
+				shortestDistance = mousePos.getDistance(station.getPos());
+				closestStation = station;
 			}
 		}
-		hoveredStation = null;
+		if (shortestDistance < 0.02) {
+			hoveredStation = closestStation;
+		} else {
+			hoveredStation = null;
+		}
+		return;
 	}
 
 	public void setStationClickedRunnable(Runnable stationClickedRunnable) {
