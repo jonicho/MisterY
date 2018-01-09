@@ -129,6 +129,9 @@ public class Canvas extends JPanel {
 	}
 
 	private void calculateHoveredStation() {
+		if (map == null) {
+			return;
+		}
 		Station closestStation = null;
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		for (Station station : map.getStations()) {
