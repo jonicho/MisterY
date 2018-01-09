@@ -182,6 +182,9 @@ public class GameServer extends Server {
 	 */
 	private void handleReady(User u) {
 		Session session = sessions.getSessionByUser(u);
+		if (session.isActive()) {
+			return;
+		}
 		u.getPlayer().setReady(true);
 		session.checkReady();
 		if (session.isActive()) {
