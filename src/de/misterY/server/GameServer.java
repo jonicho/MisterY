@@ -123,6 +123,8 @@ public class GameServer extends Server {
 			sendInfoUpdate(user, session);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
 					session);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.USED_TICKETS,
+					PROTOCOL.buildMessage((Object[]) session.getTicketsUsedByMisterY())), session);
 		} else {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}

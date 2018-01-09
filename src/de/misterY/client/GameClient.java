@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.misterY.Map;
 import de.misterY.MapLoader;
+import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
@@ -14,6 +15,7 @@ public class GameClient extends Client {
 	private Runnable errorRunnable;
 	private Runnable chatRunnable;
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private MeansOfTransportation[] ticketsUsedByMisterY = new MeansOfTransportation[0];
 	private Map map;
 	private ChatHandler chatHandler = new ChatHandler();
 	private int errorCode;
@@ -43,6 +45,9 @@ public class GameClient extends Client {
 			break;
 		case PROTOCOL.SC.INFO_UPDATE:
 			handleInfoUpdate(msgParts);
+			break;
+		case PROTOCOL.SC.USED_TICKETS:
+			handleUsedTickets(msgParts);
 			break;
 		case PROTOCOL.SC.MAP:
 			map = MapLoader.loadMap(msgParts[1]);
@@ -81,6 +86,13 @@ public class GameClient extends Client {
 		player.setUndergroundTickets(undergroundTickets);
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
+	}
+	
+	private void handleUsedTickets(String[] msgParts) {
+		ticketsUsedByMisterY = new MeansOfTransportation[msgParts.length - 1];
+		for (int i = 0; i < msgParts.length - 1; i++) {
+			ticketsUsedByMisterY[i] = MeansOfTransportation.valueOf(msgParts[i + 1]);
+		}
 	}
 	
 	private void handleChatUpdate(String[] msgParts) {
@@ -136,6 +148,10 @@ public class GameClient extends Client {
 			}
 		}
 		return null;
+	}
+	
+	public MeansOfTransportation[] getTicketsUsedByMisterY() {
+		return ticketsUsedByMisterY;
 	}
 
 	public int getErrorCode() {

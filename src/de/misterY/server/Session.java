@@ -16,6 +16,7 @@ public class Session {
 	private boolean gameStarted = false;
 	private int round = 1;
 	private ArrayList<User> users = new ArrayList<User>();
+	private ArrayList<MeansOfTransportation> ticketsUsedByMisterY = new ArrayList<MeansOfTransportation>();
 
 	/**
 	 * Creates a new session with the given users
@@ -52,6 +53,10 @@ public class Session {
 	 */
 	public User getCurrentUser() {
 		return users.get(currentUserIndex);
+	}
+	
+	public MeansOfTransportation[] getTicketsUsedByMisterY() {
+		return ticketsUsedByMisterY.toArray(new MeansOfTransportation[ticketsUsedByMisterY.size()]);
 	}
 
 	public Map getMap() {
@@ -150,7 +155,9 @@ public class Session {
 		if (success) {
 			if (user != getMrY()) {
 				getMrY().getPlayer().addTicket(type);
-			} 
+			} else {
+				ticketsUsedByMisterY.add(type);
+			}
 			endTurn();
 		}
 		return success;

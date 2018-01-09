@@ -15,6 +15,7 @@ public final class PROTOCOL {
 				OK = "ok", // Base
 				CHAT_UPDATE = "cupdt", // Base [split] name [split] message
 				INFO_UPDATE = "upinf", // Base [split] name [split] taxi tickets [split] bus tickets [split] underground tickets [split] current station id (-1 if hidden) [split] is mrY
+				USED_TICKETS = "sdtck", // Base [split] tickets used by misterY
 				MAP = "map", // Base [split] map
 				TURN = "yturn", // Base [split] name
 				PLAYER_LEFT = "plleft"; // Base [split] name
