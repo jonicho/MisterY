@@ -62,9 +62,9 @@ public class Session {
 	 * Checks whether all users are ready. If so, sets isActive to true.
 	 */
 	public void checkReady() {
-		if (users.size() < 3) {
-			return;
-		}
+//		if (users.size() < 3) {
+//			return;
+//		}
 
 		if (isActive) {
 			return;
@@ -150,7 +150,7 @@ public class Session {
 		if (success) {
 			if (user != getMrY()) {
 				getMrY().getPlayer().addTicket(type);
-			}
+			} 
 			endTurn();
 		}
 		return success;

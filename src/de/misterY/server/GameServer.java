@@ -1,6 +1,7 @@
 package de.misterY.server;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
@@ -119,9 +120,7 @@ public class GameServer extends Server {
 		}
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,
-					user.getPlayer().getInfoString(!user.getPlayer().isMrY() || session.isMisterYShowing()),
-					user.getPlayer().isMrY() ? type : ""), session);
+			sendInfoUpdate(user, session);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
 					session);
 		} else {
@@ -169,9 +168,45 @@ public class GameServer extends Server {
 	 *            The session to send the message to
 	 */
 	private void sendToSession(String msg, Session session) {
+		sendToSession(msg, session, new ArrayList<>());
+	}
+
+	/**
+	 * Sends a server message to all clients in the given session except the
+	 * excepted users.
+	 * 
+	 * @param msg
+	 *            The message to send
+	 * @param exceptedUsers
+	 *            The excepted users
+	 * @param session
+	 *            The session to send the message to
+	 */
+	private void sendToSession(String msg, Session session, ArrayList<User> exceptedUsers) {
 		for (User user : session.getAllUsers()) {
-			sendToUser(msg, user);
+			if (!exceptedUsers.contains(user)) {
+				sendToUser(msg, user);
+			}
 		}
+	}
+
+	/**
+	 * Sends a info update of the given user to the given session, also considering
+	 * whether misterY is showing.
+	 * 
+	 * @param user
+	 * @param session
+	 */
+	private void sendInfoUpdate(User user, Session session) {
+		ArrayList<User> exceptedUsers = new ArrayList<>();
+		if (user.getPlayer().isMrY()) {
+			exceptedUsers.add(user);
+			sendToUser(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString(true)), user);
+		}
+		sendToSession(
+				PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE,
+						user.getPlayer().getInfoString(!user.getPlayer().isMrY() || session.isMisterYShowing())),
+				session, exceptedUsers);
 	}
 
 	/**
@@ -191,9 +226,10 @@ public class GameServer extends Server {
 			session.prepareGame(MapLoader.loadMap(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, session.getMap().getMapString()), session);
 			for (User user : session.getAllUsers()) {
-				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.INFO_UPDATE, user.getPlayer().getInfoString(!user.getPlayer().isMrY() || session.isMisterYShowing())), session);
+				sendInfoUpdate(user, session);
 			}
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()), session);
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
+					session);
 		}
 	}
 }
