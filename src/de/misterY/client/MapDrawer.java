@@ -164,9 +164,11 @@ public class MapDrawer {
 					continue outer;
 				}
 			}
-			ArrayList<Player> newList = new ArrayList<Player>();
-			newList.add(player);
-			playerListList.add(newList);
+			if (player.getCurrentStation() != null) {
+				ArrayList<Player> newList = new ArrayList<Player>();
+				newList.add(player);
+				playerListList.add(newList);
+			}
 		}
 		for (ArrayList<Player> arrayList : playerListList) {
 			for (int i = 0; i < arrayList.size(); i++) {
