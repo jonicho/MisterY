@@ -158,7 +158,9 @@ public class MapDrawer {
 		outer: for (Player player : players) {
 			for (ArrayList<Player> arrayList : playerListList) {
 				if (arrayList.get(0).getCurrentStation() == player.getCurrentStation()) {
-					arrayList.add(player);
+					if (player.getCurrentStation() != null) {
+						arrayList.add(player);
+					}
 					continue outer;
 				}
 			}
