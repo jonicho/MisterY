@@ -38,6 +38,10 @@ public class Session {
 		}
 		return null;
 	}
+	
+	public int getRound() {
+		return round;
+	}
 
 	/**
 	 * @return Whether misterY is showing.

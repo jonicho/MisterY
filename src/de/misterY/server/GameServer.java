@@ -121,7 +121,7 @@ public class GameServer extends Server {
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
 			sendInfoUpdate(user, session);
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName(), session.getRound()),
 					session);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.USED_TICKETS,
 					PROTOCOL.buildMessage((Object[]) session.getTicketsUsedByMisterY())), session);
@@ -230,7 +230,7 @@ public class GameServer extends Server {
 			for (User user : session.getAllUsers()) {
 				sendInfoUpdate(user, session);
 			}
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName()),
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName(), session.getRound()),
 					session);
 		}
 	}

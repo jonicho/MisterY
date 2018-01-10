@@ -20,6 +20,7 @@ public class GameClient extends Client {
 	private ChatHandler chatHandler = new ChatHandler();
 	private int errorCode;
 	private boolean started;
+	private int round;
 
 	public GameClient() {
 		super(PROTOCOL.IP, PROTOCOL.PORT);
@@ -113,6 +114,7 @@ public class GameClient extends Client {
 			p.setTurn(false);
 		}
 		player.setTurn(true);
+		round = Integer.parseInt(msgParts[2]);
 	}
 
 	public ArrayList<Player> getPlayers() {
@@ -148,6 +150,10 @@ public class GameClient extends Client {
 			}
 		}
 		return null;
+	}
+	
+	public int getRound() {
+		return round;
 	}
 	
 	public MeansOfTransportation[] getTicketsUsedByMisterY() {

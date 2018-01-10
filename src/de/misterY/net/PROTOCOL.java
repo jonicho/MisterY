@@ -17,7 +17,7 @@ public final class PROTOCOL {
 				INFO_UPDATE = "upinf", // Base [split] name [split] taxi tickets [split] bus tickets [split] underground tickets [split] current station id (-1 if hidden) [split] is mrY
 				USED_TICKETS = "sdtck", // Base [split] tickets used by misterY
 				MAP = "map", // Base [split] map
-				TURN = "yturn", // Base [split] name
+				TURN = "turn", // Base [split] name [split] round
 				PLAYER_LEFT = "plleft"; // Base [split] name
 	}
 
