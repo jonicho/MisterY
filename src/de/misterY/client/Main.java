@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -393,7 +394,18 @@ public class Main {
 	 * Updates the rounds table.
 	 */
 	private void updateRoundsTable() {
-		// TODO
+		if (gameClient.getMap() == null) {
+			return;
+		}
+		MeansOfTransportation[] ticketsUsed = gameClient.getTicketsUsedByMisterY();
+		String[] columnNames = { "Round", "MisterY shows", "Ticket used by MisterY" };
+		String[][] data = new String[gameClient.getMap().getRounds()][3];
+		for (int i = 0; i < gameClient.getMap().getRounds(); i++) {
+			data[i][0] = (i + 1) + "";
+			data[i][1] = Arrays.binarySearch(gameClient.getMap().getShowRounds(), i + 1) >= 0 ? "X" : "";
+			data[i][2] = ticketsUsed.length > i ? ticketsUsed[i] + "" : "";
+		}
+		roundsTable.setModel(new DefaultTableModel(data, columnNames));
 	}
 
 	/**
