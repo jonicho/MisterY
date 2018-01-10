@@ -79,7 +79,6 @@ public class PathFinder {
 	 * @return
 	 */
 	private static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation, ArrayList<Station> consideredStations) {
-		System.out.println(start.getId());
 		if (!end.isMeansOfTransportation(meansOfTransportation)) {
 			return false;
 		}
