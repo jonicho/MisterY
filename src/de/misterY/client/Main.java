@@ -405,7 +405,37 @@ public class Main {
 			data[i][1] = Arrays.binarySearch(gameClient.getMap().getShowRounds(), i + 1) >= 0 ? "X" : "";
 			data[i][2] = ticketsUsed.length > i ? ticketsUsed[i] + "" : "";
 		}
+		int round = gameClient.getRound() - 1;
 		roundsTable.setModel(new DefaultTableModel(data, columnNames));
+		roundsTable.setRowSelectionInterval(round, round);
+		for (MouseListener l : roundsTable.getMouseListeners()) {
+			roundsTable.removeMouseListener(l);
+		}
+		final int index = round;
+		roundsTable.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				roundsTable.setRowSelectionInterval(index, index);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				roundsTable.setRowSelectionInterval(index, index);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 	}
 
 	/**

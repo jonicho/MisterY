@@ -20,7 +20,7 @@ public class GameClient extends Client {
 	private ChatHandler chatHandler = new ChatHandler();
 	private int errorCode;
 	private boolean started;
-	private int round;
+	private int round = 1;
 
 	public GameClient() {
 		super(PROTOCOL.IP, PROTOCOL.PORT);
