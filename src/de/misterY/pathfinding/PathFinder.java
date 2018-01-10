@@ -56,6 +56,31 @@ public class PathFinder {
 	}
 
 	/**
+	 * Returns the possible means of transportation with which the end station can
+	 * be reached from the start station.
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static MeansOfTransportation[] getPossibleMeansOfTransportation(Station start, Station end) {
+		int count = 0;
+		MeansOfTransportation[] values = MeansOfTransportation.values();
+		MeansOfTransportation[] possibleMOT = new MeansOfTransportation[values.length];
+		for (int i = 0; i < values.length; i++) {
+			if (isReachable(start, end, values[i])) {
+				possibleMOT[count] = values[i];
+				count++;
+			}
+		}
+		MeansOfTransportation[] result = new MeansOfTransportation[count];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = possibleMOT[i];
+		}
+		return result;
+	}
+
+	/**
 	 * Returns whether the end station is reachable from the start station with the
 	 * given means of transportation in one turn.
 	 * 
@@ -65,12 +90,16 @@ public class PathFinder {
 	 * @return
 	 */
 	public static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation) {
+		if (!start.isMeansOfTransportation(meansOfTransportation)) {
+			return false;
+		}
 		return isReachable(start, end, meansOfTransportation, new ArrayList<Station>());
 	}
-	
+
 	/**
 	 * Returns whether the end station is reachable from the start station with the
-	 * given means of transportation in one turn, not considering the given considered stations.
+	 * given means of transportation in one turn, not considering the given
+	 * considered stations.
 	 * 
 	 * @param start
 	 * @param end
@@ -78,7 +107,8 @@ public class PathFinder {
 	 * @param consideredStations
 	 * @return
 	 */
-	private static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation, ArrayList<Station> consideredStations) {
+	private static boolean isReachable(Station start, Station end, MeansOfTransportation meansOfTransportation,
+			ArrayList<Station> consideredStations) {
 		if (!end.isMeansOfTransportation(meansOfTransportation)) {
 			return false;
 		}
@@ -108,7 +138,7 @@ public class PathFinder {
 			}
 		}
 		return result;
-		
+
 	}
 
 	/**

@@ -87,8 +87,7 @@ public class Player {
 	 * @return True if movement is valid, false otherwise
 	 */
 	public boolean validateMovement(Station end, MeansOfTransportation type) {
-		return currentStation.isMeansOfTransportation(type) && hasEnoughTickets(type)
-				&& PathFinder.isReachable(currentStation, end, type);
+		return hasEnoughTickets(type) && PathFinder.isReachable(currentStation, end, type);
 	}
 
 	/**

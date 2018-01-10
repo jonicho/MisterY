@@ -33,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
 import de.misterY.net.PROTOCOL;
+import de.misterY.pathfinding.PathFinder;
 
 public class Main {
 
@@ -317,13 +318,19 @@ public class Main {
 						"It is not your turn!", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
-			MeansOfTransportation selection = (MeansOfTransportation) JOptionPane.showInputDialog(frame,
-					"Choose a means of transportation", "", JOptionPane.QUESTION_MESSAGE, null,
-					MeansOfTransportation.values(), MeansOfTransportation.Taxi);
-			if (selection == null) { // user canceled
-				return;
+			MeansOfTransportation[] possibleMOT = PathFinder.getPossibleMeansOfTransportation(
+					gameClient.getPlayerByName(ownName).getCurrentStation(), canvas.getHoveredStation());
+			MeansOfTransportation selection = null;
+			if (possibleMOT.length != 0) {
+				selection = (MeansOfTransportation) JOptionPane.showInputDialog(frame,
+						"Choose a means of transportation", "", JOptionPane.QUESTION_MESSAGE, null, possibleMOT,
+						possibleMOT[0]);
+				if (selection == null) { // user canceled
+					return;
+				}
 			}
-			if (!gameClient.getPlayerByName(ownName).validateMovement(canvas.getHoveredStation(), selection)) {
+			if (possibleMOT.length == 0
+					|| !gameClient.getPlayerByName(ownName).validateMovement(canvas.getHoveredStation(), selection)) {
 				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!",
 						JOptionPane.ERROR_MESSAGE);
 				return;
