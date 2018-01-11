@@ -18,7 +18,8 @@ public final class PROTOCOL {
 				USED_TICKETS = "sdtck", // Base [split] tickets used by misterY
 				MAP = "map", // Base [split] map
 				TURN = "turn", // Base [split] name [split] round
-				PLAYER_LEFT = "plleft"; // Base [split] name
+				PLAYER_LEFT = "plleft", // Base [split] name
+				WIN = "win"; // Base [split] name
 	}
 
 	public final class CS {

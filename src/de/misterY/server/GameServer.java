@@ -121,10 +121,16 @@ public class GameServer extends Server {
 		if (session.doMovement(user, stationId, type)) {
 			sendToUser(PROTOCOL.SC.OK, user);
 			sendInfoUpdate(user, session);
-			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName(), session.getRound()),
-					session);
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.USED_TICKETS,
 					PROTOCOL.buildMessage((Object[]) session.getTicketsUsedByMisterY())), session);
+			if(session.getWinner() != null) {
+				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.WIN, user.getPlayer().getName()), session);
+			} else {
+				sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName(), session.getRound()),
+						session);
+			}
+			
+			
 		} else {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MOVEMENT), user);
 		}

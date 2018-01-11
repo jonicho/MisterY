@@ -21,6 +21,7 @@ public class GameClient extends Client {
 	private int errorCode;
 	private boolean started;
 	private int round = 1;
+	private Player winner = null;
 
 	public GameClient() {
 		super(PROTOCOL.IP, PROTOCOL.PORT);
@@ -57,7 +58,9 @@ public class GameClient extends Client {
 			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
-
+			break;
+		case PROTOCOL.SC.WIN:
+			handleWin(msgParts);
 			break;
 
 		default:
@@ -66,6 +69,10 @@ public class GameClient extends Client {
 		if (updateRunnable != null) {
 			updateRunnable.run();
 		}
+	}
+
+	private void handleWin(String[] msgParts) {
+		winner = getPlayerByName(msgParts[1]);
 	}
 
 	private void handleInfoUpdate(String[] msgParts) {
@@ -186,5 +193,9 @@ public class GameClient extends Client {
 
 	public boolean isStarted() {
 		return started;
+	}
+	
+	public Player getWinner() {
+		return winner;
 	}
 }

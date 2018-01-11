@@ -17,6 +17,7 @@ public class Session {
 	private int round = 1;
 	private ArrayList<User> users = new ArrayList<User>();
 	private ArrayList<MeansOfTransportation> ticketsUsedByMisterY = new ArrayList<MeansOfTransportation>();
+	private User winner = null;
 
 	/**
 	 * Creates a new session with the given users
@@ -65,6 +66,10 @@ public class Session {
 
 	public Map getMap() {
 		return map;
+	}
+	
+	public User getWinner() {
+		return winner;
 	}
 
 	/**
@@ -162,8 +167,15 @@ public class Session {
 			} else {
 				ticketsUsedByMisterY.add(type);
 			}
+			if(!user.getPlayer().isMrY() && user.getPlayer().getCurrentStation().getId() == getMrY().getPlayer().getCurrentStation().getId()) {
+				winner = user;
+			}
+			if(round >= map.getRounds()) {
+				winner = getMrY();
+			}
 			endTurn();
 		}
+		
 		return success;
 	}
 
