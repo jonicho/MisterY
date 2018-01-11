@@ -88,7 +88,8 @@ public class AI {
 			moveState = 5;
 			return;
 		}
-		if (PathFinder.findPathToNearestStation(localPlayer.getCurrentStation(), MeansOfTransportation.Underground).getStations().size() - 1 <= 3) {
+		if (PathFinder.findPathToNearestStation(localPlayer.getCurrentStation(), MeansOfTransportation.Underground)
+				.getStations().size() - 1 <= 3) {
 			moveState = 4;
 			return;
 		}

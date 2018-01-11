@@ -58,8 +58,7 @@ public class Station {
 	 * @return Whether the given means of transportation can stop at this station
 	 */
 	public boolean isMeansOfTransportation(MeansOfTransportation type) {
-		return (type.equals(MeansOfTransportation.Taxi))
-				|| (type.equals(MeansOfTransportation.Bus) && isBus())
+		return (type.equals(MeansOfTransportation.Taxi)) || (type.equals(MeansOfTransportation.Bus) && isBus())
 				|| (type.equals(MeansOfTransportation.Underground) && isUnderground());
 	}
 

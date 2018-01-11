@@ -137,7 +137,7 @@ public class Vector2D {
 		y = sin * ox + cos * oy;
 		return this;
 	}
-	
+
 	/**
 	 * Returns the distance between this vector and the given vector
 	 * 

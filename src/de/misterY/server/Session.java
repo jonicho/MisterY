@@ -39,7 +39,7 @@ public class Session {
 		}
 		return null;
 	}
-	
+
 	public int getRound() {
 		return round;
 	}
@@ -59,7 +59,7 @@ public class Session {
 	public User getCurrentUser() {
 		return users.get(currentUserIndex);
 	}
-	
+
 	public MeansOfTransportation[] getTicketsUsedByMisterY() {
 		return ticketsUsedByMisterY.toArray(new MeansOfTransportation[ticketsUsedByMisterY.size()]);
 	}
@@ -67,7 +67,7 @@ public class Session {
 	public Map getMap() {
 		return map;
 	}
-	
+
 	public User getWinner() {
 		return winner;
 	}
@@ -168,14 +168,14 @@ public class Session {
 				ticketsUsedByMisterY.add(type);
 			}
 			endTurn();
-			if(!user.getPlayer().isMrY() && user.getPlayer().getCurrentStation().getId() == getMrY().getPlayer().getCurrentStation().getId()) {
+			if (!user.getPlayer().isMrY() && user.getPlayer().getCurrentStation().getId() == getMrY().getPlayer()
+					.getCurrentStation().getId()) {
 				winner = user;
 			}
-			if(round > map.getRounds()) {
+			if (round > map.getRounds()) {
 				winner = getMrY();
 			}
 		}
-		
 		return success;
 	}
 

@@ -30,7 +30,7 @@ public class Link {
 	public Station getStation() {
 		return station;
 	}
-	
+
 	/**
 	 * @return Whether a taxi can use this link
 	 */

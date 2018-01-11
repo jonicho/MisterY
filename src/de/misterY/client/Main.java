@@ -28,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import de.misterY.MeansOfTransportation;
@@ -79,7 +80,7 @@ public class Main {
 		frame = new JFrame();
 		updateTitle("");
 		frame.setBounds(100, 100, 1080, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 
 		JPanel panel_1 = new JPanel();
@@ -273,11 +274,12 @@ public class Main {
 			canvas.repaint();
 			updatePlayersTable();
 			updateRoundsTable();
-				if(gameClient.getWinner().isMrY()) {
 			if (gameClient.getWinner() != null) {
+				if (gameClient.getWinner().isMrY()) {
 					JOptionPane.showMessageDialog(frame, "MisterY won the game!");
 				} else {
-					JOptionPane.showMessageDialog(frame, "The detectives won the game - " + gameClient.getWinner().getName() + " found MisterY!");
+					JOptionPane.showMessageDialog(frame,
+							"The detectives won the game - " + gameClient.getWinner().getName() + " found MisterY!");
 				}
 			}
 		});

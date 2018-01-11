@@ -37,9 +37,11 @@ public class MapDrawer {
 			drawLinks(g, station);
 		}
 		for (Station station : map.getStations()) {
-			if (station != hoveredStation) drawStation(g, station);
+			if (station != hoveredStation)
+				drawStation(g, station);
 		}
-		if (hoveredStation != null) drawStation(g, hoveredStation);
+		if (hoveredStation != null)
+			drawStation(g, hoveredStation);
 	}
 
 	/**
@@ -210,7 +212,7 @@ public class MapDrawer {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
+
 	public void setHoveredStation(Station hoveredStation) {
 		this.hoveredStation = hoveredStation;
 	}

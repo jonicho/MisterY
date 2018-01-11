@@ -103,14 +103,14 @@ public class Map {
 		}
 		return initialTickets[index];
 	}
-	
+
 	/**
 	 * @return The number of rounds.
 	 */
 	public int getRounds() {
 		return rounds;
 	}
-	
+
 	/**
 	 * @return The rounds in which misterY shows himself.
 	 */

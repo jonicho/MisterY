@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 import de.misterY.MapLoader;
 import de.misterY.client.Canvas;
@@ -51,7 +52,7 @@ public class Main {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1080, 720);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 
 		JPanel panel_1 = new JPanel();

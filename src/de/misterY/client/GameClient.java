@@ -99,14 +99,14 @@ public class GameClient extends Client {
 		player.setCurrentStation(map.getStationById(currentStationId));
 		player.setMrY(isMrY);
 	}
-	
+
 	private void handleUsedTickets(String[] msgParts) {
 		ticketsUsedByMisterY = new MeansOfTransportation[msgParts.length - 1];
 		for (int i = 0; i < msgParts.length - 1; i++) {
 			ticketsUsedByMisterY[i] = MeansOfTransportation.valueOf(msgParts[i + 1]);
 		}
 	}
-	
+
 	private void handleChatUpdate(String[] msgParts) {
 		chatHandler.addMessage(getPlayerByName(msgParts[1]), msgParts[2]);
 		if (chatRunnable != null) {
@@ -162,11 +162,11 @@ public class GameClient extends Client {
 		}
 		return null;
 	}
-	
+
 	public int getRound() {
 		return round;
 	}
-	
+
 	public MeansOfTransportation[] getTicketsUsedByMisterY() {
 		return ticketsUsedByMisterY;
 	}
@@ -174,7 +174,7 @@ public class GameClient extends Client {
 	public int getErrorCode() {
 		return errorCode;
 	}
-	
+
 	public ChatHandler getChatHandler() {
 		return chatHandler;
 	}
@@ -186,7 +186,7 @@ public class GameClient extends Client {
 	public void setErrorRunnable(Runnable errorRunnable) {
 		this.errorRunnable = errorRunnable;
 	}
-	
+
 	public void setChatRunnable(Runnable chatRunnable) {
 		this.chatRunnable = chatRunnable;
 	}
@@ -198,11 +198,11 @@ public class GameClient extends Client {
 	public boolean isStarted() {
 		return started;
 	}
-	
+
 	public Player getWinner() {
 		return winner;
 	}
-	
+
 	public boolean isFinished() {
 		return finished;
 	}
