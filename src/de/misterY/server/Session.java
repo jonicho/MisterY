@@ -167,13 +167,13 @@ public class Session {
 			} else {
 				ticketsUsedByMisterY.add(type);
 			}
+			endTurn();
 			if(!user.getPlayer().isMrY() && user.getPlayer().getCurrentStation().getId() == getMrY().getPlayer().getCurrentStation().getId()) {
 				winner = user;
 			}
-			if(round >= map.getRounds()) {
+			if(round > map.getRounds()) {
 				winner = getMrY();
 			}
-			endTurn();
 		}
 		
 		return success;
