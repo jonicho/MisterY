@@ -141,7 +141,7 @@ public class MapDrawer {
 		g.drawRoundRect(x - size, y - size / 2, size * 2, size, arc, arc);
 
 		g.setColor(Color.BLACK);
-		drawCenteredString(g, station.getId() + "", x, y, (float) (sizeFactor * 10));
+		drawCenteredString(g, station.getId() + "", x, y, (float) (sizeFactor * 10), null);
 	}
 
 	/**
@@ -173,17 +173,19 @@ public class MapDrawer {
 			}
 		}
 		for (ArrayList<Player> arrayList : playerListList) {
+			double sizeFactor = arrayList.get(0).getCurrentStation() == hoveredStation ? 1.5 : 1;
 			for (int i = 0; i < arrayList.size(); i++) {
 				Player player = arrayList.get(i);
 				drawCenteredString(g, player.getName(), player.getCurrentStation().getPos().getDrawX(width),
-						player.getCurrentStation().getPos().getDrawY(height) + (i + 1) * g.getFontMetrics().getHeight(),
-						(float) (0.01 * avgSize));
+						(int) (player.getCurrentStation().getPos().getDrawY(height) + (i + 1) * 17 * sizeFactor),
+						(float) (0.01 * avgSize * sizeFactor), new Color(1, 1, 1, 0.8f));
 			}
 		}
 	}
 
 	/**
-	 * Draws the given string onto the given graphics
+	 * Draws the given string onto the given graphics with the given background
+	 * color. If the background color is null, no background will be drawn.
 	 * 
 	 * @param g
 	 *            The graphics to draw the string on
@@ -193,11 +195,18 @@ public class MapDrawer {
 	 *            The center-x-coordinate
 	 * @param y
 	 *            The center-y-coordinate
+	 * @param background
 	 */
-	private void drawCenteredString(Graphics2D g, String string, int x, int y, float size) {
+	private void drawCenteredString(Graphics2D g, String string, int x, int y, float size, Color background) {
 		g.setFont(g.getFont().deriveFont(size));
 		int width = g.getFontMetrics().stringWidth(string);
 		int height = g.getFontMetrics().getHeight();
+		Color colorSave = g.getColor();
+		if (background != null) {
+			g.setColor(background);
+			g.fillRect(x - width / 2, y - height / 2, width, height);
+		}
+		g.setColor(colorSave);
 		g.drawString(string, x - width / 2, y - height / 2 + g.getFontMetrics().getAscent());
 	}
 
