@@ -14,8 +14,12 @@ public class ChatHandler {
 	public String getChatString() {
 		String result = "<html>";
 		for (ChatMessage chatMessage : messages) {
-			result += "<strong>" + chatMessage.getPlayer().getName() + ":</strong> " + chatMessage.getMessage()
-					+ "<br>";
+			result += "<strong>";
+			result += chatMessage.getPlayer().getName();
+			if (chatMessage.getPlayer().isMrY()) result += " <em>[MisterY]</em>";
+			result += ":</strong> ";
+			result += chatMessage.getMessage();
+			result += "<br>";
 		}
 		result += "</html>";
 		return result;
