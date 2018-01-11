@@ -140,7 +140,7 @@ public class Canvas extends JPanel {
 				closestStation = station;
 			}
 		}
-		if (shortestDistance < 0.02) {
+		if (shortestDistance < 0.015) {
 			hoveredStation = closestStation;
 		} else {
 			hoveredStation = null;
