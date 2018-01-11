@@ -273,8 +273,8 @@ public class Main {
 			canvas.repaint();
 			updatePlayersTable();
 			updateRoundsTable();
-			if (gameClient.getWinner() != null && !gameClient.isFinished()) {
 				if(gameClient.getWinner().isMrY()) {
+			if (gameClient.getWinner() != null) {
 					JOptionPane.showMessageDialog(frame, "MisterY won the game!");
 				} else {
 					JOptionPane.showMessageDialog(frame, "The detectives won the game - " + gameClient.getWinner().getName() + " found MisterY!");
@@ -315,6 +315,9 @@ public class Main {
 
 	private void createStationClickedRunnable() {
 		canvas.setStationClickedRunnable(() -> {
+			if (gameClient.isFinished()) {
+				return;
+			}
 			if (!gameClient.isStarted()) {
 				JOptionPane.showMessageDialog(frame, "The game has not started yet!", "The game has not started yet!",
 						JOptionPane.INFORMATION_MESSAGE);

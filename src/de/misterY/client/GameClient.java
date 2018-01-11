@@ -67,7 +67,7 @@ public class GameClient extends Client {
 		default:
 			break;
 		}
-		if (updateRunnable != null) {
+		if (updateRunnable != null && !finished) {
 			updateRunnable.run();
 			if (winner != null) {
 				finished = true;
