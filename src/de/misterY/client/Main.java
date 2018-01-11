@@ -273,7 +273,7 @@ public class Main {
 			canvas.repaint();
 			updatePlayersTable();
 			updateRoundsTable();
-			if (gameClient.getWinner() != null) {
+			if (gameClient.getWinner() != null && !gameClient.isFinished()) {
 				if(gameClient.getWinner().isMrY()) {
 					JOptionPane.showMessageDialog(frame, "MisterY won the game!");
 				} else {

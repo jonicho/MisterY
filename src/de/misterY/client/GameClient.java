@@ -22,6 +22,7 @@ public class GameClient extends Client {
 	private boolean started;
 	private int round = 1;
 	private Player winner = null;
+	private boolean finished;
 
 	public GameClient() {
 		super(PROTOCOL.IP, PROTOCOL.PORT);
@@ -68,6 +69,9 @@ public class GameClient extends Client {
 		}
 		if (updateRunnable != null) {
 			updateRunnable.run();
+			if (winner != null) {
+				finished = true;
+			}
 		}
 	}
 
@@ -197,5 +201,9 @@ public class GameClient extends Client {
 	
 	public Player getWinner() {
 		return winner;
+	}
+	
+	public boolean isFinished() {
+		return finished;
 	}
 }
