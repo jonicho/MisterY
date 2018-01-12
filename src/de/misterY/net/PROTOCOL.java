@@ -5,8 +5,7 @@ public final class PROTOCOL {
 
 	public static final String IP = "localhost";
 	public static final int PORT = 54699;
-	//public static final String SPLIT = "\u2063"; // U+2063: Invisible separator
-	public static final String SPLIT = ":";
+	public static final String SPLIT = "\u2063"; // U+2063: Invisible separator
 
 	public final class SC {
 		private SC() {}
