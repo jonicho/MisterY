@@ -540,6 +540,8 @@ public class Main {
 		btnSend.setText(LANGUAGE.SEND);
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
 		
+		updatePlayersTable();
+		updateRoundsTable();
 	}
 	
 }
