@@ -252,9 +252,9 @@ public final class LANGUAGE {
 					MISTERYWON = "MisterY hat das Spiel gewonnen",
 					DETECTIVESWON = "Die Detektive haben das Spiel gewonnen",
 					FOUNDMISTERY = "hat MisterY gefunden",
-					USERNAMEALREADYINUSE = "Dieser Nutzername wird bereits verwendet! Bitte wähle einen anderen",
-					MOVEMENTISINVALID = "Dieser Spielzug ist ungültig!",
-					INVALIDMOVEMENT = "Ungültiger Spielzug!",
+					USERNAMEALREADYINUSE = "Dieser Nutzername wird bereits verwendet! Bitte w\u00e4hle einen anderen",
+					MOVEMENTISINVALID = "Dieser Spielzug ist ung\u00fcltig!",
+					INVALIDMOVEMENT = "Ung\u00fcltiger Spielzug!",
 					ERROROCURRED = "Ein Fehler ist aufgetreten",
 					ERRORCODE = "Fehlercode:",
 					ERROR = "Fehler",
@@ -262,7 +262,7 @@ public final class LANGUAGE {
 					ITIS = "Es ist",
 					PLAYERSTURN = "an der Reihe!",
 					NOTYOURTURN = "Du bist nicht dran!",
-					CHOOSEMEANSOFTRANSPORTATION = "Wähle ein Transportmittel",
+					CHOOSEMEANSOFTRANSPORTATION = "W\u00e4hle ein Transportmittel",
 					NAME = "Name",
 					TAXITICKETS = "Taxi Tickets",
 					BUSTICKETS = "Bus Tickets",
@@ -274,7 +274,7 @@ public final class LANGUAGE {
 					MISTERYUSEDTICKETS = "Ticket von MisterY genutzt",
 					ALREADYLOGGEDIN = "Du bist bereits eingeloggt!",
 					CONNECTIONNEEDED = "Du musst mit dem Server verbunden sein!",
-					ENTERUSERNAME = "Wähle einen Nutzernamen:",
+					ENTERUSERNAME = "W\u00e4hle einen Nutzernamen:",
 					LOGGEDIN = "Eingeloggt.";
 
 	}
