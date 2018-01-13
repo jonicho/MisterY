@@ -3,8 +3,11 @@ package de.misterY;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,8 +29,23 @@ public class MapLoader {
 	 */
 	public static Map loadMap(File mapFile) {
 		try {
+			return loadMap(new FileInputStream(mapFile));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Loads a map from the given input stream.
+	 * 
+	 * @param inputStream
+	 * @return The map. null if an error occurred.
+	 */
+	public static Map loadMap(InputStream inputStream) {
+		try {
 			String mapString = "";
-			BufferedReader bf = new BufferedReader(new FileReader(mapFile));
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
 			String line;
 			while ((line = bf.readLine()) != null) {
 				mapString += line;

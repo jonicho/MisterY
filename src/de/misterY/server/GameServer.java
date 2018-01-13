@@ -1,6 +1,5 @@
 package de.misterY.server;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import de.misterY.MapLoader;
@@ -231,7 +230,8 @@ public class GameServer extends Server {
 		u.getPlayer().setReady(true);
 		session.checkReady();
 		if (session.isActive()) {
-			session.prepareGame(MapLoader.loadMap(new File("src/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
+			session.prepareGame(
+					MapLoader.loadMap(getClass().getResourceAsStream("/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, session.getMap().getMapString()), session);
 			for (User user : session.getAllUsers()) {
 				sendInfoUpdate(user, session);
