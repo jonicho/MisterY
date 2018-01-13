@@ -88,7 +88,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		LANGUAGE.loadLanguage(LANGUAGE.ENG);
+		LANGUAGE.loadLanguage(LANGUAGE.EN);
 		
 		
 		frame = new JFrame();
@@ -131,7 +131,7 @@ public class Main {
 		mntmEnglish = new JMenuItem(LANGUAGE.STR_ENGLISH);
 		mntmEnglish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				updateLanguage(LANGUAGE.ENG);
+				updateLanguage(LANGUAGE.EN);
 			}
 		});
 		mnLanguage.add(mntmEnglish);
@@ -139,7 +139,7 @@ public class Main {
 		mntmGerman = new JMenuItem(LANGUAGE.STR_GERMAN);
 		mntmGerman.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				updateLanguage(LANGUAGE.GER);
+				updateLanguage(LANGUAGE.DE);
 			}
 		});
 		mnLanguage.add(mntmGerman);

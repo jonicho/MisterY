@@ -2,7 +2,7 @@ package de.misterY.language;
 
 public final class LANGUAGE {
 
-	public static final String ENG = "en", GER = "de";
+	public static final String EN = "en", DE = "de";
 
 	public static String LOGIN,
 				OPTIONS,
@@ -50,7 +50,7 @@ public final class LANGUAGE {
 	public static void loadLanguage(String lang) {
 		switch (lang) {
 
-		case LANGUAGE.ENG:
+		case LANGUAGE.EN:
 			LOGIN = LANGUAGE.ENGLISH.LOGIN;
 			OPTIONS = LANGUAGE.ENGLISH.OPTIONS;
 			READY = LANGUAGE.ENGLISH.READY;
@@ -95,7 +95,7 @@ public final class LANGUAGE {
 			
 			break;
 
-		case LANGUAGE.GER:
+		case LANGUAGE.DE:
 			LOGIN = LANGUAGE.GERMAN.LOGIN;
 			OPTIONS = LANGUAGE.GERMAN.OPTIONS;
 			READY = LANGUAGE.GERMAN.READY;
