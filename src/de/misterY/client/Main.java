@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -88,7 +89,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		LANGUAGE.loadLanguage(LANGUAGE.EN);
+		LANGUAGE.loadLanguage(Locale.getDefault().getLanguage());
 		
 		
 		frame = new JFrame();
