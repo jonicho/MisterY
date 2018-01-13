@@ -33,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
+import de.misterY.language.LANGUAGE;
 import de.misterY.net.PROTOCOL;
 import de.misterY.pathfinding.PathFinder;
 
@@ -48,6 +49,16 @@ public class Main {
 	private JTextPane chatTextPane;
 	private JScrollPane scrollPane;
 	private JTable roundsTable;
+	private JMenu mnOptions;
+	private JMenuItem mntmReady;
+	private JMenu mnLanguage;
+	private JMenuItem mntmEnglish;
+	private JMenuItem mntmGerman;
+	private JMenuItem mntmLogin;
+	private JLabel lblChat;
+	private JLabel lblRoundsInfo;
+	private JButton btnSend;
+	private JLabel lblPlayerInfo;
 
 	/**
 	 * Launch the application.
@@ -77,6 +88,9 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		LANGUAGE.loadLanguage(LANGUAGE.ENG);
+		
+		
 		frame = new JFrame();
 		updateTitle("");
 		frame.setBounds(100, 100, 1080, 720);
@@ -90,10 +104,10 @@ public class Main {
 		JMenuBar menuBar = new JMenuBar();
 		panel_1.add(menuBar, BorderLayout.NORTH);
 
-		JMenu mnOptions = new JMenu("Options");
+		mnOptions = new JMenu(LANGUAGE.OPTIONS);
 		menuBar.add(mnOptions);
 
-		JMenuItem mntmLogin = new JMenuItem("Login");
+		mntmLogin = new JMenuItem(LANGUAGE.LOGIN);
 		mntmLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,7 +116,7 @@ public class Main {
 		});
 		mnOptions.add(mntmLogin);
 
-		JMenuItem mntmReady = new JMenuItem("Ready");
+		mntmReady = new JMenuItem(LANGUAGE.READY);
 		mntmReady.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +124,25 @@ public class Main {
 			}
 		});
 		mnOptions.add(mntmReady);
+		
+		mnLanguage = new JMenu(LANGUAGE.STR_LANGUAGE);
+		menuBar.add(mnLanguage);
+		
+		mntmEnglish = new JMenuItem(LANGUAGE.STR_ENGLISH);
+		mntmEnglish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				updateLanguage(LANGUAGE.ENG);
+			}
+		});
+		mnLanguage.add(mntmEnglish);
+		
+		mntmGerman = new JMenuItem(LANGUAGE.STR_GERMAN);
+		mntmGerman.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateLanguage(LANGUAGE.GER);
+			}
+		});
+		mnLanguage.add(mntmGerman);
 
 		JSplitPane splitPane = new JSplitPane();
 		panel_1.add(splitPane, BorderLayout.CENTER);
@@ -141,7 +174,7 @@ public class Main {
 		playersTable.setDefaultEditor(Object.class, null);
 		playersTable.setFocusable(false);
 
-		JLabel lblChat = new JLabel("Chat:");
+		lblChat = new JLabel(LANGUAGE.CHAT + ":");
 		lblChat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChat.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblChat = new GridBagConstraints();
@@ -149,7 +182,7 @@ public class Main {
 		gbc_lblChat.gridy = 2;
 		panel.add(lblChat, gbc_lblChat);
 
-		JLabel lblRoundsInfo = new JLabel("Rounds info:");
+		lblRoundsInfo = new JLabel(LANGUAGE.ROUNDSINFO + ":");
 		lblRoundsInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoundsInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblRoundsInfo = new GridBagConstraints();
@@ -198,7 +231,7 @@ public class Main {
 		panel_4.add(chatTextField);
 		chatTextField.setColumns(10);
 
-		JButton btnSend = new JButton("Send");
+		btnSend = new JButton(LANGUAGE.SEND);
 		btnSend.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -207,7 +240,7 @@ public class Main {
 		});
 		panel_4.add(btnSend, BorderLayout.EAST);
 
-		JLabel lblPlayerInfo = new JLabel("Player info:");
+		lblPlayerInfo = new JLabel(LANGUAGE.PLAYERINFO);
 		GridBagConstraints gbc_lblPlayerInfo = new GridBagConstraints();
 		gbc_lblPlayerInfo.gridwidth = 2;
 		gbc_lblPlayerInfo.fill = GridBagConstraints.BOTH;
@@ -217,7 +250,7 @@ public class Main {
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-		infoLabel = new JLabel("New label");
+		infoLabel = new JLabel("");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
 
 		connect();
@@ -239,18 +272,18 @@ public class Main {
 	private void connect() {
 		new Thread(() -> {
 			infoLabel.setForeground(Color.BLACK);
-			infoLabel.setText("Connecting...");
+			infoLabel.setText(LANGUAGE.CONNECTING + "...");
 			gameClient = new GameClient();
 			if (gameClient.isConnected()) {
-				infoLabel.setText("Connected.");
+				infoLabel.setText(LANGUAGE.CONNECTED + ".");
 				createUpdateRunnable();
 				createErrorRunnable();
 				createChatRunnable();
 				createStationClickedRunnable();
 			} else {
 				infoLabel.setForeground(Color.RED);
-				infoLabel.setText("Connection failed!");
-				int o = JOptionPane.showConfirmDialog(frame, "Connection failed! Retry?", "Connection failed!",
+				infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
+				int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?", LANGUAGE.CONNECTIONFAILED,
 						JOptionPane.YES_NO_OPTION);
 				if (o == JOptionPane.OK_OPTION) {
 					connect();
@@ -276,10 +309,10 @@ public class Main {
 			updateRoundsTable();
 			if (gameClient.getWinner() != null) {
 				if (gameClient.getWinner().isMrY()) {
-					JOptionPane.showMessageDialog(frame, "MisterY won the game!");
+					JOptionPane.showMessageDialog(frame, LANGUAGE.MISTERYWON + "!");
 				} else {
 					JOptionPane.showMessageDialog(frame,
-							"The detectives won the game - " + gameClient.getWinner().getName() + " found MisterY!");
+							LANGUAGE.DETECTIVESWON + " - " + gameClient.getWinner().getName() + " " + LANGUAGE.FOUNDMISTERY + "!");
 				}
 			}
 		});
@@ -294,17 +327,17 @@ public class Main {
 			int errorCode = gameClient.getErrorCode();
 			if (errorCode == PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE) {
 				ownName = null;
-				JOptionPane.showMessageDialog(frame, "This username is already in use! Please take another one.",
+				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAMEALREADYINUSE,
 						"Error", JOptionPane.ERROR_MESSAGE);
 				updateTitle("");
 				login();
 				return;
 			} else if (errorCode == PROTOCOL.ERRORCODES.INVALID_MOVEMENT) {
-				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!",
+				JOptionPane.showMessageDialog(frame, LANGUAGE.MOVEMENTISINVALID, LANGUAGE.INVALIDMOVEMENT,
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			JOptionPane.showMessageDialog(frame, "An error ocurred. Errorcode: " + errorCode, "Error",
+			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode, LANGUAGE.ERROR,
 					JOptionPane.ERROR_MESSAGE);
 		});
 	}
@@ -321,13 +354,13 @@ public class Main {
 				return;
 			}
 			if (!gameClient.isStarted()) {
-				JOptionPane.showMessageDialog(frame, "The game has not started yet!", "The game has not started yet!",
+				JOptionPane.showMessageDialog(frame, LANGUAGE.GAMENOTSTARTEDYET, LANGUAGE.GAMENOTSTARTEDYET,
 						JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			if (!gameClient.getPlayerByName(ownName).isTurn()) {
-				JOptionPane.showMessageDialog(frame, "It is " + gameClient.getCurrentPlayer().getName() + "'s turn!",
-						"It is not your turn!", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(frame, LANGUAGE.ITIS + " " + gameClient.getCurrentPlayer().getName() + LANGUAGE.PLAYERSTURN,
+						LANGUAGE.NOTYOURTURN, JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			MeansOfTransportation[] possibleMOT = PathFinder.getPossibleMeansOfTransportation(
@@ -335,7 +368,7 @@ public class Main {
 			MeansOfTransportation selection = null;
 			if (possibleMOT.length != 0) {
 				selection = (MeansOfTransportation) JOptionPane.showInputDialog(frame,
-						"Choose a means of transportation", "", JOptionPane.QUESTION_MESSAGE, null, possibleMOT,
+						LANGUAGE.CHOOSEMEANSOFTRANSPORTATION, "", JOptionPane.QUESTION_MESSAGE, null, possibleMOT,
 						possibleMOT[0]);
 				if (selection == null) { // user canceled
 					return;
@@ -343,7 +376,7 @@ public class Main {
 			}
 			if (possibleMOT.length == 0
 					|| !gameClient.getPlayerByName(ownName).validateMovement(canvas.getHoveredStation(), selection)) {
-				JOptionPane.showMessageDialog(frame, "This movement is invalid!", "Invalid movement!",
+				JOptionPane.showMessageDialog(frame, LANGUAGE.MOVEMENTISINVALID, LANGUAGE.INVALIDMOVEMENT,
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
@@ -360,7 +393,7 @@ public class Main {
 		if (players.isEmpty()) {
 			return;
 		}
-		String[] columnNames = { "Name", "Taxi tickets", "Bus tickets", "Underground tickets", "MrY", "Turn" };
+		String[] columnNames = { LANGUAGE.NAME, LANGUAGE.TAXITICKETS, LANGUAGE.BUSTICKETS, LANGUAGE.UNDERGROUNDTICKETS, LANGUAGE.MRY, LANGUAGE.TURN };
 		String[][] data = new String[players.size()][6];
 		int thisPlayerIndex = 0;
 		for (int i = 0; i < players.size(); i++) {
@@ -417,7 +450,7 @@ public class Main {
 			return;
 		}
 		MeansOfTransportation[] ticketsUsed = gameClient.getTicketsUsedByMisterY();
-		String[] columnNames = { "Round", "MisterY shows", "Ticket used by MisterY" };
+		String[] columnNames = { LANGUAGE.ROUND, LANGUAGE.MISTERYSHOWS, LANGUAGE.MISTERYUSEDTICKETS };
 		String[][] data = new String[gameClient.getMap().getRounds()][3];
 		for (int i = 0; i < gameClient.getMap().getRounds(); i++) {
 			data[i][0] = (i + 1) + "";
@@ -462,21 +495,21 @@ public class Main {
 	 */
 	private void login() {
 		if (ownName != null) {
-			JOptionPane.showMessageDialog(frame, "You are already logged in!");
+			JOptionPane.showMessageDialog(frame, LANGUAGE.ALREADYLOGGEDIN);
 			return;
 		}
 		if (!gameClient.isConnected()) {
-			JOptionPane.showMessageDialog(frame, "You have to be connected to the server!");
+			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTIONNEEDED);
 			return;
 		}
-		String username = JOptionPane.showInputDialog(frame, "Enter your user name:");
+		String username = JOptionPane.showInputDialog(frame, LANGUAGE.ENTERUSERNAME);
 		if (username == null) {
 			return;
 		}
 		ownName = username;
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
-		infoLabel.setText("Logged in.");
+		infoLabel.setText(LANGUAGE.LOGGEDIN);
 		updateTitle(username);
 	}
 
@@ -492,4 +525,21 @@ public class Main {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
 		chatTextField.setText("");
 	}
+	
+	private void updateLanguage(String lang) {
+		LANGUAGE.loadLanguage(lang);
+		
+		mnOptions.setText(LANGUAGE.OPTIONS);
+		mntmLogin.setText(LANGUAGE.LOGIN);
+		mntmReady.setText(LANGUAGE.READY);
+		mnLanguage.setText(LANGUAGE.STR_LANGUAGE);
+		mntmEnglish.setText(LANGUAGE.STR_ENGLISH);
+		mntmGerman.setText(LANGUAGE.STR_GERMAN);
+		lblChat.setText(LANGUAGE.CHAT + ":");
+		lblRoundsInfo.setText(LANGUAGE.ROUNDSINFO + ":");
+		btnSend.setText(LANGUAGE.SEND);
+		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
+		
+	}
+	
 }
