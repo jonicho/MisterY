@@ -24,8 +24,8 @@ public class GameClient extends Client {
 	private Player winner = null;
 	private boolean finished;
 
-	public GameClient(String ip, int port) {
-		super(ip, port);
+	public GameClient() {
+		super(PROTOCOL.IP, PROTOCOL.PORT);
 	}
 
 	@Override

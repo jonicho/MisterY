@@ -253,7 +253,7 @@ public class Main {
 
 		infoLabel = new JLabel("");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
-		
+
 		connect();
 	}
 
@@ -269,39 +269,28 @@ public class Main {
 
 	/**
 	 * Connects to server using a separate thread to avoid blocking the gui.
-	 * TODO: redesign thread handling to avoid blocking the gui, maybe adding default ip + port @author Jan
 	 */
 	private void connect() {
-		
-		String input = JOptionPane.showInputDialog(frame, LANGUAGE.IPPORT , LANGUAGE.CONNECTING, JOptionPane.PLAIN_MESSAGE);
-		
-		if(isDataCorrect(input)) {
-			String[] data = input.split(":");
-			new Thread(() -> {
-				infoLabel.setForeground(Color.BLACK);
-				infoLabel.setText(LANGUAGE.CONNECTING + "...");
-				gameClient = new GameClient(data[0], Integer.parseInt(data[1]));
-				if (gameClient.isConnected()) {
-					infoLabel.setText(LANGUAGE.CONNECTED + ".");
-					createUpdateRunnable();
-					createErrorRunnable();
-					createChatRunnable();
-					createStationClickedRunnable();
-				} else {
-					infoLabel.setForeground(Color.RED);
-					infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
-					int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?", LANGUAGE.CONNECTIONFAILED,
-							JOptionPane.YES_NO_OPTION);
-					if (o == JOptionPane.OK_OPTION) {
-						connect();
-					}
+		new Thread(() -> {
+			infoLabel.setForeground(Color.BLACK);
+			infoLabel.setText(LANGUAGE.CONNECTING + "...");
+			gameClient = new GameClient();
+			if (gameClient.isConnected()) {
+				infoLabel.setText(LANGUAGE.CONNECTED + ".");
+				createUpdateRunnable();
+				createErrorRunnable();
+				createChatRunnable();
+				createStationClickedRunnable();
+			} else {
+				infoLabel.setForeground(Color.RED);
+				infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
+				int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?", LANGUAGE.CONNECTIONFAILED,
+						JOptionPane.YES_NO_OPTION);
+				if (o == JOptionPane.OK_OPTION) {
+					connect();
 				}
-			}).start();	
-		} else {
-			JOptionPane.showMessageDialog(frame, LANGUAGE.CHECKINPUT, LANGUAGE.WRONGINPUTFORMAT, JOptionPane.OK_OPTION);
-			connect();
-		}
-		
+			}
+		}).start();
 	}
 
 	/**
@@ -538,12 +527,6 @@ public class Main {
 		chatTextField.setText("");
 	}
 	
-	/**
-	 * updates all String of the GUI to the given language
-	 * 
-	 * @param lang 
-	 * 			destination language as String, look at LANGUAGE.java file
-	 */
 	private void updateLanguage(String lang) {
 		LANGUAGE.loadLanguage(lang);
 		
@@ -560,27 +543,6 @@ public class Main {
 		
 		updatePlayersTable();
 		updateRoundsTable();
-	}
-	
-	/**
-	 * checks if the given string is in correct ip+port format
-	 * 
-	 * @param data
-	 * 			IP + Port as String (ex: 255.255.255.255:8080)
-	 */
-	
-	private boolean isDataCorrect(String data) {
-		if(data.contains(":")) {
-			String[] parts = data.split(":");
-			if(parts.length == 2) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-		
 	}
 	
 }
