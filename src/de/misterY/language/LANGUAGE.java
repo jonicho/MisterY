@@ -44,7 +44,10 @@ public final class LANGUAGE {
 				ALREADYLOGGEDIN,
 				CONNECTIONNEEDED,
 				ENTERUSERNAME,
-				LOGGEDIN;
+				LOGGEDIN,
+				IPPORT,
+				CHECKINPUT,
+				WRONGINPUTFORMAT;
 				
 
 	public static void loadLanguage(String lang) {
@@ -92,6 +95,9 @@ public final class LANGUAGE {
 			CONNECTIONNEEDED = LANGUAGE.ENGLISH.CONNECTIONNEEDED;
 			ENTERUSERNAME = LANGUAGE.ENGLISH.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.ENGLISH.LOGGEDIN;
+			IPPORT = LANGUAGE.ENGLISH.IPPORT;
+			CHECKINPUT = LANGUAGE.ENGLISH.CHECKINPUT;
+			WRONGINPUTFORMAT = LANGUAGE.ENGLISH.WRONGINPUTFORMAT;
 			
 			break;
 
@@ -137,6 +143,9 @@ public final class LANGUAGE {
 			CONNECTIONNEEDED = LANGUAGE.GERMAN.CONNECTIONNEEDED;
 			ENTERUSERNAME = LANGUAGE.GERMAN.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.GERMAN.LOGGEDIN;
+			IPPORT = LANGUAGE.GERMAN.IPPORT;
+			CHECKINPUT = LANGUAGE.GERMAN.CHECKINPUT;
+			WRONGINPUTFORMAT = LANGUAGE.GERMAN.WRONGINPUTFORMAT;
 			break;
 
 		default:
@@ -187,7 +196,10 @@ public final class LANGUAGE {
 					ALREADYLOGGEDIN = "You are already logged in!",
 					CONNECTIONNEEDED = "You have to be connected to the server!",
 					ENTERUSERNAME = "Enter your username:",
-					LOGGEDIN = "Logged in.";
+					LOGGEDIN = "Logged in.",
+					IPPORT = "Servers' IP : Port",
+					CHECKINPUT = "Check your inputs!",
+					WRONGINPUTFORMAT = "Wrong input format";
 					
 					
 		
@@ -235,7 +247,10 @@ public final class LANGUAGE {
 					ALREADYLOGGEDIN = "Du bist bereits eingeloggt!",
 					CONNECTIONNEEDED = "Du musst mit dem Server verbunden sein!",
 					ENTERUSERNAME = "W\u00e4hle einen Nutzernamen:",
-					LOGGEDIN = "Eingeloggt.";
+					LOGGEDIN = "Eingeloggt.",
+					IPPORT = "IP : Port des Servers",
+					CHECKINPUT = "Überprüfe deine Eingaben!",
+					WRONGINPUTFORMAT = "Falsches Eingabeformat";
 
 	}
 
