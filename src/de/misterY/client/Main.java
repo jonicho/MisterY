@@ -30,6 +30,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import de.misterY.MeansOfTransportation;
@@ -90,8 +92,7 @@ public class Main {
 	 */
 	private void initialize() {
 		LANGUAGE.loadLanguage(Locale.getDefault().getLanguage());
-		
-		
+
 		frame = new JFrame();
 		updateTitle("");
 		frame.setBounds(100, 100, 1080, 720);
@@ -125,10 +126,10 @@ public class Main {
 			}
 		});
 		mnOptions.add(mntmReady);
-		
+
 		mnLanguage = new JMenu(LANGUAGE.STR_LANGUAGE);
 		menuBar.add(mnLanguage);
-		
+
 		mntmEnglish = new JMenuItem(LANGUAGE.STR_ENGLISH);
 		mntmEnglish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,7 +137,7 @@ public class Main {
 			}
 		});
 		mnLanguage.add(mntmEnglish);
-		
+
 		mntmGerman = new JMenuItem(LANGUAGE.STR_GERMAN);
 		mntmGerman.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,6 +209,23 @@ public class Main {
 		chatTextPane.setContentType("text/html");
 
 		JScrollPane scrollPane_1 = new JScrollPane(chatTextPane);
+		chatTextPane.setCaretPosition(chatTextPane.getDocument().getLength());
+		chatTextPane.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				chatTextPane.setCaretPosition(chatTextPane.getDocument().getLength());
+				System.out.println("cha");
+			}
+		});
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridy = 3;
@@ -284,8 +302,8 @@ public class Main {
 			} else {
 				infoLabel.setForeground(Color.RED);
 				infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
-				int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?", LANGUAGE.CONNECTIONFAILED,
-						JOptionPane.YES_NO_OPTION);
+				int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?",
+						LANGUAGE.CONNECTIONFAILED, JOptionPane.YES_NO_OPTION);
 				if (o == JOptionPane.OK_OPTION) {
 					connect();
 				}
@@ -312,8 +330,8 @@ public class Main {
 				if (gameClient.getWinner().isMrY()) {
 					JOptionPane.showMessageDialog(frame, LANGUAGE.MISTERYWON + "!");
 				} else {
-					JOptionPane.showMessageDialog(frame,
-							LANGUAGE.DETECTIVESWON + " - " + gameClient.getWinner().getName() + " " + LANGUAGE.FOUNDMISTERY + "!");
+					JOptionPane.showMessageDialog(frame, LANGUAGE.DETECTIVESWON + " - "
+							+ gameClient.getWinner().getName() + " " + LANGUAGE.FOUNDMISTERY + "!");
 				}
 			}
 		});
@@ -328,8 +346,7 @@ public class Main {
 			int errorCode = gameClient.getErrorCode();
 			if (errorCode == PROTOCOL.ERRORCODES.USERNAME_ALREADY_IN_USE) {
 				ownName = null;
-				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAMEALREADYINUSE,
-						"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAMEALREADYINUSE, "Error", JOptionPane.ERROR_MESSAGE);
 				updateTitle("");
 				login();
 				return;
@@ -338,8 +355,8 @@ public class Main {
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode, LANGUAGE.ERROR,
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode,
+					LANGUAGE.ERROR, JOptionPane.ERROR_MESSAGE);
 		});
 	}
 
@@ -360,7 +377,8 @@ public class Main {
 				return;
 			}
 			if (!gameClient.getPlayerByName(ownName).isTurn()) {
-				JOptionPane.showMessageDialog(frame, LANGUAGE.ITIS + " " + gameClient.getCurrentPlayer().getName() + LANGUAGE.PLAYERSTURN,
+				JOptionPane.showMessageDialog(frame,
+						LANGUAGE.ITIS + " " + gameClient.getCurrentPlayer().getName() + LANGUAGE.PLAYERSTURN,
 						LANGUAGE.NOTYOURTURN, JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
@@ -394,7 +412,8 @@ public class Main {
 		if (players.isEmpty()) {
 			return;
 		}
-		String[] columnNames = { LANGUAGE.NAME, LANGUAGE.TAXITICKETS, LANGUAGE.BUSTICKETS, LANGUAGE.UNDERGROUNDTICKETS, LANGUAGE.MRY, LANGUAGE.TURN };
+		String[] columnNames = { LANGUAGE.NAME, LANGUAGE.TAXITICKETS, LANGUAGE.BUSTICKETS, LANGUAGE.UNDERGROUNDTICKETS,
+				LANGUAGE.MRY, LANGUAGE.TURN };
 		String[][] data = new String[players.size()][6];
 		int thisPlayerIndex = 0;
 		for (int i = 0; i < players.size(); i++) {
@@ -526,10 +545,10 @@ public class Main {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
 		chatTextField.setText("");
 	}
-	
+
 	private void updateLanguage(String lang) {
 		LANGUAGE.loadLanguage(lang);
-		
+
 		mnOptions.setText(LANGUAGE.OPTIONS);
 		mntmLogin.setText(LANGUAGE.LOGIN);
 		mntmReady.setText(LANGUAGE.READY);
@@ -540,9 +559,9 @@ public class Main {
 		lblRoundsInfo.setText(LANGUAGE.ROUNDSINFO + ":");
 		btnSend.setText(LANGUAGE.SEND);
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
-		
+
 		updatePlayersTable();
 		updateRoundsTable();
 	}
-	
+
 }
