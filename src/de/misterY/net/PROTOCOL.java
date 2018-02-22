@@ -28,7 +28,8 @@ public final class PROTOCOL {
 				REQUEST_MOVEMENT = "reqmv", // Base [split] end id [split] type
 				CHAT_POST = "cpst", // Base [split] message
 				REQUEST_BOT = "reqbot", // Base
-				READY = "rdy"; // Base
+				READY = "rdy", // Base
+				SKIP_TURN = "skt"; // Base
 	}
 
 	public final class ERRORCODES {

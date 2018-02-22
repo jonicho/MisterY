@@ -39,6 +39,7 @@ import de.misterY.Player;
 import de.misterY.language.LANGUAGE;
 import de.misterY.net.PROTOCOL;
 import de.misterY.pathfinding.PathFinder;
+import java.awt.Insets;
 
 public class Main {
 
@@ -62,6 +63,7 @@ public class Main {
 	private JLabel lblRoundsInfo;
 	private JButton btnSend;
 	private JLabel lblPlayerInfo;
+	private JButton btnSkip;
 
 	/**
 	 * Launch the application.
@@ -157,13 +159,14 @@ public class Main {
 		splitPane.setRightComponent(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 5.0, 0.0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] {0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0 };
 		gbl_panel.columnWidths = new int[] { 0, 0 };
 		panel.setLayout(gbl_panel);
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridy = 1;
@@ -180,6 +183,7 @@ public class Main {
 		lblChat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChat.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblChat = new GridBagConstraints();
+		gbc_lblChat.insets = new Insets(0, 0, 5, 5);
 		gbc_lblChat.gridx = 0;
 		gbc_lblChat.gridy = 2;
 		panel.add(lblChat, gbc_lblChat);
@@ -188,6 +192,7 @@ public class Main {
 		lblRoundsInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoundsInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblRoundsInfo = new GridBagConstraints();
+		gbc_lblRoundsInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_lblRoundsInfo.gridx = 1;
 		gbc_lblRoundsInfo.gridy = 2;
 		panel.add(lblRoundsInfo, gbc_lblRoundsInfo);
@@ -198,7 +203,7 @@ public class Main {
 
 		JScrollPane scrollPane_2 = new JScrollPane(roundsTable);
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.gridheight = 2;
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridy = 3;
 		gbc_scrollPane_2.gridx = 1;
@@ -227,6 +232,7 @@ public class Main {
 			}
 		});
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridy = 3;
 		gbc_scrollPane_1.gridx = 0;
@@ -234,6 +240,7 @@ public class Main {
 
 		JPanel panel_4 = new JPanel();
 		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_4.fill = GridBagConstraints.BOTH;
 		gbc_panel_4.gridy = 4;
 		gbc_panel_4.gridx = 0;
@@ -261,6 +268,7 @@ public class Main {
 
 		lblPlayerInfo = new JLabel(LANGUAGE.PLAYERINFO);
 		GridBagConstraints gbc_lblPlayerInfo = new GridBagConstraints();
+		gbc_lblPlayerInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPlayerInfo.gridwidth = 2;
 		gbc_lblPlayerInfo.fill = GridBagConstraints.BOTH;
 		gbc_lblPlayerInfo.gridy = 0;
@@ -268,6 +276,18 @@ public class Main {
 		panel.add(lblPlayerInfo, gbc_lblPlayerInfo);
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		btnSkip = new JButton("Skip");
+		btnSkip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				skipTurn();
+			}
+		});
+		GridBagConstraints gbc_btnSkip = new GridBagConstraints();
+		gbc_btnSkip.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSkip.gridx = 1;
+		gbc_btnSkip.gridy = 4;
+		panel.add(btnSkip, gbc_btnSkip);
 
 		infoLabel = new JLabel("");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
@@ -544,6 +564,13 @@ public class Main {
 		}
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
 		chatTextField.setText("");
+	}
+	
+	private void skipTurn() {
+		if (gameClient.getCurrentPlayer() != gameClient.getPlayerByName(ownName)) {
+			return;
+		}
+		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.SKIP_TURN));
 	}
 
 	private void updateLanguage(String lang) {

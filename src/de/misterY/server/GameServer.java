@@ -53,6 +53,9 @@ public class GameServer extends Server {
 		case PROTOCOL.CS.READY:
 			handleReady(user);
 			break;
+		case PROTOCOL.CS.SKIP_TURN:
+			processSkipTurn(user);
+			break;
 
 		default:
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
@@ -152,6 +155,24 @@ public class GameServer extends Server {
 		String username = user.getPlayer().getName();
 		Session csession = sessions.getSessionByUser(user);
 		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.CHAT_UPDATE, username, message), csession);
+	}
+
+	/**
+	 * Processes a skip request
+	 * 
+	 * @param user
+	 *            the user that sent the request
+	 */
+	private void processSkipTurn(User user) {
+		Session session = sessions.getSessionByUser(user);
+		session.endTurn();
+		sendInfoUpdate(user, session);
+		if (session.getWinner() != null) {
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.WIN, session.getWinner().getPlayer().getName()), session);
+		} else {
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.TURN, session.getCurrentUser().getPlayer().getName(),
+					session.getRound()), session);
+		}
 	}
 
 	/**

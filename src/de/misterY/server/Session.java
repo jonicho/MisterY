@@ -167,14 +167,11 @@ public class Session {
 			} else {
 				ticketsUsedByMisterY.add(type);
 			}
-			endTurn();
 			if (!user.getPlayer().isMrY() && user.getPlayer().getCurrentStation().getId() == getMrY().getPlayer()
 					.getCurrentStation().getId()) {
 				winner = user;
 			}
-			if (round > map.getRounds()) {
-				winner = getMrY();
-			}
+			endTurn();
 		}
 		return success;
 	}
@@ -221,6 +218,9 @@ public class Session {
 		if (isDoubleTurn) {
 			isDoubleTurn = false;
 			wasDoubleTurn = true;
+		}
+		if (round > map.getRounds()) {
+			winner = getMrY();
 		}
 	}
 
