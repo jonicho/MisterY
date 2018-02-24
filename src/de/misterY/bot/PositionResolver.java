@@ -7,89 +7,124 @@ import de.misterY.MeansOfTransportation;
 import de.misterY.Station;
 
 public class PositionResolver {
-	private Station lastStation;
-	private MeansOfTransportation lastTicket;
-	private Station[][] resolvedLayers = new Station[5][200];
-	private Integer currentLayer;
 
-	public PositionResolver(Station pStation) {
-		currentLayer = 0;
-		lastStation = pStation;
-		resolvedLayers[0][0] = lastStation;
+	private Station lastKnownPosition;
+	private ArrayList<MeansOfTransportation> ticketHistory = new ArrayList<MeansOfTransportation>();
+	private int blindTurns;
+	private boolean isVisible;
+
+	public PositionResolver() {}
+
+	/**
+	 * Initializes the Resolver
+	 */
+	public void initialize() {
+		lastKnownPosition = null;
+		ticketHistory.clear();
+		blindTurns = 0;
 	}
 
 	/**
 	 * Resolves the possible positions of MRY
 	 */
-	private void resolve() {
-		// Increase the layer and clear the last results
-		currentLayer++;
-		for (int y = 0; y < 5; y++) {
-			for (int z = 0; z < 200; z++) {
-				resolvedLayers[y][z] = null;
-			}
-		}
-		// Get links
-		for (int i = 0; i < currentLayer + 1; i++) {
-			ArrayList<Link> possibleLinks = new ArrayList<Link>();
-			ArrayList<Station> layerStations = new ArrayList<Station>();
-			for (int x = 0; x < 200; x++) {
-				if (resolvedLayers[i - 1][x] != null) {
-					possibleLinks.addAll(resolvedLayers[currentLayer - 1][x].getLinks());
-				}
-			}
-			// Trace
-			for (Link l : possibleLinks) {
-				if (l.isBus() && lastTicket.equals(MeansOfTransportation.Bus)
-						|| l.isUnderground() && lastTicket.equals(MeansOfTransportation.Underground)
-						|| !l.isBus() && !l.isUnderground() && lastTicket.equals(MeansOfTransportation.Taxi)) {
-					Station target = l.getStation();
-					if (!layerStations.contains(target)) {
-						layerStations.add(target);
+	public ArrayList<Station> resolve(int precision) {
+		// Make a new array for the output
+		ArrayList<Station> result = new ArrayList<Station>();
+
+		// if MRY is visible just return his pos
+		if (isVisible) {
+			result.add(lastKnownPosition);
+			return result;
+		} else {
+			// initialize for resolving
+			Station[][] layers = new Station[blindTurns][1024];
+			int pathCount = 0;
+			layers[0][0] = lastKnownPosition;
+			ArrayList<Station> layerResults = new ArrayList<Station>();
+			ArrayList<Station> preDump = new ArrayList<Station>();
+			if (layers[0][0] == null)
+				return null;
+
+			for (int i = 0; i < blindTurns; i++) {
+				// Resolve the current layer
+				for (int x = 0; x < 1024; x++) {
+					if (layers[i][x] == null)
+						break;
+					preDump = getAllStations(layers[i][x], ticketHistory.get(i));
+					for (Station s : preDump) {
+						if (!layerResults.contains(s)) {
+							layerResults.add(s);
+						}
 					}
 				}
+				// Dump the Results of this layer to the ArrayList
+				for (int y = 0; y < layerResults.size(); y++) {
+					layers[i + 1][y] = layerResults.get(y);
+				}
 			}
-			// Output
-			for (int k = 0; k < layerStations.size(); k++) {
-				Station temp = layerStations.get(k);
-				resolvedLayers[i][k] = temp;
-				layerStations.remove(temp);
+			// We are done Resolving, lets convert & evaluate Results
+			for (int x = 0; x < 1024; x++) {
+				if (layers[blindTurns][x] == null) break;
+				if (!result.contains(layers[blindTurns][x])) {
+					result.add(layers[blindTurns][x]);
+				}
+			}
+			//Evaluate Results
+			if (result.size() > precision) {
+				return null;
+			} else {
+				return result;
 			}
 		}
 	}
 
+	
 	/**
-	 * Feeds the resolver the last ticket used by MRY
-	 * 
-	 * @param ticket
-	 */
-	public void feedTicketUpdate(MeansOfTransportation ticket) {
-		lastTicket = ticket;
-		resolve();
-	}
-
-	/**
-	 * Feeds the resolver a new position once MRY has become visible
+	 * Returns all stations that can be reached from a given station with a given
+	 * ticket
 	 * 
 	 * @param pStation
+	 *            The Station
+	 * @param Ticket
+	 *            The Ticket
+	 * @return All Stations that are Reachable
 	 */
-	public void feedPositionUpdate(Station pStation) {
-		lastStation = pStation;
-		lastTicket = null;
-	}
-
-	/**
-	 * Returns the resolved positions
-	 * 
-	 * @return
-	 */
-	public ArrayList<Station> getResolvedStations() {
+	private ArrayList<Station> getAllStations(Station pStation, MeansOfTransportation Ticket) {
 		ArrayList<Station> ret = new ArrayList<Station>();
-		for (int i = 0; i < 200; i++) {
-			if (resolvedLayers[currentLayer][i] != null) {
-				ret.add(resolvedLayers[currentLayer][i]);
+		ArrayList<Link> temp = new ArrayList<Link>();
+		temp = pStation.getLinks();
+		for (Link l : temp) {
+			if (l.isMeansOfTransportation(Ticket)) {
+				ret.add(l.getStation());
 			}
 		}
 		return ret;
 	}
+
+	/**
+	 * Updates the Data Record of MRY
+	 * 
+	 * @param lastTicket
+	 *            the last ticket MRY used
+	 * @param lastStation
+	 *            the last known station of MRY
+	 */
+	public void updateData(MeansOfTransportation lastTicket, Station lastStation) {
+		if (lastStation.equals(lastKnownPosition)) {
+			isVisible = true;
+		} else {
+			isVisible = false;
+			lastKnownPosition = lastStation;
+		}
+		if (isVisible) {
+			ticketHistory.clear();
+			blindTurns = 0;
+		} else {
+			ticketHistory.add(lastTicket);
+			blindTurns++;
+		}
+	}
+
+	
+
 }
