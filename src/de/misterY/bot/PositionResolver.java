@@ -61,6 +61,8 @@ public class PositionResolver {
 				for (int y = 0; y < layerResults.size(); y++) {
 					layers[i + 1][y] = layerResults.get(y);
 				}
+				//Clear the dump
+				layerResults.clear();
 			}
 			// We are done Resolving, lets convert & evaluate Results
 			for (int x = 0; x < 1024; x++) {
