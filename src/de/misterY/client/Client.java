@@ -3,10 +3,10 @@ package de.misterY.client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -39,9 +39,8 @@ import de.misterY.Player;
 import de.misterY.language.LANGUAGE;
 import de.misterY.net.PROTOCOL;
 import de.misterY.pathfinding.PathFinder;
-import java.awt.Insets;
 
-public class Main {
+public class Client {
 
 	private JFrame frame;
 	private GameClient gameClient;
@@ -66,26 +65,9 @@ public class Main {
 	private JButton btnSkip;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
-	public Main() {
+	public Client() {
 		initialize();
 	}
 
@@ -159,7 +141,7 @@ public class Main {
 		splitPane.setRightComponent(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 5.0, 0.0 };
-		gbl_panel.rowHeights = new int[] {0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0 };
 		gbl_panel.columnWidths = new int[] { 0, 0 };
 		panel.setLayout(gbl_panel);
@@ -276,7 +258,7 @@ public class Main {
 		panel.add(lblPlayerInfo, gbc_lblPlayerInfo);
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
+
 		btnSkip = new JButton("Skip");
 		btnSkip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -291,6 +273,8 @@ public class Main {
 
 		infoLabel = new JLabel("");
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
+
+		frame.setVisible(true);
 
 		connect();
 	}
@@ -565,7 +549,7 @@ public class Main {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
 		chatTextField.setText("");
 	}
-	
+
 	private void skipTurn() {
 		if (gameClient.getCurrentPlayer() != gameClient.getPlayerByName(ownName)) {
 			return;
