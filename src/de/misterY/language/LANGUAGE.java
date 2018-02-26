@@ -45,7 +45,7 @@ public final class LANGUAGE {
 				CONNECTIONNEEDED,
 				ENTERUSERNAME,
 				LOGGEDIN;
-				
+				//TODO add skip string
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {

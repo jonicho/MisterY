@@ -258,7 +258,7 @@ public class Client {
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-		JButton btnSkip = new JButton("Skip");
+		JButton btnSkip = new JButton("Skip"); // TODO use a string from LANGUAGE
 		btnSkip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				skipTurn();
@@ -363,13 +363,19 @@ public class Client {
 		});
 	}
 
+	/**
+	 * Creates a runnable that updates the chat when a new message arrived
+	 */
 	private void createChatRunnable() {
 		gameClient.setChatRunnable(() -> {
 			chatTextPane.setText(gameClient.getChatHandler().getChatString());
 		});
 	}
 
-	private void createStationClickedRunnable() {
+	/**
+	 * Creates a runnable that processes a click on a station
+	 */
+	private void createStationClickedRunnable() { // TODO don't check whether the movement is valid, let the server do that
 		canvas.setStationClickedRunnable(() -> {
 			if (gameClient.isFinished()) {
 				return;
@@ -549,6 +555,9 @@ public class Client {
 		chatTextField.setText("");
 	}
 
+	/**
+	 * Requests a turn skip if it's this players turn
+	 */
 	private void skipTurn() {
 		if (gameClient.getCurrentPlayer() != gameClient.getPlayerByName(ownName)) {
 			return;
@@ -556,6 +565,11 @@ public class Client {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.SKIP_TURN));
 	}
 
+	/**
+	 * Updates the gui strings with the given language
+	 * 
+	 * @param lang
+	 */
 	private void updateLanguage(String lang) {
 		LANGUAGE.loadLanguage(lang);
 
@@ -570,6 +584,7 @@ public class Client {
 		btnSend.setText(LANGUAGE.SEND);
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
 
+		// TODO update skip button
 		updatePlayersTable();
 		updateRoundsTable();
 	}
