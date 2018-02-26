@@ -157,7 +157,7 @@ public class Session {
 	 * @return Whether the movement was successful
 	 */
 	public boolean doMovement(User user, int endId, MeansOfTransportation type) {
-		if (!(user == getCurrentUser())) {
+		if (user != getCurrentUser()) {
 			return false;
 		}
 		boolean success = user.getPlayer().moveTo(map.getStationById(endId), type);
@@ -188,10 +188,7 @@ public class Session {
 	}
 
 	public boolean isFull() {
-		if (users.size() >= 6) {
-			return true;
-		}
-		return false;
+		return users.size() >= 6;
 	}
 
 	public boolean doDoubleTurn() {

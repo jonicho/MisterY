@@ -7,8 +7,6 @@ import de.misterY.Player;
 import de.misterY.Station;
 
 public class PositionPredicter {
-	public PositionPredicter() {
-	}
 
 	/**
 	 * Predicts all possible movements the specified player can make from the
@@ -20,7 +18,7 @@ public class PositionPredicter {
 	 *            the player to predict
 	 * @return All possible positions in an ArrayList
 	 */
-	private ArrayList<Station> PredictPositions(Station station, Player player) {
+	private ArrayList<Station> predictPositions(Station station, Player player) {
 		boolean hasBusTickets;
 		boolean hasUndergroundTickets;
 		boolean hasTaxiTickets;
@@ -62,7 +60,7 @@ public class PositionPredicter {
 	 * @return
 	 */
 	public boolean canPredictDefinitePosition(Station station, Player player) {
-		return (PredictPositions(station, player).size()) == 1;
+		return (predictPositions(station, player).size()) == 1;
 	}
 
 	/**
@@ -73,7 +71,7 @@ public class PositionPredicter {
 	 * @return
 	 */
 	public Station getDefinitePosition(Station station, Player player) {
-		return PredictPositions(station, player).get(0);
+		return predictPositions(station, player).get(0);
 	}
 
 	/**
@@ -84,6 +82,6 @@ public class PositionPredicter {
 	 * @return
 	 */
 	public ArrayList<Station> getAllPredictions(Station station, Player player) {
-		return PredictPositions(station, player);
+		return predictPositions(station, player);
 	}
 }

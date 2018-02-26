@@ -21,9 +21,6 @@ public class AI {
 	private Player mryHandle;
 	private boolean isChasing = false;
 
-	public AI() {
-	}
-
 	/**
 	 * Initializes the AI
 	 * 

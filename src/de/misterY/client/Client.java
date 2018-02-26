@@ -62,7 +62,6 @@ public class Client {
 	private JLabel lblRoundsInfo;
 	private JButton btnSend;
 	private JLabel lblPlayerInfo;
-	private JButton btnSkip;
 
 	/**
 	 * Create the application.
@@ -259,7 +258,7 @@ public class Client {
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-		btnSkip = new JButton("Skip");
+		JButton btnSkip = new JButton("Skip");
 		btnSkip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				skipTurn();

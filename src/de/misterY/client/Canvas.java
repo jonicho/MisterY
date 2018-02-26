@@ -96,10 +96,8 @@ public class Canvas extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (stationClickedRunnable != null) {
-					if (hoveredStation != null) {
-						stationClickedRunnable.run();
-					}
+				if (stationClickedRunnable != null && hoveredStation != null) {
+					stationClickedRunnable.run();
 				}
 			}
 		});
@@ -145,7 +143,6 @@ public class Canvas extends JPanel {
 		} else {
 			hoveredStation = null;
 		}
-		return;
 	}
 
 	public void setStationClickedRunnable(Runnable stationClickedRunnable) {
