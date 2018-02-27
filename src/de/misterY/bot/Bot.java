@@ -1,5 +1,7 @@
 package de.misterY.bot;
 
+import java.util.Random;
+
 import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Station;
@@ -12,10 +14,11 @@ public class Bot extends Client {
 	private PathFinder pFinder = new PathFinder();
 	private Station lastStation;
 	private int moveState;
+	private Random ran = new Random();
 	
 	public Bot(String pServerIP, int pServerPort) {
 		super(pServerIP, pServerPort);
-
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN,"BOT"+ran.nextInt(9999)));
 	}
 
 	@Override
@@ -58,6 +61,8 @@ public class Bot extends Client {
 		}
 	}
 	
+	
+	
 	public void handleTurn() {
 		Brain.doAnalysis();
 		moveState = Brain.getMoveState();
@@ -85,7 +90,7 @@ public class Bot extends Client {
 	}
 	
 	private void MoveToStation(Station pStation) {
-		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),);
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId()));
 	}
 
 }
