@@ -249,11 +249,11 @@ public final class LANGUAGE {
 					CONNECTIONNEEDED = "Du musst mit dem Server verbunden sein!",
 					ENTERUSERNAME = "W\u00e4hle einen Nutzernamen:",
 					LOGGEDIN = "Eingeloggt.",
-					SKIP = "Überspringen",
+					SKIP = "\u00dcberspringen",
 					CONNECT = "Verbinden",
 					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
 					ENTERIP_PORT = "Gebe IP:Port ein",
-					CHECKIP_PORTFORMAT = "Überprüfe die IP:Port Eingabe";
+					CHECKIP_PORTFORMAT = "\u00dcberpr\u00fcfe die IP:Port Eingabe";
 
 	}
 
