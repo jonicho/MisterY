@@ -17,7 +17,6 @@ public final class LANGUAGE {
 				CONNECTING,
 				CONNECTED,
 				CONNECTIONFAILED,
-				RETRY,
 				MISTERYWON,
 				DETECTIVESWON,
 				FOUNDMISTERY,
@@ -45,7 +44,11 @@ public final class LANGUAGE {
 				CONNECTIONNEEDED,
 				ENTERUSERNAME,
 				LOGGEDIN,
-				SKIP;
+				SKIP,
+				CONNECT,
+				ALREADYCONNECTEDTO,
+				ENTERIP_PORT,
+				CHECKIP_PORTFORMAT;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -64,7 +67,6 @@ public final class LANGUAGE {
 			CONNECTING = LANGUAGE.ENGLISH.CONNECTING;
 			CONNECTED = LANGUAGE.ENGLISH.CONNECTED;
 			CONNECTIONFAILED = LANGUAGE.ENGLISH.CONNECTIONFAILED;
-			RETRY = LANGUAGE.ENGLISH.RETRY;
 			MISTERYWON = LANGUAGE.ENGLISH.MISTERYWON;
 			DETECTIVESWON = LANGUAGE.ENGLISH.DETECTIVESWON;
 			FOUNDMISTERY = LANGUAGE.ENGLISH.FOUNDMISTERY;
@@ -93,6 +95,10 @@ public final class LANGUAGE {
 			ENTERUSERNAME = LANGUAGE.ENGLISH.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.ENGLISH.LOGGEDIN;
 			SKIP = LANGUAGE.ENGLISH.SKIP;
+			CONNECT = LANGUAGE.ENGLISH.CONNECT;
+			ALREADYCONNECTEDTO = LANGUAGE.ENGLISH.ALREADYCONNECTEDTO;
+			ENTERIP_PORT = LANGUAGE.ENGLISH.ENTERIP_PORT;
+			CHECKIP_PORTFORMAT = LANGUAGE.ENGLISH.CHECKIP_PORTFORMAT;
 			break;
 
 		case LANGUAGE.DE:
@@ -109,7 +115,6 @@ public final class LANGUAGE {
 			CONNECTING = LANGUAGE.GERMAN.CONNECTING;
 			CONNECTED = LANGUAGE.GERMAN.CONNECTED;
 			CONNECTIONFAILED = LANGUAGE.GERMAN.CONNECTIONFAILED;
-			RETRY = LANGUAGE.GERMAN.RETRY;
 			MISTERYWON = LANGUAGE.GERMAN.MISTERYWON;
 			DETECTIVESWON = LANGUAGE.GERMAN.DETECTIVESWON;
 			FOUNDMISTERY = LANGUAGE.GERMAN.FOUNDMISTERY;
@@ -137,7 +142,11 @@ public final class LANGUAGE {
 			CONNECTIONNEEDED = LANGUAGE.GERMAN.CONNECTIONNEEDED;
 			ENTERUSERNAME = LANGUAGE.GERMAN.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.GERMAN.LOGGEDIN;
-			SKIP = LANGUAGE.ENGLISH.SKIP;
+			SKIP = LANGUAGE.GERMAN.SKIP;
+			CONNECT = LANGUAGE.GERMAN.CONNECT;
+			ALREADYCONNECTEDTO = LANGUAGE.GERMAN.ALREADYCONNECTEDTO;
+			ENTERIP_PORT = LANGUAGE.GERMAN.ENTERIP_PORT;
+			CHECKIP_PORTFORMAT = LANGUAGE.GERMAN.CHECKIP_PORTFORMAT;
 			break;
 
 		default:
@@ -161,7 +170,6 @@ public final class LANGUAGE {
 					CONNECTING = "Connecting",
 					CONNECTED = "Connected",
 					CONNECTIONFAILED = "Connection failed",
-					RETRY = "Retry",
 					MISTERYWON = "MisterY won the game",
 					DETECTIVESWON = "The detectives won the game",
 					FOUNDMISTERY = "found MisterY",
@@ -189,7 +197,11 @@ public final class LANGUAGE {
 					CONNECTIONNEEDED = "You have to be connected to the server!",
 					ENTERUSERNAME = "Enter your username:",
 					LOGGEDIN = "Logged in.",
-					SKIP = "Skip";
+					SKIP = "Skip",
+					CONNECT = "Connect",
+					ALREADYCONNECTEDTO = "Already connected to ",
+					ENTERIP_PORT = "Enter IP:Port",
+					CHECKIP_PORTFORMAT = "Check entered IP:Port";
 					
 					
 		
@@ -210,7 +222,6 @@ public final class LANGUAGE {
 					CONNECTING = "Verbinden",
 					CONNECTED = "Verbunden",
 					CONNECTIONFAILED = "Verbindung fehlgeschlagen",
-					RETRY = "Erneut versuchen",
 					MISTERYWON = "MisterY hat das Spiel gewonnen",
 					DETECTIVESWON = "Die Detektive haben das Spiel gewonnen",
 					FOUNDMISTERY = "hat MisterY gefunden",
@@ -238,7 +249,11 @@ public final class LANGUAGE {
 					CONNECTIONNEEDED = "Du musst mit dem Server verbunden sein!",
 					ENTERUSERNAME = "W\u00e4hle einen Nutzernamen:",
 					LOGGEDIN = "Eingeloggt.",
-					SKIP = "Überspringen";
+					SKIP = "\u00dcberspringen",
+					CONNECT = "Verbinden",
+					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
+					ENTERIP_PORT = "Gebe IP:Port ein",
+					CHECKIP_PORTFORMAT = "\u00dcberpr\u00fcfe die IP:Port Eingabe";
 
 	}
 
