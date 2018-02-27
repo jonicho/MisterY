@@ -15,10 +15,12 @@ public class Bot extends Client {
 	private Station lastStation;
 	private int moveState;
 	private Random ran = new Random();
+	private String myName;
 	
 	public Bot(String pServerIP, int pServerPort) {
 		super(pServerIP, pServerPort);
-		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN,"BOT"+ran.nextInt(9999)));
+		myName = "BOT"+ran.nextInt(9999);
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN,myName));
 	}
 
 	@Override
