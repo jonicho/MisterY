@@ -17,9 +17,9 @@ public class AI {
 	private Station lastMRYStation;
 	private Player localPlayer;
 	private Integer moveState;
-	private Map mapHandle;
 	private Player mryHandle;
 	private boolean isChasing = false;
+	private int RESOLVER_PRECISION = 4;
 
 	/**
 	 * Initializes the AI
@@ -32,8 +32,7 @@ public class AI {
 	 *            The map we are playing on
 	 */
 	public void initialize(Station pStation, Player pPlayer, Map pMap) {
-		resolver = new PositionResolver(pStation);
-		mapHandle = pMap;
+		resolver = new PositionResolver();
 		predicter = new PositionPredicter();
 		localPlayer = pPlayer;
 		lastMRYStation = pStation;
@@ -58,9 +57,8 @@ public class AI {
 		}
 		lastMRYStation = pStation;
 		ticketRecordMRY.add(ticket);
-		resolver.feedPositionUpdate(pStation);
-		resolver.feedTicketUpdate(ticket);
-		resolvedPositions = resolver.getResolvedStations();
+		resolver.updateData(ticket, pStation);
+		resolvedPositions = resolver.resolve(RESOLVER_PRECISION);
 		if (resolvedPositions.size() == 1) {
 			predictedPositions = predicter.getAllPredictions(resolvedPositions.get(0), mryHandle);
 		}
