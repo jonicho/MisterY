@@ -44,8 +44,8 @@ public final class LANGUAGE {
 				ALREADYLOGGEDIN,
 				CONNECTIONNEEDED,
 				ENTERUSERNAME,
-				LOGGEDIN;
-				//TODO add skip string
+				LOGGEDIN,
+				SKIP;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -92,7 +92,7 @@ public final class LANGUAGE {
 			CONNECTIONNEEDED = LANGUAGE.ENGLISH.CONNECTIONNEEDED;
 			ENTERUSERNAME = LANGUAGE.ENGLISH.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.ENGLISH.LOGGEDIN;
-			
+			SKIP = LANGUAGE.ENGLISH.SKIP;
 			break;
 
 		case LANGUAGE.DE:
@@ -137,6 +137,7 @@ public final class LANGUAGE {
 			CONNECTIONNEEDED = LANGUAGE.GERMAN.CONNECTIONNEEDED;
 			ENTERUSERNAME = LANGUAGE.GERMAN.ENTERUSERNAME;
 			LOGGEDIN = LANGUAGE.GERMAN.LOGGEDIN;
+			SKIP = LANGUAGE.ENGLISH.SKIP;
 			break;
 
 		default:
@@ -187,7 +188,8 @@ public final class LANGUAGE {
 					ALREADYLOGGEDIN = "You are already logged in!",
 					CONNECTIONNEEDED = "You have to be connected to the server!",
 					ENTERUSERNAME = "Enter your username:",
-					LOGGEDIN = "Logged in.";
+					LOGGEDIN = "Logged in.",
+					SKIP = "Skip";
 					
 					
 		
@@ -235,7 +237,8 @@ public final class LANGUAGE {
 					ALREADYLOGGEDIN = "Du bist bereits eingeloggt!",
 					CONNECTIONNEEDED = "Du musst mit dem Server verbunden sein!",
 					ENTERUSERNAME = "W\u00e4hle einen Nutzernamen:",
-					LOGGEDIN = "Eingeloggt.";
+					LOGGEDIN = "Eingeloggt.",
+					SKIP = "Überspringen";
 
 	}
 

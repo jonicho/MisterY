@@ -62,6 +62,7 @@ public class Client {
 	private JLabel lblRoundsInfo;
 	private JButton btnSend;
 	private JLabel lblPlayerInfo;
+	private JButton btnSkip;
 
 	/**
 	 * Create the application.
@@ -258,7 +259,7 @@ public class Client {
 		lblPlayerInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-		JButton btnSkip = new JButton("Skip"); // TODO use a string from LANGUAGE
+		btnSkip = new JButton(LANGUAGE.SKIP);
 		btnSkip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				skipTurn();
@@ -583,6 +584,7 @@ public class Client {
 		lblRoundsInfo.setText(LANGUAGE.ROUNDSINFO + ":");
 		btnSend.setText(LANGUAGE.SEND);
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
+		btnSkip.setText(LANGUAGE.SKIP);
 
 		// TODO update skip button
 		updatePlayersTable();
