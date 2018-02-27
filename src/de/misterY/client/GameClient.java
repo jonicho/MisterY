@@ -75,20 +75,10 @@ public class GameClient extends Client {
 		}
 	}
 
-	/**
-	 * Handles a win message
-	 * 
-	 * @param msgParts
-	 */
 	private void handleWin(String[] msgParts) {
 		winner = getPlayerByName(msgParts[1]);
 	}
 
-	/**
-	 * Handles an info update and updates the information accordingly
-	 * 
-	 * @param msgParts
-	 */
 	private void handleInfoUpdate(String[] msgParts) {
 		String name = msgParts[1];
 		int taxiTickets = Integer.parseInt(msgParts[2]);
@@ -110,12 +100,6 @@ public class GameClient extends Client {
 		player.setMrY(isMrY);
 	}
 
-	/**
-	 * Handles the PROTOCOL.USED_TICKETS message and updates which tickets misterY
-	 * used
-	 * 
-	 * @param msgParts
-	 */
 	private void handleUsedTickets(String[] msgParts) {
 		ticketsUsedByMisterY = new MeansOfTransportation[msgParts.length - 1];
 		for (int i = 0; i < msgParts.length - 1; i++) {
@@ -123,11 +107,6 @@ public class GameClient extends Client {
 		}
 	}
 
-	/**
-	 * Handles an incoming chat message
-	 * 
-	 * @param msgParts
-	 */
 	private void handleChatUpdate(String[] msgParts) {
 		chatHandler.addMessage(getPlayerByName(msgParts[1]), msgParts[2]);
 		if (chatRunnable != null) {
@@ -135,11 +114,6 @@ public class GameClient extends Client {
 		}
 	}
 
-	/**
-	 * Handles the PROTOCOL.TURN message and updates the info who's turn it is
-	 * 
-	 * @param msgParts
-	 */
 	private void handleTurn(String[] msgParts) {
 		started = true;
 		String name = msgParts[1];
