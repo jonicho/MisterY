@@ -71,11 +71,11 @@ public class AI {
 	 */
 	public void doAnalysis() {
 		// Check everything in order of importance
-		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1) {
+		if (resolvedPositions.size() > 0 && predictedPositions.size() == 1) {
 			moveState = 2;
 			return;
 		}
-		if (resolvedPositions.size() == 1) {
+		if (resolvedPositions.size() > 0) {
 			moveState = 1;
 			return;
 		}
@@ -88,28 +88,27 @@ public class AI {
 			moveState = 4;
 			return;
 		}
-		if (resolvedPositions.size() <= 10) {
-			moveState = 3;
-			return;
-		} else {
+		else {
 			moveState = 0;
 		}
 
+	}
+	
+	public int getMoveState() {
+		return moveState;
 	}
 
 	/**
 	 * Executes the moves selected by the Analysis
 	 * 
 	 */
-	public void generateMove() {
+	public void generateMoveExecute() {
 		switch (moveState) {
 		case 0: // Nothing usefull todo, just go in a random direction
 			break;
 		case 1: // Go to Definitive Resolved Position
 			break;
 		case 2: // Go to Definitive Predcted Position
-			break;
-		case 3: // Go in the middle of multiple Resolved Positions
 			break;
 		case 4: // Go to the Next Trainstation to occupy it
 			break;
@@ -118,4 +117,9 @@ public class AI {
 			break;
 		}
 	}
+	
+	private void MoveToStation(Station pStation) {
+		Bot.this.send(pMessage);
+	}
+	
 }

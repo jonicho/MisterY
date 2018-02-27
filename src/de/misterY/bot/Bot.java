@@ -5,10 +5,13 @@ import de.misterY.MeansOfTransportation;
 import de.misterY.Station;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
+import de.misterY.pathfinding.PathFinder;
 
 public class Bot extends Client {
 	private AI Brain = new AI();
+	private PathFinder pFinder = new PathFinder();
 	private Station lastStation;
+	private int moveState;
 	
 	public Bot(String pServerIP, int pServerPort) {
 		super(pServerIP, pServerPort);
@@ -56,7 +59,33 @@ public class Bot extends Client {
 	}
 	
 	public void handleTurn() {
-		
+		Brain.doAnalysis();
+		moveState = Brain.getMoveState();
+		MoveExecute();
+	}
+	
+	/**
+	 * Executes the moves selected by the Analysis
+	 * 
+	 */
+	public void MoveExecute() {
+		switch (moveState) {
+		case 0: // Nothing usefull todo, just go in a random direction
+			break;
+		case 1: // Go to Definitive Resolved Position
+			break;
+		case 2: // Go to Definitive Predcted Position
+			break;
+		case 4: // Go to the Next Trainstation to occupy it
+			break;
+		case 5: // We are chasing MRY & are one turn behind him, pick a link that matches his
+				// ticket to maybe get him
+			break;
+		}
+	}
+	
+	private void MoveToStation(Station pStation) {
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),);
 	}
 
 }
