@@ -63,6 +63,9 @@ public class Client {
 	private JButton btnSend;
 	private JLabel lblPlayerInfo;
 	private JButton btnSkip;
+	private JMenuItem mntmConnect;
+	private boolean connection = false;
+	private String server;
 
 	/**
 	 * Create the application.
@@ -100,6 +103,14 @@ public class Client {
 				login();
 			}
 		});
+		
+		mntmConnect = new JMenuItem(LANGUAGE.CONNECT);
+		mntmConnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				connect();
+			}
+		});
+		mnOptions.add(mntmConnect);
 		mnOptions.add(mntmLogin);
 
 		mntmReady = new JMenuItem(LANGUAGE.READY);
@@ -275,8 +286,6 @@ public class Client {
 		panel_1.add(infoLabel, BorderLayout.SOUTH);
 
 		frame.setVisible(true);
-
-		connect();
 	}
 
 	/**
@@ -293,26 +302,41 @@ public class Client {
 	 * Connects to server using a separate thread to avoid blocking the gui.
 	 */
 	private void connect() {
-		new Thread(() -> {
-			infoLabel.setForeground(Color.BLACK);
-			infoLabel.setText(LANGUAGE.CONNECTING + "...");
-			gameClient = new GameClient();
-			if (gameClient.isConnected()) {
-				infoLabel.setText(LANGUAGE.CONNECTED + ".");
-				createUpdateRunnable();
-				createErrorRunnable();
-				createChatRunnable();
-				createStationClickedRunnable();
-			} else {
-				infoLabel.setForeground(Color.RED);
-				infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
-				int o = JOptionPane.showConfirmDialog(frame, LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?",
-						LANGUAGE.CONNECTIONFAILED, JOptionPane.YES_NO_OPTION);
-				if (o == JOptionPane.OK_OPTION) {
-					connect();
+		if(isConnected()) {
+			JOptionPane.showMessageDialog(frame, LANGUAGE.ALREADYCONNECTEDTO + server);
+			return;
+		}
+		String cnt = JOptionPane.showInputDialog(frame, LANGUAGE.ENTERIP_PORT);
+		if(isDataCorrect(cnt)) {
+			String[] data = cnt.split(":");
+			new Thread(() -> {
+				infoLabel.setForeground(Color.BLACK);
+				infoLabel.setText(LANGUAGE.CONNECTING + "...");
+				gameClient = new GameClient(data[0], Integer.parseInt(data[1]));
+				if (gameClient.isConnected()) {
+					server = cnt;
+					infoLabel.setText(LANGUAGE.CONNECTED + ". " + server);
+					createUpdateRunnable();
+					createErrorRunnable();
+					createChatRunnable();
+					createStationClickedRunnable();
+					connection = true;
+				} else {
+					infoLabel.setForeground(Color.RED);
+					infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
+					JOptionPane.showMessageDialog(frame, 
+							LANGUAGE.CONNECTIONFAILED + "!",
+							LANGUAGE.CONNECTIONFAILED, 
+							JOptionPane.WARNING_MESSAGE);
 				}
-			}
-		}).start();
+			}).start();
+		} else {
+			JOptionPane.showMessageDialog(frame, 
+					LANGUAGE.CHECKIP_PORTFORMAT + "!",
+					LANGUAGE.CHECKIP_PORTFORMAT, 
+					JOptionPane.WARNING_MESSAGE);
+		}
+		
 	}
 
 	/**
@@ -585,10 +609,33 @@ public class Client {
 		btnSend.setText(LANGUAGE.SEND);
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
 		btnSkip.setText(LANGUAGE.SKIP);
-
-		// TODO update skip button
+		mntmConnect.setText(LANGUAGE.CONNECT);
+		
 		updatePlayersTable();
 		updateRoundsTable();
+	}
+	
+	private boolean isDataCorrect(String input) {
+		if(input.contains(":")) {
+			String[] parts = input.split(":");
+			if(parts.length == 2) {
+				try {
+					Integer.parseInt(parts[1]);
+				} catch (NumberFormatException e) {
+					return false;
+				}
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		
+	}
+	
+	private boolean isConnected() {
+		return connection;
 	}
 
 }
