@@ -2,6 +2,7 @@ package de.misterY.bot;
 
 import java.util.Random;
 
+import de.misterY.Map;
 import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Station;
@@ -13,9 +14,11 @@ public class Bot extends Client {
 	private AI Brain = new AI();
 	private PathFinder pFinder = new PathFinder();
 	private Station lastStation;
-	private int moveState;
+	private int targetID;
 	private Random ran = new Random();
 	private String myName;
+	private Map map;
+	private Station myStation;
 	
 	public Bot(String pServerIP, int pServerPort) {
 		super(pServerIP, pServerPort);
@@ -37,8 +40,11 @@ public class Bot extends Client {
 			//ignore the chat
 			break;
 		case PROTOCOL.SC.INFO_UPDATE:
+			if (msgParts[1] == myName) {
+				myStation = map.getStationById(Integer.parseInt(msgParts[5]));
+			}
 			if(Boolean.parseBoolean(msgParts[6])) {
-				Station currentStation = Station.class.cast(msgParts[5]);
+				Station currentStation = map.getStationById(Integer.parseInt(msgParts[5]));
 				if (lastStation != null && lastStation != currentStation) {
 					lastStation = currentStation;
 				}
@@ -49,6 +55,7 @@ public class Bot extends Client {
 			Brain.updateData(lastStation, pTicket);
 			break;
 		case PROTOCOL.SC.MAP:
+			map = MapLoader.loadMap(msgParts[1]);
 			break;
 		case PROTOCOL.SC.TURN:
 			handleTurn();
@@ -67,32 +74,21 @@ public class Bot extends Client {
 	
 	public void handleTurn() {
 		Brain.doAnalysis();
-		moveState = Brain.getMoveState();
-		MoveExecute();
+		targetID = Brain.getTarget();
+		if (targetID == -1 || targetID == -5) {
+			
+		}
 	}
 	
 	/**
 	 * Executes the moves selected by the Analysis
 	 * 
 	 */
-	public void MoveExecute() {
-		switch (moveState) {
-		case 0: // Nothing usefull todo, just go in a random direction
-			break;
-		case 1: // Go to Definitive Resolved Position
-			break;
-		case 2: // Go to Definitive Predcted Position
-			break;
-		case 4: // Go to the Next Trainstation to occupy it
-			break;
-		case 5: // We are chasing MRY & are one turn behind him, pick a link that matches his
-				// ticket to maybe get him
-			break;
-		}
-	}
 	
+	
+	@SuppressWarnings("static-access")
 	private void MoveToStation(Station pStation) {
-		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId()));
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),pFinder.findPath(myStation, pStation).getFollowingStation(myStation).getId()));
 	}
 
 }

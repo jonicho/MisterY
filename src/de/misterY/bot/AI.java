@@ -20,6 +20,7 @@ public class AI {
 	private Player mryHandle;
 	private boolean isChasing = false;
 	private int RESOLVER_PRECISION = 4;
+	private int targetID;
 
 	/**
 	 * Initializes the AI
@@ -31,7 +32,7 @@ public class AI {
 	 * @param pMap
 	 *            The map we are playing on
 	 */
-	public void initialize(Station pStation, Player pPlayer, Map pMap) {
+	public void initialize(Station pStation, Player pPlayer) {
 		resolver = new PositionResolver();
 		predicter = new PositionPredicter();
 		localPlayer = pPlayer;
@@ -71,11 +72,11 @@ public class AI {
 	 */
 	public void doAnalysis() {
 		// Check everything in order of importance
-		if (resolvedPositions.size() > 0 && predictedPositions.size() == 1) {
+		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1) {
 			moveState = 2;
 			return;
 		}
-		if (resolvedPositions.size() > 0) {
+		if (resolvedPositions.size() == 1 ) {
 			moveState = 1;
 			return;
 		}
@@ -83,43 +84,32 @@ public class AI {
 			moveState = 5;
 			return;
 		}
-		if (PathFinder.findPathToNearestStation(localPlayer.getCurrentStation(), MeansOfTransportation.Underground)
-				.getStations().size() - 1 <= 3) {
-			moveState = 4;
-			return;
-		}
+
 		else {
 			moveState = 0;
 		}
 
 	}
 	
-	public int getMoveState() {
-		return moveState;
-	}
-
-	/**
-	 * Executes the moves selected by the Analysis
-	 * 
-	 */
-	public void generateMoveExecute() {
+	public void MoveExecute() {
 		switch (moveState) {
 		case 0: // Nothing usefull todo, just go in a random direction
+			targetID = -1;
 			break;
 		case 1: // Go to Definitive Resolved Position
+			targetID = resolvedPositions.get(0).getId();
 			break;
-		case 2: // Go to Definitive Predcted Position
-			break;
-		case 4: // Go to the Next Trainstation to occupy it
+		case 2: // Go to Definitive Predicted Position
+			targetID = predictedPositions.get(0).getId();
 			break;
 		case 5: // We are chasing MRY & are one turn behind him, pick a link that matches his
 				// ticket to maybe get him
+			targetID = -5;
 			break;
 		}
 	}
 	
-	private void MoveToStation(Station pStation) {
-		Bot.this.send(pMessage);
+	public int getTarget() {
+		return targetID;
 	}
-	
 }
