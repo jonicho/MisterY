@@ -47,8 +47,8 @@ public final class LANGUAGE {
 				SKIP,
 				CONNECT,
 				ALREADYCONNECTEDTO,
-				ENTERIP_PORT,
-				CHECKIP_PORTFORMAT;
+				ENTERIP,
+				CHECKIPFORMAT;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -97,8 +97,8 @@ public final class LANGUAGE {
 			SKIP = LANGUAGE.ENGLISH.SKIP;
 			CONNECT = LANGUAGE.ENGLISH.CONNECT;
 			ALREADYCONNECTEDTO = LANGUAGE.ENGLISH.ALREADYCONNECTEDTO;
-			ENTERIP_PORT = LANGUAGE.ENGLISH.ENTERIP_PORT;
-			CHECKIP_PORTFORMAT = LANGUAGE.ENGLISH.CHECKIP_PORTFORMAT;
+			ENTERIP = LANGUAGE.ENGLISH.ENTERIP;
+			CHECKIPFORMAT = LANGUAGE.ENGLISH.CHECKIPFORMAT;
 			break;
 
 		case LANGUAGE.DE:
@@ -145,8 +145,8 @@ public final class LANGUAGE {
 			SKIP = LANGUAGE.GERMAN.SKIP;
 			CONNECT = LANGUAGE.GERMAN.CONNECT;
 			ALREADYCONNECTEDTO = LANGUAGE.GERMAN.ALREADYCONNECTEDTO;
-			ENTERIP_PORT = LANGUAGE.GERMAN.ENTERIP_PORT;
-			CHECKIP_PORTFORMAT = LANGUAGE.GERMAN.CHECKIP_PORTFORMAT;
+			ENTERIP = LANGUAGE.GERMAN.ENTERIP;
+			CHECKIPFORMAT = LANGUAGE.GERMAN.CHECKIPFORMAT;
 			break;
 
 		default:
@@ -200,8 +200,8 @@ public final class LANGUAGE {
 					SKIP = "Skip",
 					CONNECT = "Connect",
 					ALREADYCONNECTEDTO = "Already connected to ",
-					ENTERIP_PORT = "Enter IP:Port",
-					CHECKIP_PORTFORMAT = "Check entered IP:Port";
+					ENTERIP = "Enter IP",
+					CHECKIPFORMAT = "Check entered IP";
 					
 					
 		
@@ -252,8 +252,8 @@ public final class LANGUAGE {
 					SKIP = "\u00dcberspringen",
 					CONNECT = "Verbinden",
 					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
-					ENTERIP_PORT = "Gebe IP:Port ein",
-					CHECKIP_PORTFORMAT = "\u00dcberpr\u00fcfe die IP:Port Eingabe";
+					ENTERIP = "Gib IP ein",
+					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe";
 
 	}
 
