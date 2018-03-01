@@ -407,7 +407,7 @@ public class Client {
 			}
 			if (!gameClient.getPlayerByName(ownName).isTurn()) {
 				JOptionPane.showMessageDialog(frame,
-						LANGUAGE.ITIS + " " + gameClient.getCurrentPlayer().getName() + LANGUAGE.PLAYERSTURN,
+						LANGUAGE.ITIS + " " + gameClient.getCurrentPlayer().getName() + " " + LANGUAGE.PLAYERSTURN,
 						LANGUAGE.NOTYOURTURN, JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
