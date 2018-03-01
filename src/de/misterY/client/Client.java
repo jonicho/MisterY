@@ -429,6 +429,9 @@ public class Client {
 	 * Updates the players table
 	 */
 	private void updatePlayersTable() {
+		if (gameClient == null) {
+			return;
+		}
 		ArrayList<Player> players = gameClient.getPlayers();
 		if (players.isEmpty()) {
 			return;
@@ -487,7 +490,7 @@ public class Client {
 	 * Updates the rounds table.
 	 */
 	private void updateRoundsTable() {
-		if (gameClient.getMap() == null) {
+		if (gameClient == null || gameClient.getMap() == null) {
 			return;
 		}
 		MeansOfTransportation[] ticketsUsed = gameClient.getTicketsUsedByMisterY();
