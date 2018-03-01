@@ -318,6 +318,7 @@ public class Client {
 					createChatRunnable();
 					createStationClickedRunnable();
 					server = input;
+					break;
 				} else {
 					infoLabel.setForeground(Color.RED);
 					infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
