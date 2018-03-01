@@ -48,7 +48,8 @@ public final class LANGUAGE {
 				CONNECT,
 				ALREADYCONNECTEDTO,
 				ENTERIP,
-				CHECKIPFORMAT;
+				CHECKIPFORMAT,
+				RETRY;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -99,6 +100,7 @@ public final class LANGUAGE {
 			ALREADYCONNECTEDTO = LANGUAGE.ENGLISH.ALREADYCONNECTEDTO;
 			ENTERIP = LANGUAGE.ENGLISH.ENTERIP;
 			CHECKIPFORMAT = LANGUAGE.ENGLISH.CHECKIPFORMAT;
+			RETRY = LANGUAGE.ENGLISH.RETRY;
 			break;
 
 		case LANGUAGE.DE:
@@ -147,6 +149,7 @@ public final class LANGUAGE {
 			ALREADYCONNECTEDTO = LANGUAGE.GERMAN.ALREADYCONNECTEDTO;
 			ENTERIP = LANGUAGE.GERMAN.ENTERIP;
 			CHECKIPFORMAT = LANGUAGE.GERMAN.CHECKIPFORMAT;
+			RETRY = LANGUAGE.GERMAN.RETRY;
 			break;
 
 		default:
@@ -201,7 +204,8 @@ public final class LANGUAGE {
 					CONNECT = "Connect",
 					ALREADYCONNECTEDTO = "Already connected to ",
 					ENTERIP = "Enter IP",
-					CHECKIPFORMAT = "Check entered IP";
+					CHECKIPFORMAT = "Check entered IP",
+					RETRY = "Retry";
 					
 					
 		
@@ -253,7 +257,8 @@ public final class LANGUAGE {
 					CONNECT = "Verbinden",
 					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
 					ENTERIP = "Gib IP ein",
-					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe";
+					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe",
+					RETRY = "Erneut versuchen";
 
 	}
 

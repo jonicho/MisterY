@@ -307,21 +307,27 @@ public class Client {
 		}
 		String input = JOptionPane.showInputDialog(frame, LANGUAGE.ENTERIP, PROTOCOL.IP);
 		new Thread(() -> {
-			infoLabel.setForeground(Color.BLACK);
-			infoLabel.setText(LANGUAGE.CONNECTING + "...");
-			gameClient = new GameClient(input, PROTOCOL.PORT);
-			if (gameClient.isConnected()) {
-				infoLabel.setText(LANGUAGE.CONNECTED + ". " + input);
-				createUpdateRunnable();
-				createErrorRunnable();
-				createChatRunnable();
-				createStationClickedRunnable();
-				server = input;
-			} else {
-				infoLabel.setForeground(Color.RED);
-				infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
-				JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTIONFAILED + "!", LANGUAGE.CONNECTIONFAILED,
-						JOptionPane.WARNING_MESSAGE);
+			while (true) {
+				infoLabel.setForeground(Color.BLACK);
+				infoLabel.setText(LANGUAGE.CONNECTING + "...");
+				gameClient = new GameClient(input, PROTOCOL.PORT);
+				if (gameClient.isConnected()) {
+					infoLabel.setText(LANGUAGE.CONNECTED + ". " + input);
+					createUpdateRunnable();
+					createErrorRunnable();
+					createChatRunnable();
+					createStationClickedRunnable();
+					server = input;
+				} else {
+					infoLabel.setForeground(Color.RED);
+					infoLabel.setText(LANGUAGE.CONNECTIONFAILED + "!");
+					int o = JOptionPane.showConfirmDialog(frame,
+							LANGUAGE.CONNECTIONFAILED + "! " + LANGUAGE.RETRY + "?", LANGUAGE.CONNECTIONFAILED,
+							JOptionPane.YES_NO_OPTION);
+					if (o != JOptionPane.OK_OPTION) {
+						break;
+					}
+				}
 			}
 		}).start();
 	}
@@ -387,7 +393,8 @@ public class Client {
 	/**
 	 * Creates a runnable that processes a click on a station
 	 */
-	private void createStationClickedRunnable() { // TODO don't check whether the movement is valid, let the server do that
+	private void createStationClickedRunnable() { // TODO don't check whether the movement is valid, let the server do
+													// that
 		canvas.setStationClickedRunnable(() -> {
 			if (gameClient.isFinished()) {
 				return;
