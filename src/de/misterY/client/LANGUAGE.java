@@ -1,4 +1,4 @@
-package de.misterY.language;
+package de.misterY.client;
 
 public final class LANGUAGE {
 

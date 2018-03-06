@@ -1,4 +1,4 @@
-package de.misterY.mapDesigner;
+package de.misterY.map;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import de.misterY.MapLoader;
 import de.misterY.client.Canvas;
 
-public class Main {
+public class MapDesigner {
 
 	private JFrame frame;
 	private Canvas canvas;
@@ -30,7 +30,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					Main window = new Main();
+					MapDesigner window = new MapDesigner();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class Main {
 	/**
 	 * Create the application.
 	 */
-	public Main() {
+	public MapDesigner() {
 		initialize();
 	}
 

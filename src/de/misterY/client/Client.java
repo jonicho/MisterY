@@ -36,7 +36,6 @@ import javax.swing.table.DefaultTableModel;
 
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
-import de.misterY.language.LANGUAGE;
 import de.misterY.net.PROTOCOL;
 import de.misterY.pathfinding.PathFinder;
 
