@@ -5,10 +5,10 @@ import java.util.Random;
 import de.misterY.Map;
 import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
+import de.misterY.PathFinder;
 import de.misterY.Station;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
-import de.misterY.pathfinding.PathFinder;
 
 public class Bot extends Client {
 	private AI Brain = new AI();

@@ -35,9 +35,9 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import de.misterY.MeansOfTransportation;
+import de.misterY.PathFinder;
 import de.misterY.Player;
 import de.misterY.net.PROTOCOL;
-import de.misterY.pathfinding.PathFinder;
 
 public class Client {
 

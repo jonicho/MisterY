@@ -1,8 +1,6 @@
-package de.misterY.pathfinding;
+package de.misterY;
 
 import java.util.ArrayList;
-
-import de.misterY.Station;
 
 public class Path {
 	private ArrayList<Station> stations = new ArrayList<>();

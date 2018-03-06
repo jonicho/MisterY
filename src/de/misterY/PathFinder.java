@@ -1,10 +1,6 @@
-package de.misterY.pathfinding;
+package de.misterY;
 
 import java.util.ArrayList;
-
-import de.misterY.Link;
-import de.misterY.MeansOfTransportation;
-import de.misterY.Station;
 
 public class PathFinder {
 

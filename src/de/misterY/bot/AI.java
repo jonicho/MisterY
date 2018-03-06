@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
+import de.misterY.PathFinder;
 import de.misterY.Player;
 import de.misterY.Station;
-import de.misterY.pathfinding.PathFinder;
 
 public class AI {
 	private ArrayList<Station> resolvedPositions = new ArrayList<Station>();

@@ -1,7 +1,6 @@
 package de.misterY;
 
 import de.misterY.net.PROTOCOL;
-import de.misterY.pathfinding.PathFinder;
 
 public class Player {
 	private String name;
