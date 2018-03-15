@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -474,7 +475,7 @@ public class Client {
 			playersTable.removeMouseListener(l);
 		}
 		final int index = thisPlayerIndex;
-		playersTable.addMouseListener(new MouseListener() {
+		playersTable.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -484,18 +485,6 @@ public class Client {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				playersTable.setRowSelectionInterval(index, index);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
 			}
 		});
 		Dimension d = playersTable.getPreferredSize();
@@ -524,7 +513,7 @@ public class Client {
 			roundsTable.removeMouseListener(l);
 		}
 		final int index = round;
-		roundsTable.addMouseListener(new MouseListener() {
+		roundsTable.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -534,18 +523,6 @@ public class Client {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				roundsTable.setRowSelectionInterval(index, index);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
 			}
 		});
 	}
