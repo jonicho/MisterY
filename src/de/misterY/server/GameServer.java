@@ -2,8 +2,8 @@ package de.misterY.server;
 
 import java.util.ArrayList;
 
-import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
+import de.misterY.map.MapLoader;
 import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
 

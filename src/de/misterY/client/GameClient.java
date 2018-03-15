@@ -3,9 +3,9 @@ package de.misterY.client;
 import java.util.ArrayList;
 
 import de.misterY.Map;
-import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Player;
+import de.misterY.map.MapLoader;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
 

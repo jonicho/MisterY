@@ -1,4 +1,4 @@
-package de.misterY;
+package de.misterY.map;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -18,6 +18,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import de.misterY.Link;
+import de.misterY.Map;
+import de.misterY.Station;
+import de.misterY.Vector2D;
 
 public class MapLoader {
 

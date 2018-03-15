@@ -3,10 +3,10 @@ package de.misterY.bot;
 import java.util.Random;
 
 import de.misterY.Map;
-import de.misterY.MapLoader;
 import de.misterY.MeansOfTransportation;
 import de.misterY.PathFinder;
 import de.misterY.Station;
+import de.misterY.map.MapLoader;
 import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
 

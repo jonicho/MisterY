@@ -13,7 +13,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import de.misterY.MapLoader;
 import de.misterY.client.Canvas;
 
 public class MapDesigner {
