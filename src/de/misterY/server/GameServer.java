@@ -248,7 +248,7 @@ public class GameServer extends Server {
 		session.checkReady();
 		if (session.isActive()) {
 			session.prepareGame(
-					MapLoader.loadMap(getClass().getResourceAsStream("/de/misterY/maps/OriginalScotlandYard.xml")));// TODO
+					MapLoader.loadMap(getClass().getResourceAsStream("/de/misterY/map/OriginalScotlandYard.xml")));// TODO
 			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.MAP, session.getMap().getMapString()), session);
 			for (User user : session.getAllUsers()) {
 				sendInfoUpdate(user, session);
