@@ -49,7 +49,8 @@ public final class LANGUAGE {
 				ALREADYCONNECTEDTO,
 				ENTERIP,
 				CHECKIPFORMAT,
-				RETRY;
+				RETRY,
+				NOT_LOGGED_IN;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -101,6 +102,7 @@ public final class LANGUAGE {
 			ENTERIP = LANGUAGE.ENGLISH.ENTERIP;
 			CHECKIPFORMAT = LANGUAGE.ENGLISH.CHECKIPFORMAT;
 			RETRY = LANGUAGE.ENGLISH.RETRY;
+			NOT_LOGGED_IN = LANGUAGE.ENGLISH.NOT_LOGGED_IN;
 			break;
 
 		case LANGUAGE.DE:
@@ -150,6 +152,7 @@ public final class LANGUAGE {
 			ENTERIP = LANGUAGE.GERMAN.ENTERIP;
 			CHECKIPFORMAT = LANGUAGE.GERMAN.CHECKIPFORMAT;
 			RETRY = LANGUAGE.GERMAN.RETRY;
+			NOT_LOGGED_IN = LANGUAGE.GERMAN.NOT_LOGGED_IN;
 			break;
 
 		default:
@@ -205,7 +208,8 @@ public final class LANGUAGE {
 					ALREADYCONNECTEDTO = "Already connected to ",
 					ENTERIP = "Enter IP",
 					CHECKIPFORMAT = "Check entered IP",
-					RETRY = "Retry";
+					RETRY = "Retry",
+					NOT_LOGGED_IN = "You are not logged in!";
 					
 					
 		
@@ -258,7 +262,8 @@ public final class LANGUAGE {
 					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
 					ENTERIP = "Gib IP ein",
 					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe",
-					RETRY = "Erneut versuchen";
+					RETRY = "Erneut versuchen",
+					NOT_LOGGED_IN = "Du bist nicht eingeloggt!";
 
 	}
 

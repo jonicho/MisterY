@@ -375,6 +375,9 @@ public class Client {
 				JOptionPane.showMessageDialog(frame, LANGUAGE.MOVEMENTISINVALID, LANGUAGE.INVALIDMOVEMENT,
 						JOptionPane.ERROR_MESSAGE);
 				return;
+			} else if (errorCode == PROTOCOL.ERRORCODES.NOT_LOGGED_IN) {
+				JOptionPane.showMessageDialog(frame, LANGUAGE.NOT_LOGGED_IN, "Error", JOptionPane.ERROR_MESSAGE);
+				return;
 			}
 			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode,
 					LANGUAGE.ERROR, JOptionPane.ERROR_MESSAGE);
