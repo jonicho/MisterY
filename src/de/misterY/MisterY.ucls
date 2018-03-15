@@ -1,267 +1,729 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="de.misterY.net.PROTOCOL.SC" project="MisterY" 
-    file="/MisterY/src/de/misterY/net/PROTOCOL.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="990" y="381"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="de.misterY.net.PROTOCOL.CS" project="MisterY" 
-    file="/MisterY/src/de/misterY/net/PROTOCOL.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="790" y="354"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="de.misterY.server.Sessions" project="MisterY" 
-    file="/MisterY/src/de/misterY/server/Sessions.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="465" y="230"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="de.misterY.net.PROTOCOL.ERRORCODES" project="MisterY" 
-    file="/MisterY/src/de/misterY/net/PROTOCOL.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1204" y="363"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="de.misterY.server.Users" project="MisterY" 
-    file="/MisterY/src/de/misterY/server/Users.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="132" y="420"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="de.misterY.Link" project="MisterY" file="/MisterY/src/de/misterY/Link.java" 
+  <class id="1" language="java" name="de.misterY.bot.Bot" project="MisterY" file="/MisterY/src/de/misterY/bot/Bot.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="121" y="1487"/>    
+    <position height="189" width="169" x="800" y="2182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="7" language="java" name="de.misterY.MeansOfTransportation" project="MisterY" 
+  <class id="2" language="java" name="de.misterY.Link" project="MisterY" file="/MisterY/src/de/misterY/Link.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="311" x="1216" y="4497"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="de.misterY.Vector2D" project="MisterY" 
+    file="/MisterY/src/de/misterY/Vector2D.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2334" y="4510"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="de.misterY.client.Client" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="693" width="200" x="2403" y="194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="de.misterY.bot.PositionPredicter" project="MisterY" 
+    file="/MisterY/src/de/misterY/bot/PositionPredicter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="273" x="840" y="3108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="de.misterY.server.GameServer" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/GameServer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="284" x="1685" y="194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="de.misterY.client.GameClient" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/GameClient.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="281" x="2101" y="1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="de.misterY.Path" project="MisterY" file="/MisterY/src/de/misterY/Path.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="197" x="561" y="3805"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="de.misterY.bot.PositionResolver" project="MisterY" 
+    file="/MisterY/src/de/misterY/bot/PositionResolver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="343" x="1216" y="3108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="de.misterY.server.Session" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/Session.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="289" x="1530" y="2182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="de.misterY.Player" project="MisterY" file="/MisterY/src/de/misterY/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="657" width="311" x="1811" y="3108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="de.misterY.map.MapDesigner" project="MisterY" 
+    file="/MisterY/src/de/misterY/map/MapDesigner.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="140" x="2443" y="2182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="de.misterY.server.User" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="157" x="1683" y="2753"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="de.misterY.map.MapLoader" project="MisterY" 
+    file="/MisterY/src/de/misterY/map/MapLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="154" x="1128" y="194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="de.misterY.client.Canvas" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/Canvas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="229" x="2403" y="2753"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="de.misterY.bot.AI" project="MisterY" file="/MisterY/src/de/misterY/bot/AI.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="262" x="1176" y="2753"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="de.misterY.server.Sessions" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/Sessions.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="204" x="1530" y="1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="de.misterY.client.LANGUAGE.ENGLISH" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/LANGUAGE.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="927" width="244" x="377" y="1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="de.misterY.server.GameServerLauncher" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/GameServerLauncher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="149" x="1328" y="194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="de.misterY.server.Users" project="MisterY" 
+    file="/MisterY/src/de/misterY/server/Users.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="189" x="1840" y="1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="21" language="java" name="de.misterY.MeansOfTransportation" project="MisterY" 
     file="/MisterY/src/de/misterY/MeansOfTransportation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1221" y="624"/>    
+    <position height="135" width="209" x="1580" y="3805"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="8" language="java" name="de.misterY.server.GameServer" project="MisterY" 
-    file="/MisterY/src/de/misterY/server/GameServer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="142" y="119"/>    
+  <class id="22" language="java" name="de.misterY.client.ChatHandler.ChatMessage" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/ChatHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="160" x="1901" y="2753"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="de.misterY.client.GameClient" project="MisterY" 
-    file="/MisterY/src/de/misterY/client/GameClient.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="954" y="621"/>    
+  <class id="23" language="java" name="de.misterY.PathFinder" project="MisterY" 
+    file="/MisterY/src/de/misterY/PathFinder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="413" x="345" y="2753"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="de.misterY.Station" project="MisterY" file="/MisterY/src/de/misterY/Station.java" 
+  <class id="24" language="java" name="de.misterY.client.LANGUAGE" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/LANGUAGE.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="981" width="244" x="519" y="194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="de.misterY.client.LANGUAGE.GERMAN" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/LANGUAGE.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="927" width="244" x="661" y="1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="de.misterY.Station" project="MisterY" file="/MisterY/src/de/misterY/Station.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="585" y="1381"/>    
+    <position height="297" width="311" x="1216" y="4160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="de.misterY.net.PROTOCOL" project="MisterY" 
-    file="/MisterY/src/de/misterY/net/PROTOCOL.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="997" y="89"/>    
+  <class id="27" language="java" name="de.misterY.client.ChatHandler" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/ChatHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="179" x="1901" y="2182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="de.misterY.server.Session" project="MisterY" 
-    file="/MisterY/src/de/misterY/server/Session.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="606" y="598"/>    
+  <class id="28" language="java" name="de.misterY.client.ClientLauncher" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/ClientLauncher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="1524" y="194"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="de.misterY.Map" project="MisterY" file="/MisterY/src/de/misterY/Map.java" 
+  <class id="29" language="java" name="de.misterY.Map" project="MisterY" file="/MisterY/src/de/misterY/Map.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="599" y="962"/>    
+    <position height="315" width="322" x="1850" y="3805"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="de.misterY.Player" project="MisterY" file="/MisterY/src/de/misterY/Player.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="140" y="1079"/>    
+  <class id="30" language="java" name="de.misterY.client.MapDrawer" project="MisterY" 
+    file="/MisterY/src/de/misterY/client/MapDrawer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="324" x="2204" y="3108"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="de.misterY.server.User" project="MisterY" 
-    file="/MisterY/src/de/misterY/server/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="144" y="677"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <association id="16">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="17" name="sessions"/>      
-      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="20" name="map"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="23" name="users"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <bendpoint x="639" y="1233"/>    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="26" name="startStations"/>      
-      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="28">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="29" name="map"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="31">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="32" name="currentStation"/>      
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="32" name="resolver"/>      
       <multiplicity id="33" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="34">    
-    <bendpoint x="516" y="1244"/>    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="35" name="stations"/>      
-      <multiplicity id="36" minimum="0" maximum="2147483647"/>    
+    <bendpoint x="788" y="2753"/>    
+    <bendpoint x="788" y="3108"/>    
+    <bendpoint x="788" y="3805"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="35" name="lastStation"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="37">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="38" name="users"/>      
-      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
+    <bendpoint x="2558" y="3108"/>    
+    <bendpoint x="2558" y="3805"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="38" name="hoveredStation"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="41" name="sessions"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
+  <nesting id="40">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="22"/>  
+  </nesting>  
+  <association id="41">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="42" name="users"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <bendpoint x="2579" y="3108"/>    
+    <bendpoint x="2579" y="3805"/>    
+    <bendpoint x="2579" y="4160"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="45" name="mousePos"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="44" name="users"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="46">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="47" name="mrY"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="49">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="50" name="player"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="52">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="4"/>  
+  <nesting id="47">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="18"/>  
   </nesting>  
-  <association id="53">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="54" name="links"/>      
-      <multiplicity id="55" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="56">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="2"/>  
-  </nesting>  
-  <association id="57">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="58" name="station"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
+  <association id="48">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="49" name="sessions"/>      
+      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="60">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="1"/>  
+  <association id="51">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="52" name="Brain"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <bendpoint x="1610" y="2753"/>    
+    <bendpoint x="1610" y="3108"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="55" name="map"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="58" name="players"/>      
+      <multiplicity id="59" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="61" name="stations"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="64" name="pos"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <bendpoint x="1164" y="3108"/>    
+    <bendpoint x="1164" y="3805"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="67" name="predictedPositions"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="69">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="25"/>  
   </nesting>  
+  <association id="70">    
+    <bendpoint x="2412" y="1215"/>    
+    <bendpoint x="2412" y="2182"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="71" name="canvas"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="74" name="station"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <bendpoint x="1849" y="2182"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="77" name="users"/>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="80" name="messages"/>      
+      <multiplicity id="81" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <bendpoint x="1225" y="3805"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="83" name="lastKnownPosition"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="86" name="gameClient"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <bendpoint x="1870" y="2182"/>    
+    <bendpoint x="1870" y="2753"/>    
+    <bendpoint x="1780" y="3108"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="89" name="ticketsUsedByMisterY"/>      
+      <multiplicity id="90" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="92" name="predicter"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="95" name="users"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="98" name="player"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="101" name="localPlayer"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="104" name="links"/>      
+      <multiplicity id="105" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <bendpoint x="1589" y="3108"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="107" name="ticketRecordMRY"/>      
+      <multiplicity id="108" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="110" name="winner"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="113" name="ticketHistory"/>      
+      <multiplicity id="114" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="116" name="map"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <bendpoint x="2110" y="2182"/>    
+    <bendpoint x="2110" y="2753"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="119" name="winner"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="122" name="startStations"/>      
+      <multiplicity id="123" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="125" name="stations"/>      
+      <multiplicity id="126" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <bendpoint x="1819" y="3805"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="128" name="currentStation"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <bendpoint x="1143" y="3108"/>    
+    <bendpoint x="1143" y="3805"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="131" name="lastMRYStation"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="134" name="canvas"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="137" name="sessions"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <bendpoint x="2131" y="2182"/>    
+    <bendpoint x="2131" y="2753"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="140" name="players"/>      
+      <multiplicity id="141" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <bendpoint x="2202" y="3805"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="143" name="hoveredStation"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <bendpoint x="1631" y="2753"/>    
+    <bendpoint x="1631" y="3108"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="146" name="ticketsUsedByMisterY"/>      
+      <multiplicity id="147" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <bendpoint x="1185" y="3108"/>    
+    <bendpoint x="1185" y="3805"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="149" name="resolvedPositions"/>      
+      <multiplicity id="150" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <bendpoint x="2152" y="2182"/>    
+    <bendpoint x="2152" y="2753"/>    
+    <bendpoint x="2152" y="3108"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="152" name="map"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="155" name="pFinder"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <bendpoint x="1652" y="2753"/>    
+    <bendpoint x="1652" y="3108"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="158" name="map"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="161" name="mapDrawer"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="164" name="chatHandler"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="167" name="fillingSession"/>      
+      <multiplicity id="168" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="170" name="mryHandle"/>      
+      <multiplicity id="171" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="173" name="player"/>      
+      <multiplicity id="174" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <bendpoint x="2173" y="3108"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="176" name="map"/>      
+      <multiplicity id="177" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="178">    
+    <bendpoint x="809" y="2753"/>    
+    <bendpoint x="809" y="3108"/>    
+    <bendpoint x="809" y="3805"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="179" name="myStation"/>      
+      <multiplicity id="180" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="182" name="map"/>      
+      <multiplicity id="183" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
