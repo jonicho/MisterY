@@ -312,6 +312,9 @@ public class Client {
 			return;
 		}
 		String input = JOptionPane.showInputDialog(frame, LANGUAGE.ENTERIP, PROTOCOL.IP);
+		if (input == null) {
+			return;
+		}
 		new Thread(() -> {
 			while (true) {
 				infoLabel.setForeground(Color.BLACK);
@@ -535,7 +538,7 @@ public class Client {
 			JOptionPane.showMessageDialog(frame, LANGUAGE.ALREADYLOGGEDIN);
 			return;
 		}
-		if (!gameClient.isConnected()) {
+		if (gameClient == null || !gameClient.isConnected()) {
 			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTIONNEEDED);
 			return;
 		}
@@ -556,7 +559,7 @@ public class Client {
 	 */
 	private void sendMessage() {
 		String message = chatTextField.getText().trim();
-		if (message.isEmpty()) {
+		if (message.isEmpty() || gameClient == null) {
 			return;
 		}
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.CHAT_POST, message));
@@ -567,7 +570,7 @@ public class Client {
 	 * Requests a turn skip if it's this players turn
 	 */
 	private void skipTurn() {
-		if (gameClient.getCurrentPlayer() != gameClient.getPlayerByName(ownName)) {
+		if (gameClient == null || gameClient.getCurrentPlayer() != gameClient.getPlayerByName(ownName)) {
 			return;
 		}
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.SKIP_TURN));
