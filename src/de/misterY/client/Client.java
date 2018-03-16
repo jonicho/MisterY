@@ -122,6 +122,10 @@ public class Client {
 		mntmReady.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (gameClient == null || !gameClient.isConnected()) {
+					JOptionPane.showMessageDialog(frame, LANGUAGE.NOT_LOGGED_IN, "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				gameClient.send(PROTOCOL.CS.READY);
 			}
 		});
