@@ -23,7 +23,6 @@ public class GameServer extends Server {
 
 	@Override
 	public void processMessage(String clientIP, int clientPort, String message) {
-		System.out.println(message);
 		User user = users.getUserByAdress(clientIP, clientPort);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 		if (user == null) {
@@ -33,6 +32,8 @@ public class GameServer extends Server {
 				return;
 			}
 		}
+		
+		Logger.logMessage(message, user, true);
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
@@ -181,6 +182,7 @@ public class GameServer extends Server {
 	 */
 	private void sendToUser(String msg, User user) {
 		send(user.getIp(), user.getPort(), msg);
+		Logger.logMessage(msg, user, false);
 	}
 
 	/**
