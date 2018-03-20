@@ -33,7 +33,7 @@ public class GameServer extends Server {
 			}
 		}
 		
-		Logger.logMessage(message, user, true);
+		Logger.logMessage(message, user, sessions.getSessionByUser(user), true);
 
 		switch (msgParts[0]) {
 		case PROTOCOL.CS.LOGIN:
@@ -182,7 +182,7 @@ public class GameServer extends Server {
 	 */
 	private void sendToUser(String msg, User user) {
 		send(user.getIp(), user.getPort(), msg);
-		Logger.logMessage(msg, user, false);
+		Logger.logMessage(msg, user, sessions.getSessionByUser(user), false);
 	}
 
 	/**

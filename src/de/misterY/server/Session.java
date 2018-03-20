@@ -18,6 +18,7 @@ public class Session {
 	private ArrayList<User> users = new ArrayList<User>();
 	private ArrayList<MeansOfTransportation> ticketsUsedByMisterY = new ArrayList<MeansOfTransportation>();
 	private User winner = null;
+	private final int id;
 
 	/**
 	 * Creates a new session with the given users
@@ -25,7 +26,8 @@ public class Session {
 	 * @param user
 	 *            The users to add to the session
 	 */
-	public Session(User... user) {
+	public Session(int id, User... user) {
+		this.id = id;
 		for (int i = 0; i < user.length; i++) {
 			users.add(user[i]);
 		}
@@ -42,6 +44,10 @@ public class Session {
 
 	public int getRound() {
 		return round;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	/**

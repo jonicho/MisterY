@@ -5,10 +5,11 @@ import java.util.ArrayList;
 public class Sessions {
 	private ArrayList<Session> sessions;
 	private Session fillingSession;
+	private int lastId = 0;
 
 	public Sessions() {
 		sessions = new ArrayList<Session>();
-		Session s = new Session();
+		Session s = new Session(0);
 		sessions.add(s);
 		fillingSession = sessions.get(0);
 	}
@@ -26,7 +27,7 @@ public class Sessions {
 			fillingSession.addUser(u);
 		} else {
 			sessions.add(fillingSession);
-			fillingSession = new Session();
+			fillingSession = new Session(++lastId);
 			fillingSession.addUser(u);
 		}
 	}
