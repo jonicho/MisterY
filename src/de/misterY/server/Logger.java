@@ -3,6 +3,7 @@ package de.misterY.server;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.misterY.net.PROTOCOL;
@@ -21,7 +22,7 @@ public class Logger {
 	}
 
 	public static void log(String msg) {
-		String output = "[" + new Date().toString() + "] " + msg;
+		String output = "[" + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.S").format(new Date()) + "] " + msg;
 		System.out.println(output);
 		try {
 			FileWriter fw = new FileWriter(logFile, true);
