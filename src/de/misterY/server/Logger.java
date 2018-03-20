@@ -18,7 +18,8 @@ public class Logger {
 	public static void logMessage(String msg, User user, Session session, boolean incoming) {
 		log((session != null ? ("Session " + session.getId() + ": ") : "")
 				+ (incoming ? "Got message from \"" : "Sent message to \"") + user.getPlayer().getName() + "\": "
-				+ msg.replace(PROTOCOL.SPLIT, "::"));
+				+ (msg.startsWith("map" + PROTOCOL.SPLIT + "<?xml") ? "map::[map]"
+						: msg.replace(PROTOCOL.SPLIT, "::")));
 	}
 
 	public static void log(String msg) {
