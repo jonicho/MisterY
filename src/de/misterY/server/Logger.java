@@ -10,7 +10,7 @@ import de.misterY.net.PROTOCOL;
 
 /**
  * A logger used to log things. Writes logs to System.out and the log file. The
- * log file is named in the following way:
+ * log file is named in the following way:<br>
  * misterY_log_yyyy-MM-dd_HH-mm-ss-SSS.txt
  *
  */
@@ -44,7 +44,7 @@ public class Logger {
 
 	/**
 	 * Logs a message. Writes a line in System.out and appends a line to the log
-	 * file with the current time and the message in the following format:
+	 * file with the current time and the message in the following format:<br>
 	 * [yyyy.MM.dd HH:mm:ss.SSS] message
 	 * 
 	 * @param msg
