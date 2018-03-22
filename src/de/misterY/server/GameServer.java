@@ -14,6 +14,7 @@ public class GameServer extends Server {
 
 	public GameServer(int port) {
 		super(port);
+		Logger.log("Server started");
 	}
 
 	@Override
