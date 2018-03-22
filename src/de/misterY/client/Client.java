@@ -230,7 +230,6 @@ public class Client {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				chatTextPane.setCaretPosition(chatTextPane.getDocument().getLength());
-				System.out.println("cha");
 			}
 		});
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
