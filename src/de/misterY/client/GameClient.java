@@ -14,6 +14,7 @@ public class GameClient extends Client {
 	private Runnable updateRunnable;
 	private Runnable errorRunnable;
 	private Runnable chatRunnable;
+	private Runnable connectionLostRunnable;
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private MeansOfTransportation[] ticketsUsedByMisterY = new MeansOfTransportation[0];
 	private Map map;
@@ -72,6 +73,13 @@ public class GameClient extends Client {
 			if (winner != null) {
 				finished = true;
 			}
+		}
+	}
+	
+	@Override
+	public void connectionLost() {
+		if (connectionLostRunnable != null) {
+			connectionLostRunnable.run();
 		}
 	}
 
@@ -215,6 +223,10 @@ public class GameClient extends Client {
 
 	public void setChatRunnable(Runnable chatRunnable) {
 		this.chatRunnable = chatRunnable;
+	}
+	
+	public void setConnectionLostRunnable(Runnable connectionLostRunnable) {
+		this.connectionLostRunnable = connectionLostRunnable;
 	}
 
 	public Map getMap() {

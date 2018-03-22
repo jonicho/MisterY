@@ -50,7 +50,8 @@ public final class LANGUAGE {
 				ENTERIP,
 				CHECKIPFORMAT,
 				RETRY,
-				NOT_LOGGED_IN;
+				NOT_LOGGED_IN,
+				CONNECTION_LOST;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -103,6 +104,7 @@ public final class LANGUAGE {
 			CHECKIPFORMAT = LANGUAGE.ENGLISH.CHECKIPFORMAT;
 			RETRY = LANGUAGE.ENGLISH.RETRY;
 			NOT_LOGGED_IN = LANGUAGE.ENGLISH.NOT_LOGGED_IN;
+			CONNECTION_LOST = LANGUAGE.ENGLISH.CONNECTION_LOST;
 			break;
 
 		case LANGUAGE.DE:
@@ -153,6 +155,7 @@ public final class LANGUAGE {
 			CHECKIPFORMAT = LANGUAGE.GERMAN.CHECKIPFORMAT;
 			RETRY = LANGUAGE.GERMAN.RETRY;
 			NOT_LOGGED_IN = LANGUAGE.GERMAN.NOT_LOGGED_IN;
+			CONNECTION_LOST = LANGUAGE.GERMAN.CONNECTION_LOST;
 			break;
 
 		default:
@@ -209,7 +212,8 @@ public final class LANGUAGE {
 					ENTERIP = "Enter IP",
 					CHECKIPFORMAT = "Check entered IP",
 					RETRY = "Retry",
-					NOT_LOGGED_IN = "You are not logged in!";
+					NOT_LOGGED_IN = "You are not logged in!",
+					CONNECTION_LOST = "Connection lost!";
 					
 					
 		
@@ -263,7 +267,8 @@ public final class LANGUAGE {
 					ENTERIP = "Gib IP ein",
 					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe",
 					RETRY = "Erneut versuchen",
-					NOT_LOGGED_IN = "Du bist nicht eingeloggt!";
+					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
+					CONNECTION_LOST = "Verbindung verloren!";
 
 	}
 

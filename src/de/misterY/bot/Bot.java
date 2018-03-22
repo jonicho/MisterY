@@ -69,6 +69,11 @@ public class Bot extends Client {
 		}
 	}
 	
+	@Override
+	public void connectionLost() {
+		
+	}
+	
 	
 	
 	public void handleTurn() {

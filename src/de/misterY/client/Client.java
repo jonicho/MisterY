@@ -328,6 +328,7 @@ public class Client {
 					createUpdateRunnable();
 					createErrorRunnable();
 					createChatRunnable();
+					createConnectionLostRunnable();
 					createStationClickedRunnable();
 					server = input;
 					break;
@@ -403,6 +404,14 @@ public class Client {
 	private void createChatRunnable() {
 		gameClient.setChatRunnable(() -> {
 			chatTextPane.setText(gameClient.getChatHandler().getChatString());
+		});
+	}
+	
+	private void createConnectionLostRunnable() {
+		gameClient.setConnectionLostRunnable(() -> {
+			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTION_LOST, LANGUAGE.ERROR, JOptionPane.ERROR_MESSAGE);
+			gameClient = null;
+			canvas.setStationClickedRunnable(null);
 		});
 	}
 
