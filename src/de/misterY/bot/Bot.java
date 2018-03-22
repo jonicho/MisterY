@@ -12,7 +12,6 @@ import de.misterY.net.PROTOCOL;
 
 public class Bot extends Client {
 	private AI Brain = new AI();
-	private PathFinder pFinder = new PathFinder();
 	private Station lastStation;
 	private int targetID;
 	private Random ran = new Random();
@@ -86,9 +85,8 @@ public class Bot extends Client {
 	 */
 	
 	
-	@SuppressWarnings("static-access")
 	private void MoveToStation(Station pStation) {
-		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),pFinder.findPath(myStation, pStation).getFollowingStation(myStation).getId()));
+		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),PathFinder.findPath(myStation, pStation).getFollowingStation(myStation).getId()));
 	}
 
 }

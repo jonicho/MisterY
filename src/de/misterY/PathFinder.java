@@ -3,6 +3,8 @@ package de.misterY;
 import java.util.ArrayList;
 
 public class PathFinder {
+	private PathFinder() {
+	}
 
 	/**
 	 * Tries to find the shortest path between the given start station and end
