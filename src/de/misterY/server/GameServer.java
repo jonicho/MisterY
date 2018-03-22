@@ -32,7 +32,7 @@ public class GameServer extends Server {
 				return;
 			}
 		}
-		
+
 		Logger.logMessage(message, user, sessions.getSessionByUser(user), true);
 
 		switch (msgParts[0]) {
@@ -182,7 +182,9 @@ public class GameServer extends Server {
 	 */
 	private void sendToUser(String msg, User user) {
 		send(user.getIp(), user.getPort(), msg);
-		Logger.logMessage(msg, user, sessions.getSessionByUser(user), false);
+		if (!msg.equals(PROTOCOL.SC.OK)) {
+			Logger.logMessage(msg, user, sessions.getSessionByUser(user), false);
+		}
 	}
 
 	/**
