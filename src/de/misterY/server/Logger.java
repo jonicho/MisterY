@@ -12,7 +12,7 @@ public class Logger {
 	private static final File logFile;
 
 	static {
-		logFile = new File("misterY_log_" + new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss.S").format(new Date()) + ".txt");
+		logFile = new File("misterY_log_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS").format(new Date()) + ".txt");
 	}
 
 	public static void logMessage(String msg, User user, Session session, boolean incoming) {
