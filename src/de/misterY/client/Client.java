@@ -315,6 +315,7 @@ public class Client {
 			return;
 		}
 		String input = JOptionPane.showInputDialog(frame, LANGUAGE.ENTERIP, PROTOCOL.IP);
+		reset();
 		if (input == null) {
 			return;
 		}
@@ -344,6 +345,18 @@ public class Client {
 				}
 			}
 		}).start();
+	}
+	
+	/**
+	 * Resets the client
+	 */
+	private void reset() {
+		canvas = null;
+		gameClient = null;
+		ownName = null;
+		server = null;
+		frame.dispose();
+		initialize();
 	}
 
 	/**
