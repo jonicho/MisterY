@@ -23,6 +23,7 @@ public class Bot extends Client {
 		super(pServerIP, pServerPort);
 		myName = "BOT"+ran.nextInt(9999);
 		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN,myName));
+		Brain.initialize(Brain.localPlayer.getCurrentStation(),Brain.localPlayer);
 	}
 
 	@Override
@@ -79,8 +80,9 @@ public class Bot extends Client {
 	public void handleTurn() {
 		Brain.doAnalysis();
 		targetID = Brain.getTarget();
-		if (targetID == -1 || targetID == -5) {
-			
+		if (targetID > 0) 
+		{
+			MoveToStation(map.getStationById(targetID));
 		}
 	}
 	

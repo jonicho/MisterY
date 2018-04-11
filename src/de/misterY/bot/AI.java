@@ -15,7 +15,7 @@ public class AI {
 	private PositionResolver resolver;
 	private PositionPredicter predicter;
 	private Station lastMRYStation;
-	private Player localPlayer;
+	public Player localPlayer;
 	private Integer moveState;
 	private Player mryHandle;
 	private boolean isChasing = false;
