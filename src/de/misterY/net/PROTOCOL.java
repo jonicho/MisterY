@@ -29,7 +29,8 @@ public final class PROTOCOL {
 				CHAT_POST = "cpst", // Base [split] message
 				REQUEST_BOT = "reqbot", // Base
 				READY = "rdy", // Base
-				SKIP_TURN = "skt"; // Base
+				SKIP_TURN = "skt", // Base [split] amount
+				ADD_BOT = "addbot";// Base 
 	}
 
 	public final class ERRORCODES {

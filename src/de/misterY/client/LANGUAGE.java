@@ -51,7 +51,8 @@ public final class LANGUAGE {
 				CHECKIPFORMAT,
 				RETRY,
 				NOT_LOGGED_IN,
-				CONNECTION_LOST;
+				CONNECTION_LOST,
+				ADD_BOT;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -105,6 +106,7 @@ public final class LANGUAGE {
 			RETRY = LANGUAGE.ENGLISH.RETRY;
 			NOT_LOGGED_IN = LANGUAGE.ENGLISH.NOT_LOGGED_IN;
 			CONNECTION_LOST = LANGUAGE.ENGLISH.CONNECTION_LOST;
+			ADD_BOT = LANGUAGE.ENGLISH.ADD_BOT;
 			break;
 
 		case LANGUAGE.DE:
@@ -156,6 +158,7 @@ public final class LANGUAGE {
 			RETRY = LANGUAGE.GERMAN.RETRY;
 			NOT_LOGGED_IN = LANGUAGE.GERMAN.NOT_LOGGED_IN;
 			CONNECTION_LOST = LANGUAGE.GERMAN.CONNECTION_LOST;
+			ADD_BOT = LANGUAGE.ENGLISH.ADD_BOT;
 			break;
 
 		default:
@@ -213,7 +216,8 @@ public final class LANGUAGE {
 					CHECKIPFORMAT = "Check entered IP",
 					RETRY = "Retry",
 					NOT_LOGGED_IN = "You are not logged in!",
-					CONNECTION_LOST = "Connection lost!";
+					CONNECTION_LOST = "Connection lost!",
+					ADD_BOT = "Connect new bot to server";
 					
 					
 		
@@ -268,7 +272,8 @@ public final class LANGUAGE {
 					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe",
 					RETRY = "Erneut versuchen",
 					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
-					CONNECTION_LOST = "Verbindung verloren!";
+					CONNECTION_LOST = "Verbindung verloren!",
+					ADD_BOT = "Neuen Bot zum Server verbinden";
 
 	}
 

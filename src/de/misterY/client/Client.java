@@ -66,6 +66,7 @@ public class Client {
 	private JButton btnSkip;
 	private JMenuItem mntmConnect;
 	private String server;
+	private JMenuItem mntmAddBot;
 
 	/**
 	 * Create the application.
@@ -130,6 +131,16 @@ public class Client {
 			}
 		});
 		mnOptions.add(mntmReady);
+		
+		mntmAddBot = new JMenuItem(LANGUAGE.ADD_BOT);
+		mntmAddBot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(gameClient.isConnected()) {
+					gameClient.send(PROTOCOL.CS.ADD_BOT + PROTOCOL.SPLIT + 1);
+				}
+			}
+		});
+		mnOptions.add(mntmAddBot);
 
 		mnLanguage = new JMenu(LANGUAGE.STR_LANGUAGE);
 		menuBar.add(mnLanguage);
@@ -621,6 +632,7 @@ public class Client {
 		lblPlayerInfo.setText(LANGUAGE.PLAYERINFO);
 		btnSkip.setText(LANGUAGE.SKIP);
 		mntmConnect.setText(LANGUAGE.CONNECT);
+		mntmAddBot.setText(LANGUAGE.ADD_BOT);
 
 		updatePlayersTable();
 		updateRoundsTable();

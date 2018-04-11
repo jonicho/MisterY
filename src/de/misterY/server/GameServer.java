@@ -3,6 +3,7 @@ package de.misterY.server;
 import java.util.ArrayList;
 
 import de.misterY.MeansOfTransportation;
+import de.misterY.bot.Bot;
 import de.misterY.map.MapLoader;
 import de.misterY.net.PROTOCOL;
 import de.misterY.net.Server;
@@ -54,6 +55,8 @@ public class GameServer extends Server {
 		case PROTOCOL.CS.SKIP_TURN:
 			processSkipTurn(user);
 			break;
+		case PROTOCOL.CS.ADD_BOT:
+			processAddBot(user, msgParts);
 
 		default:
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
@@ -93,6 +96,17 @@ public class GameServer extends Server {
 			users.addUser(nUser);
 			sessions.placeUserInSession(nUser);
 			sendToUser(PROTOCOL.SC.OK, nUser);
+		}
+	}
+	
+	private void processAddBot(User user, String[] msgParts) {
+		if(msgParts.length != 2) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
+			return;
+		}
+		int amount = Integer.parseInt(msgParts[1]);
+		for(int i = 0; i < amount; i++) {
+			Bot bot = new Bot("127.0.0.1", 54699);
 		}
 	}
 
