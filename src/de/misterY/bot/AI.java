@@ -51,7 +51,7 @@ public class AI {
 	 *            The Ticket MRY last used
 	 */
 	public void updateData(Station pStation, MeansOfTransportation[] tickets) {
-		if (resolvedPositions.size() == 1 && localPlayer.getCurrentStation().equals(resolvedPositions.get(0))
+		if (resolvedPositions != null && resolvedPositions.size() == 1 && localPlayer.getCurrentStation().equals(resolvedPositions.get(0))
 				|| localPlayer.getCurrentStation().equals(lastMRYStation)) {
 			isChasing = true;
 		} else {
@@ -76,6 +76,7 @@ public class AI {
 		// Check everything in order of importance
 		if (resolvedPositions == null) {
 			moveState = 0;
+			return;
 		}
 		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1) {
 			moveState = 2;

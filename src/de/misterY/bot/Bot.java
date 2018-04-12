@@ -31,7 +31,6 @@ public class Bot extends Client {
 
 	@Override
 	public void processMessage(String message) {
-		System.out.println(message);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 
 		switch (msgParts[0]) {
@@ -65,7 +64,7 @@ public class Bot extends Client {
 			map = MapLoader.loadMap(msgParts[1]);
 			break;
 		case PROTOCOL.SC.TURN:
-			handleTurn();
+			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
 			break;
@@ -82,7 +81,10 @@ public class Bot extends Client {
 
 	}
 
-	public void handleTurn() {
+	public void handleTurn(String[] msgParts) {
+		if (!msgParts[1].equals(myName)) {
+			return;
+		}
 		brain.doAnalysis();
 		brain.MoveExecute();
 		targetID = brain.getTarget();
@@ -90,7 +92,9 @@ public class Bot extends Client {
 			MoveToStation(map.getStationById(targetID));
 		}
 		if (targetID == -1 || targetID == -5) {
-			MoveToStation(PathFinder.findPathToNearestStation(myStation.getLinks().get((int) (myStation.getLinks().size() * Math.random())).getStation(), MeansOfTransportation.Taxi).getLastStation());
+			MoveToStation(PathFinder.findPathToNearestStation(
+					myStation.getLinks().get((int) (myStation.getLinks().size() * Math.random())).getStation(),
+					MeansOfTransportation.Taxi).getLastStation());
 		}
 	}
 
@@ -101,7 +105,7 @@ public class Bot extends Client {
 
 	private void MoveToStation(Station pStation) {
 		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
-				PathFinder.findPath(myStation, pStation).getFollowingStation(myStation).getId()));
+				PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
 	}
 
 }
