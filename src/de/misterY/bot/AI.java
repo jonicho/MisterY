@@ -60,9 +60,9 @@ public class AI {
 		lastMRYStation = pStation;
 		ticketRecordMRY.clear();
 		ticketRecordMRY.addAll(Arrays.asList(tickets));
-		resolver.updateData(tickets[tickets.length-1], pStation);
+		resolver.updateData(tickets[tickets.length - 1], pStation);
 		resolvedPositions = resolver.resolve(RESOLVER_PRECISION);
-		if (resolvedPositions.size() == 1) {
+		if (resolvedPositions != null && resolvedPositions.size() == 1) {
 			predictedPositions = predicter.getAllPredictions(resolvedPositions.get(0), mryHandle);
 		}
 
@@ -74,11 +74,14 @@ public class AI {
 	 */
 	public void doAnalysis() {
 		// Check everything in order of importance
+		if (resolvedPositions == null) {
+			moveState = 0;
+		}
 		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1) {
 			moveState = 2;
 			return;
 		}
-		if (resolvedPositions.size() == 1 ) {
+		if (resolvedPositions.size() == 1) {
 			moveState = 1;
 			return;
 		}
@@ -92,7 +95,7 @@ public class AI {
 		}
 
 	}
-	
+
 	public void MoveExecute() {
 		switch (moveState) {
 		case 0: // Nothing usefull todo, just go in a random direction
@@ -110,7 +113,7 @@ public class AI {
 			break;
 		}
 	}
-	
+
 	public int getTarget() {
 		return targetID;
 	}

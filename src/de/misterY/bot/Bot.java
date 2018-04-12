@@ -40,24 +40,24 @@ public class Bot extends Client {
 		case PROTOCOL.SC.OK:
 			break;
 		case PROTOCOL.SC.CHAT_UPDATE:
-			//ignore the chat
+			// ignore the chat
 			break;
 		case PROTOCOL.SC.INFO_UPDATE:
-			if (msgParts[1] == myName) {
+			if (msgParts[1].equals(myName)) {
 				myStation = map.getStationById(Integer.parseInt(msgParts[5]));
+				brain.localPlayer.setCurrentStation(myStation);
 			}
 			if (Boolean.parseBoolean(msgParts[6])) {
 				Station currentStation = map.getStationById(Integer.parseInt(msgParts[5]));
-				if (lastStation != null && lastStation != currentStation) {
+				if (currentStation != null && lastStation != currentStation) {
 					lastStation = currentStation;
 				}
 			}
 			break;
 		case PROTOCOL.SC.USED_TICKETS:
-			MeansOfTransportation[] pTickets = new MeansOfTransportation[msgParts.length-1];
-			for(int i = 1; i < msgParts.length; i++) 
-			{
-				pTickets[i-1] = MeansOfTransportation.valueOf(msgParts[i]);
+			MeansOfTransportation[] pTickets = new MeansOfTransportation[msgParts.length - 1];
+			for (int i = 1; i < msgParts.length; i++) {
+				pTickets[i - 1] = MeansOfTransportation.valueOf(msgParts[i]);
 			}
 			brain.updateData(lastStation, pTickets);
 			break;
@@ -88,6 +88,9 @@ public class Bot extends Client {
 		targetID = brain.getTarget();
 		if (targetID > 0) {
 			MoveToStation(map.getStationById(targetID));
+		}
+		if (targetID == -1 || targetID == -5) {
+			MoveToStation(PathFinder.findPathToNearestStation(myStation.getLinks().get((int) (myStation.getLinks().size() * Math.random())).getStation(), MeansOfTransportation.Taxi).getLastStation());
 		}
 	}
 

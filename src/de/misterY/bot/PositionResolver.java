@@ -112,7 +112,7 @@ public class PositionResolver {
 	 *            the last known station of MRY
 	 */
 	public void updateData(MeansOfTransportation lastTicket, Station lastStation) {
-		if (lastStation.equals(lastKnownPosition)) {
+		if (lastStation != null) {
 			isVisible = true;
 		} else {
 			isVisible = false;
