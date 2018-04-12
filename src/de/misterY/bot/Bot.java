@@ -54,8 +54,12 @@ public class Bot extends Client {
 			}
 			break;
 		case PROTOCOL.SC.USED_TICKETS:
-			MeansOfTransportation pTicket = MeansOfTransportation.valueOf(msgParts[1]);
-			brain.updateData(lastStation, pTicket);
+			MeansOfTransportation[] pTickets = new MeansOfTransportation[msgParts.length-1];
+			for(int i = 1; i < msgParts.length; i++) 
+			{
+				pTickets[i-1] = MeansOfTransportation.valueOf(msgParts[i]);
+			}
+			brain.updateData(lastStation, pTickets);
 			break;
 		case PROTOCOL.SC.MAP:
 			map = MapLoader.loadMap(msgParts[1]);

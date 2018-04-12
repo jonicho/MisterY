@@ -1,6 +1,7 @@
 package de.misterY.bot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
@@ -49,7 +50,7 @@ public class AI {
 	 * @param ticket
 	 *            The Ticket MRY last used
 	 */
-	public void updateData(Station pStation, MeansOfTransportation ticket) {
+	public void updateData(Station pStation, MeansOfTransportation[] tickets) {
 		if (resolvedPositions.size() == 1 && localPlayer.getCurrentStation().equals(resolvedPositions.get(0))
 				|| localPlayer.getCurrentStation().equals(lastMRYStation)) {
 			isChasing = true;
@@ -57,8 +58,9 @@ public class AI {
 			isChasing = false;
 		}
 		lastMRYStation = pStation;
-		ticketRecordMRY.add(ticket);
-		resolver.updateData(ticket, pStation);
+		ticketRecordMRY.clear();
+		ticketRecordMRY.addAll(Arrays.asList(tickets));
+		resolver.updateData(tickets[tickets.length-1], pStation);
 		resolvedPositions = resolver.resolve(RESOLVER_PRECISION);
 		if (resolvedPositions.size() == 1) {
 			predictedPositions = predicter.getAllPredictions(resolvedPositions.get(0), mryHandle);
