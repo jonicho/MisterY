@@ -57,7 +57,7 @@ public class GameServer extends Server {
 			break;
 		case PROTOCOL.CS.ADD_BOT:
 			processAddBot(user, msgParts);
-
+			break;
 		default:
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
 			break;
