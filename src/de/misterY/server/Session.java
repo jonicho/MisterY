@@ -114,8 +114,16 @@ public class Session {
 			return;
 		}
 		Collections.shuffle(users);
-		users.get(0).getPlayer().setMrY(true);
-
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getPlayer().getName().startsWith("BOT")) {
+				continue;
+			}
+			users.get(i).getPlayer().setMrY(true);
+			User temp = users.get(i);
+			users.set(i, users.get(0));
+			users.set(0, temp);
+			break;
+		}
 		for (User user : users) {
 			user.getPlayer().start(map, map.getInitialTickets(MeansOfTransportation.Taxi, user.getPlayer().isMrY()),
 					map.getInitialTickets(MeansOfTransportation.Bus, user.getPlayer().isMrY()),
