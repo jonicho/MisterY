@@ -84,6 +84,7 @@ public class Bot extends Client {
 
 	public void handleTurn() {
 		brain.doAnalysis();
+		brain.MoveExecute();
 		targetID = brain.getTarget();
 		if (targetID > 0) {
 			MoveToStation(map.getStationById(targetID));
