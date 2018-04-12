@@ -99,6 +99,12 @@ public class GameServer extends Server {
 		}
 	}
 	
+	/**
+	 * processes request for adding bots to the server
+	 * 
+	 * @param user
+	 * @param msgParts
+	 */
 	private void processAddBot(User user, String[] msgParts) {
 		if(msgParts.length != 2) {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);

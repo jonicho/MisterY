@@ -53,7 +53,8 @@ public final class LANGUAGE {
 				NOT_LOGGED_IN,
 				CONNECTION_LOST,
 				ADD_BOT,
-				USERNAME_INVALID;
+				USERNAME_INVALID,
+				ALREADY_RUNNING;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -109,6 +110,7 @@ public final class LANGUAGE {
 			CONNECTION_LOST = LANGUAGE.ENGLISH.CONNECTION_LOST;
 			ADD_BOT = LANGUAGE.ENGLISH.ADD_BOT;
 			USERNAME_INVALID = LANGUAGE.ENGLISH.USERNAME_INVALID;
+			ALREADY_RUNNING = LANGUAGE.ENGLISH.ALREADY_RUNNING;
 			break;
 
 		case LANGUAGE.DE:
@@ -162,6 +164,7 @@ public final class LANGUAGE {
 			CONNECTION_LOST = LANGUAGE.GERMAN.CONNECTION_LOST;
 			ADD_BOT = LANGUAGE.GERMAN.ADD_BOT;
 			USERNAME_INVALID = LANGUAGE.GERMAN.USERNAME_INVALID;
+			ALREADY_RUNNING = LANGUAGE.GERMAN.ALREADY_RUNNING;
 			break;
 
 		default:
@@ -221,7 +224,8 @@ public final class LANGUAGE {
 					NOT_LOGGED_IN = "You are not logged in!",
 					CONNECTION_LOST = "Connection lost!",
 					ADD_BOT = "Connect new bot to server",
-					USERNAME_INVALID = "Username invalid";
+					USERNAME_INVALID = "Username invalid",
+					ALREADY_RUNNING = "The game is already running";
 					
 					
 		
@@ -278,7 +282,8 @@ public final class LANGUAGE {
 					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
 					CONNECTION_LOST = "Verbindung verloren!",
 					ADD_BOT = "Neuen Bot zum Server verbinden",
-					USERNAME_INVALID = "Nutzername ungültig";
+					USERNAME_INVALID = "Nutzername ungültig",
+					ALREADY_RUNNING = "Das Spiel läuft bereits";
 
 	}
 
