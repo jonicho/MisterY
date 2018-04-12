@@ -20,9 +20,9 @@ public class Bot extends Client {
 	private Map map;
 	private Station myStation;
 
-	public Bot(String pServerIP, int pServerPort) {
+	public Bot(String pServerIP, int pServerPort, String name) {
 		super(pServerIP, pServerPort);
-		myName = "BOT" + ran.nextInt(9999);
+		myName = name;
 		send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, myName));
 		send(PROTOCOL.CS.READY);
 		Player player = new Player(myName);

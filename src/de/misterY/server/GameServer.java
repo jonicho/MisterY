@@ -12,6 +12,7 @@ public class GameServer extends Server {
 
 	private Sessions sessions = new Sessions();
 	private Users users = new Users();
+	private ArrayList<String> allowedBotNames = new ArrayList<String>();
 
 	public GameServer(int port) {
 		super(port);
@@ -83,10 +84,11 @@ public class GameServer extends Server {
 	 * @param msgParts
 	 */
 	private void processLogin(User user, String[] msgParts) {
-		if (msgParts.length < 2 || msgParts[1].startsWith("BOT")) {
+		if (msgParts.length < 2 || (msgParts[1].startsWith("BOT")) && !allowedBotNames.contains(msgParts[1])) {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USERNAME_INVALID), user);
 			return;
 		}
+		allowedBotNames.remove(msgParts[1]);
 		if (users.getUserByAdress(user.getIp(), user.getPort()) != null) {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.ALREADY_LOGGED_IN), user);
 		} else if (users.isNameTaken(msgParts[1])) {
@@ -98,7 +100,7 @@ public class GameServer extends Server {
 			sendToUser(PROTOCOL.SC.OK, nUser);
 		}
 	}
-	
+
 	/**
 	 * processes request for adding bots to the server
 	 * 
@@ -106,13 +108,15 @@ public class GameServer extends Server {
 	 * @param msgParts
 	 */
 	private void processAddBot(User user, String[] msgParts) {
-		if(msgParts.length != 2) {
+		if (msgParts.length != 2) {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
 			return;
 		}
 		int amount = Integer.parseInt(msgParts[1]);
-		for(int i = 0; i < amount; i++) {
-			Bot bot = new Bot("127.0.0.1", 54699);
+		for (int i = 0; i < amount; i++) {
+			String botName = "BOT" + (int) (Math.random() * 1000000);
+			allowedBotNames.add(botName);
+			new Bot("127.0.0.1", 54699, botName);
 		}
 	}
 
