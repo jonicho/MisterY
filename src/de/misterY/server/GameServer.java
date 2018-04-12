@@ -83,8 +83,8 @@ public class GameServer extends Server {
 	 * @param msgParts
 	 */
 	private void processLogin(User user, String[] msgParts) {
-		if (msgParts.length < 2) {
-			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);
+		if (msgParts.length < 2 || msgParts[1].startsWith("BOT")) {
+			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.USERNAME_INVALID), user);
 			return;
 		}
 		if (users.getUserByAdress(user.getIp(), user.getPort()) != null) {
@@ -99,6 +99,12 @@ public class GameServer extends Server {
 		}
 	}
 	
+	/**
+	 * processes request for adding bots to the server
+	 * 
+	 * @param user
+	 * @param msgParts
+	 */
 	private void processAddBot(User user, String[] msgParts) {
 		if(msgParts.length != 2) {
 			sendToUser(PROTOCOL.getErrorMessage(PROTOCOL.ERRORCODES.INVALID_MESSAGE), user);

@@ -135,9 +135,7 @@ public class Client {
 		mntmAddBot = new JMenuItem(LANGUAGE.ADD_BOT);
 		mntmAddBot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(gameClient.isConnected()) {
-					gameClient.send(PROTOCOL.CS.ADD_BOT + PROTOCOL.SPLIT + 1);
-				}
+				//TODO handleBotRequest();
 			}
 		});
 		mnOptions.add(mntmAddBot);
@@ -306,6 +304,20 @@ public class Client {
 
 		frame.setVisible(true);
 	}
+	
+	//TODO needed to be fixed
+	/*private void handleBotRequest() {
+		if(gameClient.isConnected()) {
+			if(!gameClient.isStarted()) {
+				gameClient.send(PROTOCOL.CS.ADD_BOT + PROTOCOL.SPLIT + 1);
+			} else {
+				JOptionPane.showMessageDialog(frame, LANGUAGE.ALREADY_RUNNING, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		} else {
+			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTIONNEEDED, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}*/
 
 	/**
 	 * Updates the title with the given user name in the following way: "MisterY" +
@@ -415,6 +427,12 @@ public class Client {
 				return;
 			} else if (errorCode == PROTOCOL.ERRORCODES.NOT_LOGGED_IN) {
 				JOptionPane.showMessageDialog(frame, LANGUAGE.NOT_LOGGED_IN, "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			} else if (errorCode == PROTOCOL.ERRORCODES.USERNAME_INVALID) {
+				ownName = null;
+				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+				updateTitle("");
+				login();
 				return;
 			}
 			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode,
