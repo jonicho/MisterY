@@ -416,6 +416,12 @@ public class Client {
 			} else if (errorCode == PROTOCOL.ERRORCODES.NOT_LOGGED_IN) {
 				JOptionPane.showMessageDialog(frame, LANGUAGE.NOT_LOGGED_IN, "Error", JOptionPane.ERROR_MESSAGE);
 				return;
+			} else if (errorCode == PROTOCOL.ERRORCODES.USERNAME_INVALID) {
+				ownName = null;
+				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+				updateTitle("");
+				login();
+				return;
 			}
 			JOptionPane.showMessageDialog(frame, LANGUAGE.ERROROCURRED + " " + LANGUAGE.ERRORCODE + " " + errorCode,
 					LANGUAGE.ERROR, JOptionPane.ERROR_MESSAGE);

@@ -52,7 +52,8 @@ public final class LANGUAGE {
 				RETRY,
 				NOT_LOGGED_IN,
 				CONNECTION_LOST,
-				ADD_BOT;
+				ADD_BOT,
+				USERNAME_INVALID;
 
 	public static void loadLanguage(String lang) {
 		switch (lang) {
@@ -107,6 +108,7 @@ public final class LANGUAGE {
 			NOT_LOGGED_IN = LANGUAGE.ENGLISH.NOT_LOGGED_IN;
 			CONNECTION_LOST = LANGUAGE.ENGLISH.CONNECTION_LOST;
 			ADD_BOT = LANGUAGE.ENGLISH.ADD_BOT;
+			USERNAME_INVALID = LANGUAGE.ENGLISH.USERNAME_INVALID;
 			break;
 
 		case LANGUAGE.DE:
@@ -159,6 +161,7 @@ public final class LANGUAGE {
 			NOT_LOGGED_IN = LANGUAGE.GERMAN.NOT_LOGGED_IN;
 			CONNECTION_LOST = LANGUAGE.GERMAN.CONNECTION_LOST;
 			ADD_BOT = LANGUAGE.GERMAN.ADD_BOT;
+			USERNAME_INVALID = LANGUAGE.GERMAN.USERNAME_INVALID;
 			break;
 
 		default:
@@ -217,7 +220,8 @@ public final class LANGUAGE {
 					RETRY = "Retry",
 					NOT_LOGGED_IN = "You are not logged in!",
 					CONNECTION_LOST = "Connection lost!",
-					ADD_BOT = "Connect new bot to server";
+					ADD_BOT = "Connect new bot to server",
+					USERNAME_INVALID = "Username invalid";
 					
 					
 		
@@ -273,7 +277,8 @@ public final class LANGUAGE {
 					RETRY = "Erneut versuchen",
 					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
 					CONNECTION_LOST = "Verbindung verloren!",
-					ADD_BOT = "Neuen Bot zum Server verbinden";
+					ADD_BOT = "Neuen Bot zum Server verbinden",
+					USERNAME_INVALID = "Nutzername ungültig";
 
 	}
 
