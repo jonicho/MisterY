@@ -158,7 +158,7 @@ public final class LANGUAGE {
 			RETRY = LANGUAGE.GERMAN.RETRY;
 			NOT_LOGGED_IN = LANGUAGE.GERMAN.NOT_LOGGED_IN;
 			CONNECTION_LOST = LANGUAGE.GERMAN.CONNECTION_LOST;
-			ADD_BOT = LANGUAGE.ENGLISH.ADD_BOT;
+			ADD_BOT = LANGUAGE.GERMAN.ADD_BOT;
 			break;
 
 		default:
@@ -268,7 +268,7 @@ public final class LANGUAGE {
 					SKIP = "\u00dcberspringen",
 					CONNECT = "Verbinden",
 					ALREADYCONNECTEDTO = "Bereits verbunden mit ",
-					ENTERIP = "Gib IP ein",
+					ENTERIP = "Gib eine IP ein",
 					CHECKIPFORMAT = "\u00dcberpr\u00fcfe die IP Eingabe",
 					RETRY = "Erneut versuchen",
 					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
