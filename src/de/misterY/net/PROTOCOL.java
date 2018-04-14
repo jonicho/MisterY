@@ -18,7 +18,8 @@ public final class PROTOCOL {
 				MAP = "map", // Base [split] map
 				TURN = "turn", // Base [split] name [split] round
 				PLAYER_LEFT = "plleft", // Base [split] name
-				WIN = "win"; // Base [split] name
+				WIN = "win", // Base [split] name
+				LOBBY_UPDATE = "lbupdt"; // Base [split] name [split] ready
 	}
 
 	public final class CS {

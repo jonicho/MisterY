@@ -3,6 +3,7 @@ package de.misterY.server;
 import java.util.ArrayList;
 
 import de.misterY.MeansOfTransportation;
+import de.misterY.Player;
 import de.misterY.bot.Bot;
 import de.misterY.map.MapLoader;
 import de.misterY.net.PROTOCOL;
@@ -70,10 +71,11 @@ public class GameServer extends Server {
 		User user = users.getUserByAdress(clientIP, clientPort);
 		users.removeUser(user);
 		Session session = sessions.getSessionByUser(user);
-		if (session.removeUser(user) || session.isActive()) {
+		if (session != null && session.removeUser(user) || session.isActive()) {
 			sessions.removeSession(session);
 		}
-		sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.PLAYER_LEFT, user.getPlayer().getName()), session);
+		if (session != null)
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.PLAYER_LEFT, user.getPlayer().getName()), session);
 	}
 
 	/**
@@ -98,6 +100,7 @@ public class GameServer extends Server {
 			users.addUser(nUser);
 			sessions.placeUserInSession(nUser);
 			sendToUser(PROTOCOL.SC.OK, nUser);
+			sendLobbyUpdate(sessions.getSessionByUser(nUser));
 		}
 	}
 
@@ -244,7 +247,7 @@ public class GameServer extends Server {
 	}
 
 	/**
-	 * Sends a info update of the given user to the given session, also considering
+	 * Sends an info update of the given user to the given session, also considering
 	 * whether misterY is showing.
 	 * 
 	 * @param user
@@ -263,6 +266,18 @@ public class GameServer extends Server {
 	}
 
 	/**
+	 * Sends a lobby update to the given session.
+	 * 
+	 * @param session
+	 */
+	private void sendLobbyUpdate(Session session) {
+		for (User user : session.getAllUsers()) {
+			sendToSession(PROTOCOL.buildMessage(PROTOCOL.SC.LOBBY_UPDATE, user.getPlayer().getName(),
+					user.getPlayer().isReady()), session);
+		}
+	}
+
+	/**
 	 * Handles a "Ready" from the user
 	 * 
 	 * @param u
@@ -274,6 +289,7 @@ public class GameServer extends Server {
 			return;
 		}
 		u.getPlayer().setReady(true);
+		sendLobbyUpdate(session);
 		session.checkReady();
 		if (session.isActive()) {
 			session.prepareGame(

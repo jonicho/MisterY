@@ -16,6 +16,7 @@ public class Bot extends Client {
 	private String myName;
 	private Map map;
 	private Station myStation;
+	private boolean started;
 
 	public Bot(String pServerIP, int pServerPort, String name) {
 		super(pServerIP, pServerPort);
@@ -55,7 +56,8 @@ public class Bot extends Client {
 			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
-			close();
+			if (started)
+				close();
 			break;
 		case PROTOCOL.SC.WIN:
 			break;
@@ -71,6 +73,7 @@ public class Bot extends Client {
 	}
 
 	private void handleTurn(String[] msgParts) {
+		started = true;
 		if (!msgParts[1].equals(myName)) {
 			return;
 		}

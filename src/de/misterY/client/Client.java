@@ -388,6 +388,10 @@ public class Client {
 	 */
 	private void createUpdateRunnable() {
 		gameClient.setUpdateRunnable(() -> {
+			if (!gameClient.isStarted()) {
+				updateLobbyTable();
+				return;
+			}
 			if (gameClient.getMap() != null) {
 				canvas.setMap(gameClient.getMap());
 			}
@@ -496,6 +500,50 @@ public class Client {
 			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, canvas.getHoveredStation().getId(),
 					selection + ""));
 		});
+	}
+
+	/**
+	 * Updates the players table
+	 */
+	private void updateLobbyTable() {
+		if (gameClient == null) {
+			return;
+		}
+		ArrayList<Player> players = gameClient.getPlayersInLobby();
+		if (players.isEmpty()) {
+			return;
+		}
+		String[] columnNames = { LANGUAGE.NAME, LANGUAGE.READY };
+		String[][] data = new String[players.size()][6];
+		int thisPlayerIndex = 0;
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			data[i][0] = player.getName();
+			data[i][1] = player.isReady() ? "X" : "";
+			if (ownName.equals(player.getName())) {
+				thisPlayerIndex = i;
+			}
+		}
+		playersTable.setModel(new DefaultTableModel(data, columnNames));
+		playersTable.setRowSelectionInterval(thisPlayerIndex, thisPlayerIndex);
+		for (MouseListener l : playersTable.getMouseListeners()) {
+			playersTable.removeMouseListener(l);
+		}
+		final int index = thisPlayerIndex;
+		playersTable.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				playersTable.setRowSelectionInterval(index, index);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				playersTable.setRowSelectionInterval(index, index);
+			}
+		});
+		Dimension d = playersTable.getPreferredSize();
+		scrollPane.setPreferredSize(new Dimension(d.width, playersTable.getRowHeight() * 2));
 	}
 
 	/**

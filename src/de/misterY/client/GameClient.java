@@ -16,6 +16,7 @@ public class GameClient extends Client {
 	private Runnable chatRunnable;
 	private Runnable connectionLostRunnable;
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Player> playersInLobby = new ArrayList<>();
 	private MeansOfTransportation[] ticketsUsedByMisterY = new MeansOfTransportation[0];
 	private Map map;
 	private ChatHandler chatHandler = new ChatHandler();
@@ -31,7 +32,6 @@ public class GameClient extends Client {
 
 	@Override
 	public void processMessage(String message) {
-		System.out.println(message);
 		String[] msgParts = message.split(PROTOCOL.SPLIT);
 
 		switch (msgParts[0]) {
@@ -60,9 +60,13 @@ public class GameClient extends Client {
 			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
+			handlePlayerLeft(msgParts); 
 			break;
 		case PROTOCOL.SC.WIN:
 			handleWin(msgParts);
+			break;
+		case PROTOCOL.SC.LOBBY_UPDATE:
+			handleLobbyUpdate(msgParts);
 			break;
 
 		default:
@@ -75,12 +79,38 @@ public class GameClient extends Client {
 			}
 		}
 	}
-	
+
 	@Override
 	public void connectionLost() {
 		if (connectionLostRunnable != null) {
 			connectionLostRunnable.run();
 		}
+	}
+
+	private void handlePlayerLeft(String[] msgParts) {
+		Player player = null;
+		for (Player p : playersInLobby) {
+			if (p.getName().equals(msgParts[1])) {
+				player = p;
+				break;
+			}
+		}
+		playersInLobby.remove(player);
+	}
+
+	private void handleLobbyUpdate(String[] msgParts) {
+		Player player = null;
+		for (Player p : playersInLobby) {
+			if (p.getName().equals(msgParts[1])) {
+				player = p;
+				break;
+			}
+		}
+		if (player == null) {
+			player = new Player(msgParts[1]);
+			playersInLobby.add(player);
+		}
+		player.setReady(Boolean.parseBoolean(msgParts[2]));
 	}
 
 	/**
@@ -166,6 +196,10 @@ public class GameClient extends Client {
 		return players;
 	}
 
+	public ArrayList<Player> getPlayersInLobby() {
+		return playersInLobby;
+	}
+
 	/**
 	 * Returns the player with the given name.<br>
 	 * Returns null if there is no player with the given name.
@@ -224,7 +258,7 @@ public class GameClient extends Client {
 	public void setChatRunnable(Runnable chatRunnable) {
 		this.chatRunnable = chatRunnable;
 	}
-	
+
 	public void setConnectionLostRunnable(Runnable connectionLostRunnable) {
 		this.connectionLostRunnable = connectionLostRunnable;
 	}
