@@ -3,7 +3,6 @@ package de.misterY.bot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
 import de.misterY.Path;
 import de.misterY.PathFinder;
@@ -17,8 +16,8 @@ public class AI {
 	private PositionResolver resolver;
 	private PositionPredicter predicter;
 	private Station lastMRYStation;
-	public Player localPlayer;
-	private Integer moveState;
+	private Player localPlayer;
+	private int moveState;
 	private Player mryHandle;
 	private boolean isChasing = false;
 	private int RESOLVER_PRECISION = 4;
@@ -78,30 +77,21 @@ public class AI {
 		// Check everything in order of importance
 		if (resolvedPositions == null) {
 			moveState = 0;
-			return;
-		}
-		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1
+		} else if (resolvedPositions.size() == 1 && predictedPositions.size() == 1
 				&& resolvedPositions.get(0) != localPlayer.getCurrentStation()
 				&& predictedPositions.get(0) != localPlayer.getCurrentStation()) {
 			moveState = 2;
-			return;
-		}
-		if (resolvedPositions.size() == 1 && resolvedPositions.get(0) != localPlayer.getCurrentStation()) {
+		} else if (resolvedPositions.size() == 1 && resolvedPositions.get(0) != localPlayer.getCurrentStation()) {
 			moveState = 1;
-			return;
-		}
-		if (isChasing) {
+		} else if (isChasing) {
 			moveState = 5;
-			return;
-		}
-
-		else {
+		} else {
 			moveState = 0;
 		}
 
 	}
 
-	public void MoveExecute() {
+	public void moveExecute() {
 		switch (moveState) {
 		case 0: // Nothing usefull todo, just go in a random direction
 			targetID = -1;
@@ -130,5 +120,9 @@ public class AI {
 
 	public void setMryHandle(Player mryHandle) {
 		this.mryHandle = mryHandle;
+	}
+
+	public Player getLocalPlayer() {
+		return localPlayer;
 	}
 }

@@ -22,18 +22,9 @@ public class PositionPredicter {
 		boolean hasBusTickets;
 		boolean hasUndergroundTickets;
 		boolean hasTaxiTickets;
-		if (player.getBusTickets() > 0)
-			hasBusTickets = true;
-		else
-			hasBusTickets = false;
-		if (player.getTaxiTickets() > 0)
-			hasTaxiTickets = true;
-		else
-			hasTaxiTickets = false;
-		if (player.getUndergroundTickets() > 0)
-			hasUndergroundTickets = true;
-		else
-			hasUndergroundTickets = false;
+		hasTaxiTickets = player.getTaxiTickets() > 0;
+		hasBusTickets = player.getBusTickets() > 0;
+		hasUndergroundTickets = player.getUndergroundTickets() > 0;
 		ArrayList<Link> stationLinks = station.getLinks();
 		ArrayList<Link> possibleLinks = new ArrayList<Link>();
 		for (Link l : stationLinks) {
@@ -60,7 +51,7 @@ public class PositionPredicter {
 	 * @return
 	 */
 	public boolean canPredictDefinitePosition(Station station, Player player) {
-		return (predictPositions(station, player).size()) == 1;
+		return predictPositions(station, player).size() == 1;
 	}
 
 	/**

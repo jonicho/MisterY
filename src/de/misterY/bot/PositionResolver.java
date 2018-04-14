@@ -13,7 +13,8 @@ public class PositionResolver {
 	private int blindTurns;
 	private boolean isVisible;
 
-	public PositionResolver() {}
+	public PositionResolver() {
+	}
 
 	/**
 	 * Initializes the Resolver
@@ -38,7 +39,6 @@ public class PositionResolver {
 		} else {
 			// initialize for resolving
 			Station[][] layers = new Station[blindTurns][1024];
-			int pathCount = 0;
 			layers[0][0] = lastKnownPosition;
 			ArrayList<Station> layerResults = new ArrayList<Station>();
 			ArrayList<Station> preDump = new ArrayList<Station>();
@@ -66,7 +66,8 @@ public class PositionResolver {
 			}
 			// We are done Resolving, lets convert & evaluate Results
 			for (int x = 0; x < 1024; x++) {
-				if (layers[blindTurns][x] == null) break;
+				if (layers[blindTurns][x] == null)
+					break;
 				if (!result.contains(layers[blindTurns][x])) {
 					result.add(layers[blindTurns][x]);
 				}
@@ -80,7 +81,6 @@ public class PositionResolver {
 		}
 	}
 
-	
 	/**
 	 * Returns all stations that can be reached from a given station with a given
 	 * ticket
@@ -126,7 +126,4 @@ public class PositionResolver {
 			blindTurns++;
 		}
 	}
-
-	
-
 }

@@ -460,8 +460,7 @@ public class Client {
 	/**
 	 * Creates a runnable that processes a click on a station
 	 */
-	private void createStationClickedRunnable() { // TODO don't check whether the movement is valid, let the server do
-													// that
+	private void createStationClickedRunnable() {
 		canvas.setStationClickedRunnable(() -> {
 			if (gameClient.isFinished()) {
 				return;

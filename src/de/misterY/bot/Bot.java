@@ -1,7 +1,5 @@
 package de.misterY.bot;
 
-import java.util.Random;
-
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
 import de.misterY.PathFinder;
@@ -15,7 +13,6 @@ public class Bot extends Client {
 	private AI brain = new AI();
 	private Station lastStation;
 	private int targetID;
-	private Random ran = new Random();
 	private String myName;
 	private Map map;
 	private Station myStation;
@@ -78,14 +75,14 @@ public class Bot extends Client {
 			return;
 		}
 		brain.doAnalysis();
-		brain.MoveExecute();
+		brain.moveExecute();
 		targetID = brain.getTarget();
 		if (targetID > 0) {
-			MoveToStation(map.getStationById(targetID));
+			moveToStation(map.getStationById(targetID));
 		}
 		if (targetID == -1 || targetID == -5) {
 			Station[] possibleStations = PathFinder.findPossibleStations(myStation);
-			MoveToStation(possibleStations[(int) (Math.random() * possibleStations.length)]);
+			moveToStation(possibleStations[(int) (Math.random() * possibleStations.length)]);
 		}
 	}
 
@@ -99,7 +96,7 @@ public class Bot extends Client {
 
 		if (name.equals(myName)) {
 			myStation = map.getStationById(currentStationId);
-			brain.localPlayer.setCurrentStation(myStation);
+			brain.getLocalPlayer().setCurrentStation(myStation);
 		}
 		if (isMrY) {
 			Station currentStation = map.getStationById(currentStationId);
@@ -120,7 +117,7 @@ public class Bot extends Client {
 	 * 
 	 */
 
-	private void MoveToStation(Station pStation) {
+	private void moveToStation(Station pStation) {
 		try {
 			this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
 					PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
