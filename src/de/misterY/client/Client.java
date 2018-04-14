@@ -138,7 +138,7 @@ public class Client {
 		mntmAddBot = new JMenuItem(LANGUAGE.ADD_BOT);
 		mntmAddBot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO handleBotRequest();
+				handleBotRequest();
 			}
 		});
 		mntmAddBot.setEnabled(false);
@@ -311,19 +311,11 @@ public class Client {
 		frame.setVisible(true);
 	}
 
-	//TODO needed to be fixed
-	/*private void handleBotRequest() {
-		if(gameClient.isConnected()) {
-			if(!gameClient.isStarted()) {
-				gameClient.send(PROTOCOL.CS.ADD_BOT + PROTOCOL.SPLIT + 1);
-			} else {
-				JOptionPane.showMessageDialog(frame, LANGUAGE.ALREADY_RUNNING, "Error", JOptionPane.ERROR_MESSAGE);
-			}
-			
-		} else {
-			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTIONNEEDED, "Error", JOptionPane.ERROR_MESSAGE);
+	private void handleBotRequest() {
+		if (gameClient != null && gameClient.isConnected() && !gameClient.isStarted()) {
+			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.ADD_BOT, 1));
 		}
-	}*/
+	}
 
 	/**
 	 * Updates the title with the given user name in the following way: "MisterY" +
