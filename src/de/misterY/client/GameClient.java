@@ -10,7 +10,6 @@ import de.misterY.net.Client;
 import de.misterY.net.PROTOCOL;
 
 public class GameClient extends Client {
-
 	private Runnable updateRunnable;
 	private Runnable errorRunnable;
 	private Runnable chatRunnable;
@@ -209,6 +208,11 @@ public class GameClient extends Client {
 	 */
 	public Player getPlayerByName(String name) {
 		for (Player player : players) {
+			if (player.getName().equals(name)) {
+				return player;
+			}
+		}
+		for (Player player : playersInLobby) {
 			if (player.getName().equals(name)) {
 				return player;
 			}

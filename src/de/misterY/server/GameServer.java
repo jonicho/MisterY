@@ -189,6 +189,9 @@ public class GameServer extends Server {
 	 */
 	private void processSkipTurn(User user) {
 		Session session = sessions.getSessionByUser(user);
+		if (!session.isActive()) {
+			return;
+		}
 		session.endTurn();
 		sendInfoUpdate(user, session);
 		if (session.getWinner() != null) {
