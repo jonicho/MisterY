@@ -58,6 +58,7 @@ public class Bot extends Client {
 			handleTurn(msgParts);
 			break;
 		case PROTOCOL.SC.PLAYER_LEFT:
+			close();
 			break;
 		case PROTOCOL.SC.WIN:
 			break;
