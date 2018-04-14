@@ -109,6 +109,7 @@ public class Client {
 				login();
 			}
 		});
+		mntmLogin.setEnabled(false);
 
 		mntmConnect = new JMenuItem(LANGUAGE.CONNECT);
 		mntmConnect.addActionListener(new ActionListener() {
@@ -128,16 +129,19 @@ public class Client {
 					return;
 				}
 				gameClient.send(PROTOCOL.CS.READY);
+				mntmReady.setEnabled(false);
 			}
 		});
+		mntmReady.setEnabled(false);
 		mnOptions.add(mntmReady);
-		
+
 		mntmAddBot = new JMenuItem(LANGUAGE.ADD_BOT);
 		mntmAddBot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO handleBotRequest();
 			}
 		});
+		mntmAddBot.setEnabled(false);
 		mnOptions.add(mntmAddBot);
 
 		mnLanguage = new JMenu(LANGUAGE.STR_LANGUAGE);
@@ -274,6 +278,7 @@ public class Client {
 				sendMessage();
 			}
 		});
+		btnSend.setEnabled(false);
 		panel_4.add(btnSend, BorderLayout.EAST);
 
 		lblPlayerInfo = new JLabel(LANGUAGE.PLAYERINFO);
@@ -293,6 +298,7 @@ public class Client {
 				skipTurn();
 			}
 		});
+		btnSkip.setEnabled(false);
 		GridBagConstraints gbc_btnSkip = new GridBagConstraints();
 		gbc_btnSkip.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSkip.gridx = 1;
@@ -304,7 +310,7 @@ public class Client {
 
 		frame.setVisible(true);
 	}
-	
+
 	//TODO needed to be fixed
 	/*private void handleBotRequest() {
 		if(gameClient.isConnected()) {
@@ -348,6 +354,8 @@ public class Client {
 				infoLabel.setText(LANGUAGE.CONNECTING + "...");
 				gameClient = new GameClient(input, PROTOCOL.PORT);
 				if (gameClient.isConnected()) {
+					mntmConnect.setEnabled(false);
+					mntmLogin.setEnabled(true);
 					infoLabel.setText(LANGUAGE.CONNECTED + ". " + input);
 					createUpdateRunnable();
 					createErrorRunnable();
@@ -369,7 +377,7 @@ public class Client {
 			}
 		}).start();
 	}
-	
+
 	/**
 	 * Resets the client
 	 */
@@ -388,6 +396,8 @@ public class Client {
 	 */
 	private void createUpdateRunnable() {
 		gameClient.setUpdateRunnable(() -> {
+			mntmAddBot.setEnabled(!gameClient.isStarted());
+			btnSkip.setEnabled(!gameClient.isStarted());
 			if (!gameClient.isStarted()) {
 				updateLobbyTable();
 				return;
@@ -435,6 +445,7 @@ public class Client {
 			} else if (errorCode == PROTOCOL.ERRORCODES.USERNAME_INVALID) {
 				ownName = null;
 				JOptionPane.showMessageDialog(frame, LANGUAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+				mntmLogin.setEnabled(true);
 				updateTitle("");
 				login();
 				return;
@@ -452,10 +463,11 @@ public class Client {
 			chatTextPane.setText(gameClient.getChatHandler().getChatString());
 		});
 	}
-	
+
 	private void createConnectionLostRunnable() {
 		gameClient.setConnectionLostRunnable(() -> {
 			JOptionPane.showMessageDialog(frame, LANGUAGE.CONNECTION_LOST, LANGUAGE.ERROR, JOptionPane.ERROR_MESSAGE);
+			mntmConnect.setEnabled(true);
 			gameClient = null;
 			canvas.setStationClickedRunnable(null);
 		});
@@ -651,6 +663,9 @@ public class Client {
 		gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.LOGIN, username));
 		infoLabel.setForeground(Color.BLACK);
 		infoLabel.setText(LANGUAGE.LOGGEDIN);
+		mntmLogin.setEnabled(false);
+		mntmReady.setEnabled(true);
+		btnSend.setEnabled(true);
 		updateTitle(username);
 	}
 

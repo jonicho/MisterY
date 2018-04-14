@@ -3,7 +3,6 @@ package de.misterY.server;
 import java.util.ArrayList;
 
 import de.misterY.MeansOfTransportation;
-import de.misterY.Player;
 import de.misterY.bot.Bot;
 import de.misterY.map.MapLoader;
 import de.misterY.net.PROTOCOL;
