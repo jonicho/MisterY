@@ -135,7 +135,7 @@ public class GameClient extends Client {
 		boolean isMrY = Boolean.parseBoolean(msgParts[6]);
 
 		Player player = getPlayerByName(name);
-		if (player == null) {
+		if (!players.contains(player)) {
 			player = new Player(name);
 			player.setMap(map);
 			players.add(player);

@@ -397,7 +397,7 @@ public class Client {
 	private void createUpdateRunnable() {
 		gameClient.setUpdateRunnable(() -> {
 			mntmAddBot.setEnabled(!gameClient.isStarted());
-			btnSkip.setEnabled(!gameClient.isStarted());
+			btnSkip.setEnabled(gameClient.isStarted());
 			if (!gameClient.isStarted()) {
 				updateLobbyTable();
 				return;
