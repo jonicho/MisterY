@@ -140,41 +140,36 @@ public class PathFinder {
 	}
 
 	/**
-	 * Tries to find the shortest path to the nearest station of the given means of
-	 * transportation.<br>
-	 * If there is more than one shortest path to more than one station of the given
-	 * means of transportation, the first one is returned.<br>
-	 * Returns null if the nearest station of the given means of transportation is
-	 * not reachable.
+	 * Returns all Stations that are reachable in one step.
 	 * 
 	 * @param start
 	 *            The station where the path starts
-	 * @param type
-	 *            The means of transportation of the end station
+	 * @param considerStart
+	 *            Whether the start station should be considered
 	 * @return The path
 	 */
-	public static Path findPathToNearestStation(Station start, MeansOfTransportation type) {
-		if (start.isMeansOfTransportation(type)) {
-			return new Path(start);
-		}
+	public static Station[] findPossibleStations(Station start) {
 		ArrayList<Path> possiblePaths = new ArrayList<>();
 		ArrayList<Station> consideredStations = new ArrayList<>();
+		ArrayList<Station> resultStations = new ArrayList<>();
 		consideredStations.add(start);
 		possiblePaths.add(new Path(start));
+		MeansOfTransportation mof = MeansOfTransportation.Taxi;
 		while (true) {
 			ArrayList<Path> toRemove = new ArrayList<>();
 			ArrayList<Path> toAdd = new ArrayList<>();
 			for (Path path : possiblePaths) {
 				for (Link link : path.getLastStation().getLinks()) {
 					Station station = link.getStation();
-					if (!consideredStations.contains(station)) {
+					if (!link.isMeansOfTransportation(mof) || consideredStations.contains(station))
+						continue;
+					consideredStations.add(station);
+					if (!station.isMeansOfTransportation(mof)) {
 						Path nextPath = path.getClone();
 						nextPath.addStation(station);
-						if (station.isMeansOfTransportation(type)) {
-							return nextPath;
-						}
-						consideredStations.add(station);
 						toAdd.add(nextPath);
+					} else if (!resultStations.contains(station)){
+						resultStations.add(station);
 					}
 				}
 				toRemove.add(path);
@@ -182,7 +177,21 @@ public class PathFinder {
 			possiblePaths.addAll(toAdd);
 			possiblePaths.removeAll(toRemove);
 			if (possiblePaths.isEmpty()) {
-				return null;
+				switch (mof) {
+				case Taxi:
+					mof = start.isBus() ? MeansOfTransportation.Bus
+							: (start.isUnderground() ? MeansOfTransportation.Underground : null);
+					break;
+				case Bus:
+					mof = start.isUnderground() ? MeansOfTransportation.Underground : null;
+					break;
+				default:
+					mof = null;
+					break;
+				}
+				if (mof == null) {
+					return resultStations.toArray(new Station[0]);
+				}
 			}
 		}
 	}

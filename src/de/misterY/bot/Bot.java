@@ -42,16 +42,7 @@ public class Bot extends Client {
 			// ignore the chat
 			break;
 		case PROTOCOL.SC.INFO_UPDATE:
-			if (msgParts[1].equals(myName)) {
-				myStation = map.getStationById(Integer.parseInt(msgParts[5]));
-				brain.localPlayer.setCurrentStation(myStation);
-			}
-			if (Boolean.parseBoolean(msgParts[6])) {
-				Station currentStation = map.getStationById(Integer.parseInt(msgParts[5]));
-				if (currentStation != null && lastStation != currentStation) {
-					lastStation = currentStation;
-				}
-			}
+			handleInfoUpdate(msgParts);
 			break;
 		case PROTOCOL.SC.USED_TICKETS:
 			MeansOfTransportation[] pTickets = new MeansOfTransportation[msgParts.length - 1];
@@ -81,7 +72,7 @@ public class Bot extends Client {
 
 	}
 
-	public void handleTurn(String[] msgParts) {
+	private void handleTurn(String[] msgParts) {
 		if (!msgParts[1].equals(myName)) {
 			return;
 		}
@@ -92,9 +83,34 @@ public class Bot extends Client {
 			MoveToStation(map.getStationById(targetID));
 		}
 		if (targetID == -1 || targetID == -5) {
-			MoveToStation(PathFinder.findPathToNearestStation(
-					myStation.getLinks().get((int) (myStation.getLinks().size() * Math.random())).getStation(),
-					MeansOfTransportation.Taxi).getLastStation());
+			Station[] possibleStations = PathFinder.findPossibleStations(myStation);
+			MoveToStation(possibleStations[(int) (Math.random() * possibleStations.length)]);
+		}
+	}
+
+	private void handleInfoUpdate(String[] msgParts) {
+		String name = msgParts[1];
+		int taxiTickets = Integer.parseInt(msgParts[2]);
+		int busTickets = Integer.parseInt(msgParts[3]);
+		int undergroundTickets = Integer.parseInt(msgParts[4]);
+		int currentStationId = Integer.parseInt(msgParts[5]);
+		boolean isMrY = Boolean.parseBoolean(msgParts[6]);
+
+		if (name.equals(myName)) {
+			myStation = map.getStationById(currentStationId);
+			brain.localPlayer.setCurrentStation(myStation);
+		}
+		if (isMrY) {
+			Station currentStation = map.getStationById(currentStationId);
+			Player mryHandle = new Player(name);
+			mryHandle.setTaxiTickets(taxiTickets);
+			mryHandle.setBusTickets(busTickets);
+			mryHandle.setUndergroundTickets(undergroundTickets);
+			mryHandle.setCurrentStation(currentStation);
+			brain.setMryHandle(mryHandle);
+			if (currentStation != null && lastStation != currentStation) {
+				lastStation = currentStation;
+			}
 		}
 	}
 
@@ -104,8 +120,12 @@ public class Bot extends Client {
 	 */
 
 	private void MoveToStation(Station pStation) {
-		this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
-				PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
+		try {
+			this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
+					PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

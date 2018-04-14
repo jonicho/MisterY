@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import de.misterY.Map;
 import de.misterY.MeansOfTransportation;
+import de.misterY.Path;
 import de.misterY.PathFinder;
 import de.misterY.Player;
 import de.misterY.Station;
@@ -51,7 +52,8 @@ public class AI {
 	 *            The Ticket MRY last used
 	 */
 	public void updateData(Station pStation, MeansOfTransportation[] tickets) {
-		if (resolvedPositions != null && resolvedPositions.size() == 1 && localPlayer.getCurrentStation().equals(resolvedPositions.get(0))
+		if (resolvedPositions != null && resolvedPositions.size() == 1
+				&& localPlayer.getCurrentStation().equals(resolvedPositions.get(0))
 				|| localPlayer.getCurrentStation().equals(lastMRYStation)) {
 			isChasing = true;
 		} else {
@@ -78,11 +80,13 @@ public class AI {
 			moveState = 0;
 			return;
 		}
-		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1) {
+		if (resolvedPositions.size() == 1 && predictedPositions.size() == 1
+				&& resolvedPositions.get(0) != localPlayer.getCurrentStation()
+				&& predictedPositions.get(0) != localPlayer.getCurrentStation()) {
 			moveState = 2;
 			return;
 		}
-		if (resolvedPositions.size() == 1) {
+		if (resolvedPositions.size() == 1 && resolvedPositions.get(0) != localPlayer.getCurrentStation()) {
 			moveState = 1;
 			return;
 		}
@@ -103,10 +107,15 @@ public class AI {
 			targetID = -1;
 			break;
 		case 1: // Go to Definitive Resolved Position
-			targetID = resolvedPositions.get(0).getId();
-			break;
 		case 2: // Go to Definitive Predicted Position
-			targetID = predictedPositions.get(0).getId();
+			Path path = PathFinder.findPath(localPlayer.getCurrentStation(),
+					(moveState == 1 ? resolvedPositions : predictedPositions).get(0));
+			Station targetStation = path.getLastStation();
+			while (targetStation != null && PathFinder.getPossibleMeansOfTransportation(localPlayer.getCurrentStation(),
+					targetStation).length == 0) {
+				targetStation = path.getPreviousStation(targetStation);
+			}
+			targetID = targetStation.getId();
 			break;
 		case 5: // We are chasing MRY & are one turn behind him, pick a link that matches his
 				// ticket to maybe get him
@@ -117,5 +126,9 @@ public class AI {
 
 	public int getTarget() {
 		return targetID;
+	}
+
+	public void setMryHandle(Player mryHandle) {
+		this.mryHandle = mryHandle;
 	}
 }

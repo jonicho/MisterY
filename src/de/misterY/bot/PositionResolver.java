@@ -114,9 +114,9 @@ public class PositionResolver {
 	public void updateData(MeansOfTransportation lastTicket, Station lastStation) {
 		if (lastStation != null) {
 			isVisible = true;
+			lastKnownPosition = lastStation;
 		} else {
 			isVisible = false;
-			lastKnownPosition = lastStation;
 		}
 		if (isVisible) {
 			ticketHistory.clear();

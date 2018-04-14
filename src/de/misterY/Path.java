@@ -38,8 +38,27 @@ public class Path {
 		return stations;
 	}
 
+	public Station getFirstStation() {
+		return stations.get(0);
+	}
+
 	public Station getLastStation() {
 		return stations.get(stations.size() - 1);
+	}
+
+	/**
+	 * Returns the previous station.<br>
+	 * Returns null if there is no previous station (the given station is the first
+	 * one).
+	 * 
+	 * @param station
+	 * @return
+	 */
+	public Station getPreviousStation(Station station) {
+		if (getFirstStation() == station) {
+			return null;
+		}
+		return stations.get(stations.indexOf(station) - 1);
 	}
 
 	/**
