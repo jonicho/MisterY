@@ -282,8 +282,8 @@ public final class LANGUAGE {
 					NOT_LOGGED_IN = "Du bist nicht eingeloggt!",
 					CONNECTION_LOST = "Verbindung verloren!",
 					ADD_BOT = "Neuen Bot zum Server verbinden",
-					USERNAME_INVALID = "Nutzername ungültig",
-					ALREADY_RUNNING = "Das Spiel läuft bereits";
+					USERNAME_INVALID = "Nutzername ung\u00fcltig",
+					ALREADY_RUNNING = "Das Spiel l\u00e4uft bereits";
 
 	}
 
