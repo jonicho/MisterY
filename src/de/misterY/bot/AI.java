@@ -93,7 +93,7 @@ public class AI {
 
 	public void moveExecute() {
 		switch (moveState) {
-		case 0: // Nothing usefull todo, just go in a random direction
+		case 0: // Nothing useful to do, just go in a random direction
 			targetID = -1;
 			break;
 		case 1: // Go to Definitive Resolved Position
@@ -105,7 +105,7 @@ public class AI {
 					targetStation).length == 0) {
 				targetStation = path.getPreviousStation(targetStation);
 			}
-			targetID = targetStation.getId();
+			targetID = targetStation == null ? -1 : targetStation.getId();
 			break;
 		case 5: // We are chasing MRY & are one turn behind him, pick a link that matches his
 				// ticket to maybe get him
