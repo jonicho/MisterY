@@ -87,6 +87,7 @@ public class Client {
 		LANGUAGE.loadLanguage(Locale.getDefault().getLanguage());
 
 		frame = new JFrame();
+		frame.setMinimumSize(new Dimension(400, 200));
 		updateTitle("");
 		frame.setBounds(100, 100, 1080, 720);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -164,13 +165,16 @@ public class Client {
 		mnLanguage.add(mntmGerman);
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setContinuousLayout(true);
 		panel_1.add(splitPane, BorderLayout.CENTER);
 		splitPane.setResizeWeight(0.7);
 
 		canvas = new Canvas();
+		canvas.setMinimumSize(new Dimension(200, 200));
 		splitPane.setLeftComponent(canvas);
 
 		JPanel panel = new JPanel();
+		panel.setMinimumSize(new Dimension(200, 200));
 		splitPane.setRightComponent(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 5.0, 0.0 };
