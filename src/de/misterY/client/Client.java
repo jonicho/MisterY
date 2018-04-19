@@ -410,6 +410,7 @@ public class Client {
 					JOptionPane.showMessageDialog(frame, LANGUAGE.DETECTIVESWON + " - "
 							+ gameClient.getWinner().getName() + " " + LANGUAGE.FOUNDMISTERY + "!");
 				}
+				mntmConnect.setEnabled(true);
 			}
 		});
 	}
