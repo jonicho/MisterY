@@ -100,6 +100,9 @@ public class Bot extends Client {
 		if (name.equals(myName)) {
 			myStation = map.getStationById(currentStationId);
 			brain.getLocalPlayer().setCurrentStation(myStation);
+			brain.getLocalPlayer().setBusTickets(busTickets);
+			brain.getLocalPlayer().setTaxiTickets(taxiTickets);
+			brain.getLocalPlayer().setUndergroundTickets(undergroundTickets);
 		}
 		if (isMrY) {
 			Station currentStation = map.getStationById(currentStationId);
@@ -122,8 +125,14 @@ public class Bot extends Client {
 
 	private void moveToStation(Station pStation) {
 		try {
-			this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
-					PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
+			if(brain.getLocalPlayer().hasEnoughTickets(PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0])) {
+				this.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_MOVEMENT, pStation.getId(),
+						PathFinder.getPossibleMeansOfTransportation(myStation, pStation)[0]));
+			}
+			else {
+				this.send(PROTOCOL.buildMessage(PROTOCOL.CS.SKIP_TURN));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

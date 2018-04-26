@@ -64,7 +64,7 @@ public class PositionResolver {
 				//Clear the dump
 				layerResults.clear();
 			}
-			// We are done Resolving, lets convert & evaluate Results
+			// We are done Resolving, lets convert
 			for (int x = 0; x < 1024; x++) {
 				if (layers[blindTurns][x] == null)
 					break;
