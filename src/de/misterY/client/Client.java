@@ -317,7 +317,7 @@ public class Client {
 
 	private void handleBotRequest() {
 		if (gameClient != null && gameClient.isConnected() && !gameClient.isStarted()) {
-			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.ADD_BOT, 1));
+			gameClient.send(PROTOCOL.buildMessage(PROTOCOL.CS.REQUEST_BOT, 1));
 		}
 	}
 

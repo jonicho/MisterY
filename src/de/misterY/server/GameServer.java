@@ -48,15 +48,13 @@ public class GameServer extends Server {
 		case PROTOCOL.CS.CHAT_POST:
 			processChatPost(user, msgParts);
 			break;
-		case PROTOCOL.CS.REQUEST_BOT:
-			break;
 		case PROTOCOL.CS.READY:
 			handleReady(user);
 			break;
 		case PROTOCOL.CS.SKIP_TURN:
 			processSkipTurn(user);
 			break;
-		case PROTOCOL.CS.ADD_BOT:
+		case PROTOCOL.CS.REQUEST_BOT:
 			processAddBot(user, msgParts);
 			break;
 		default:
