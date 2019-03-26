@@ -3,6 +3,8 @@ package de.misterY.client;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,18 +40,29 @@ public class Canvas extends JPanel {
 			private double mouseX;
 			private double mouseY;
 			private double zoom = 1;
+			private long lastUpdate = 0;
+			private static final int minTimeBetweenFrames = 33;
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				if (System.currentTimeMillis() - lastUpdate < minTimeBetweenFrames) {
+					return;
+				}
+				lastUpdate = System.currentTimeMillis();
 				mouseX = e.getX();
 				mouseY = e.getY();
 				calculateMousePos();
 				calculateHoveredStation();
+				calculateDrawRect();
 				repaint();
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
+				if (System.currentTimeMillis() - lastUpdate < minTimeBetweenFrames) {
+					return;
+				}
+				lastUpdate = System.currentTimeMillis();
 				currentX += (e.getX() - mouseX) / zoom;
 				currentY += (e.getY() - mouseY) / zoom;
 				mouseX = e.getX();
@@ -57,6 +70,7 @@ public class Canvas extends JPanel {
 				calculateCurrentTransform();
 				calculateMousePos();
 				calculateHoveredStation();
+				calculateDrawRect();
 				repaint();
 			}
 
@@ -66,6 +80,13 @@ public class Canvas extends JPanel {
 					zoom = Math.min(10, Math.max(0.7, zoom + 0.2 * zoom * -e.getWheelRotation()));
 				}
 				calculateCurrentTransform();
+				if (System.currentTimeMillis() - lastUpdate < minTimeBetweenFrames) {
+					return;
+				}
+				lastUpdate = System.currentTimeMillis();
+				calculateMousePos();
+				calculateHoveredStation();
+				calculateDrawRect();
 				repaint();
 			}
 
@@ -91,6 +112,13 @@ public class Canvas extends JPanel {
 			private void calculateMousePos() {
 				Point2D mouse = getTranslatedPoint(mouseX, mouseY);
 				mousePos = new Vector2D(mouse.getX() / getWidth(), mouse.getY() / getHeight());
+			}
+
+			private void calculateDrawRect() {
+				Point2D p1 = getTranslatedPoint(0, 0);
+				Point2D p2 = getTranslatedPoint(getWidth(), getHeight());
+				mapDrawer.setDrawRect(new Rectangle((int) p1.getX(), (int) p1.getY(), (int) (p2.getX() - p1.getX()),
+						(int) (p2.getY() - p1.getY())));
 			}
 
 			private Point2D getTranslatedPoint(double panelX, double panelY) {

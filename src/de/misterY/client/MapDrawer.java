@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import de.misterY.Link;
@@ -19,6 +20,7 @@ public class MapDrawer {
 	private int height;
 	private int avgSize;
 	private Station hoveredStation;
+	private Rectangle drawRect;
 
 	/**
 	 * Draws the map onto the given graphics.<br>
@@ -98,6 +100,9 @@ public class MapDrawer {
 		int y1 = v1.getDrawY(height);
 		int x2 = v2.getDrawX(width);
 		int y2 = v2.getDrawY(height);
+		if (drawRect != null && !drawRect.intersectsLine(x1, y1, x2, y2)) {
+			return;
+		}
 		if (gradient) {
 			g.setPaint(new GradientPaint(x1, y1, color, x2, y2, new Color(0, 0, 0, 0)));
 		} else {
@@ -118,6 +123,9 @@ public class MapDrawer {
 		g.setColor(Color.BLACK);
 		int x = station.getPos().getDrawX(width);
 		int y = station.getPos().getDrawY(height);
+		if (drawRect != null && !drawRect.contains(x, y)) {
+			return;
+		}
 		double sizeFactor = 0.001 * avgSize;
 		if (hoveredStation != null && station == hoveredStation) {
 			sizeFactor *= 1.5;
@@ -201,10 +209,14 @@ public class MapDrawer {
 		g.setFont(g.getFont().deriveFont(size));
 		int width = g.getFontMetrics().stringWidth(string);
 		int height = g.getFontMetrics().getHeight();
+		Rectangle stringRect = new Rectangle(x - width / 2, y - height / 2, width, height);
+		if (drawRect != null && !drawRect.intersects(stringRect)) {
+			return;
+		}
 		Color colorSave = g.getColor();
 		if (background != null) {
 			g.setColor(background);
-			g.fillRect(x - width / 2, y - height / 2, width, height);
+			g.fillRect(stringRect.x, stringRect.y, stringRect.width, stringRect.height);
 		}
 		g.setColor(colorSave);
 		g.drawString(string, x - width / 2, y - height / 2 + g.getFontMetrics().getAscent());
@@ -224,5 +236,13 @@ public class MapDrawer {
 
 	public void setHoveredStation(Station hoveredStation) {
 		this.hoveredStation = hoveredStation;
+	}
+
+	/**
+	 * Sets the rectangle outside which the map should not be drawn.<br>
+	 * If {@code drawRect} is {@code null} everything is drawn.
+	 */
+	public void setDrawRect(Rectangle drawRect) {
+		this.drawRect = drawRect;
 	}
 }
